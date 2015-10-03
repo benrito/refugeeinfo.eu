@@ -1,0 +1,212 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html itemscope itemtype="http://schema.org/CollectionPage" lang="en">  <!--<![endif]-->
+<head>
+    <!-- Meta info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width" name="viewport">
+
+    <title>Information Hub </title>
+    <meta name="description" content="{{ cons.descr_copy }} {{ cons.title_copy }}">
+
+    <!-- Facebook info -->
+    <meta content="{{ cons.title_copy }}" property="og:title">
+    <meta content="article" property="og:type">
+    <meta content="{{ cons.website_url }}" property="og:url">
+    <meta content="{{ cons.website_url }}{{ cons.preview_image }}" property="og:image">
+    <meta content="{{ cons.descr_copy }} {{ cons.title_copy }}" property="og:description">
+
+    <!-- Twitter info -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ cons.tw_author }}">
+    <meta name="twitter:creator" content="{{ cons.tw_author }}">
+    <meta name="twitter:title" content="{{ cons.title_copy }}">
+    <meta name="twitter:description" content="{{ cons.descr_copy }} {{ cons.title_copy }}">
+    <meta name="twitter:image:src" content="{{ cons.website_url }}{{ cons.preview_image }}">
+
+    <!-- Itemprop info -->
+    <meta content="{{ cons.title_copy }}" itemprop="name">
+    <meta content="{{ cons.website_url }}{{ cons.preview_image }}" itemprop="image">
+    <meta content="{{ cons.descr_copy }} {{ cons.title_copy }}" itemprop="description">
+
+    <!-- Favicons and Theme colors -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ cons.path.favicons }}/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ cons.path.favicons }}/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ cons.path.favicons }}/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ cons.path.favicons }}/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ cons.path.favicons }}/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ cons.path.favicons }}/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ cons.path.favicons }}/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ cons.path.favicons }}/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ cons.path.favicons }}/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="{{ cons.path.favicons }}/manifest.json">
+    <meta name="msapplication-TileColor" content="#005749">
+    <meta name="msapplication-TileImage" content="{{ cons.path.favicons }}/mstile-144x144.png">
+    <meta name="theme-color" content="#005749">
+
+    <!-- Font and Styles -->
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        iframe {
+            display: block
+        }
+
+        body {
+            background-color: #000;
+            max-width: 566.9pt;
+            padding: 0 10px;
+            margin: 5px;
+        }
+
+        .g-translate {
+            float: right;
+            margin-top: 15px;
+        }
+
+        .lst-kix_6cj4gmv9r21z-0 > li:before {
+            color: #fff;
+        }
+    </style>
+</head>
+<body data-timestamp="@@timestamp">
+
+<div class="g-translate" id="google_translate_element"></div>
+
+<div id="container"></div>
+
+<script>
+    var container = document.getElementById('container');
+    var docLink = 'https://docs.google.com/document/d/1NCCHyLKiSI7yHIZjbBGiIUg5_jFUOdTwgOa4vJjkYzM/pub?embedded=true';
+    var cities = [
+        {
+            name: 'berlin',
+            latitude: '52.5167',
+            longitude: '13.3833',
+            link: 'https://www.google.co.uk/#q=refugee+germany'
+        },
+        {
+            name: 'athena',
+            latitude: '37.9667',
+            longitude: '23.7167',
+            link: 'https://docs.google.com/document/d/1waTYKJmnj7pjpgIp2BjX95pJLtmaayGmnSPhMCuBnWw/pub?embedded=true'
+        }
+    ];
+
+    function detectLanguage() {
+        var lg = navigator.language.toLocaleLowerCase();
+        console.log(lg);
+
+        switch (lg) {
+            case 'el':
+            case 'el-gr':
+                location.hash = '#googtrans(en|el)';
+                break;
+            case 'fa':
+            case 'fa-ir':
+                location.hash = '#googtrans(en|fa)';
+                break;
+            case 'ar':
+            case 'ar-ae':
+            case 'ar-bh':
+            case 'ar-dz':
+            case 'ar-eg':
+            case 'ar-iq':
+            case 'ar-jo':
+            case 'ar-kw':
+            case 'ar-lb':
+            case 'ar-ly':
+            case 'ar-ma':
+            case 'ar-om':
+            case 'ar-qa':
+            case 'ar-sa':
+            case 'ar-sy':
+            case 'ar-tn':
+            case 'ar-ye':
+                location.hash = '#googtrans(en|ar)';
+                break;
+        }
+    }
+
+    function getPage() {
+        var r = new XMLHttpRequest();
+        r.open('GET', docLink, true);
+        r.onreadystatechange = function () {
+            if (r.readyState !== 4 || r.status !== 200) {
+                return;
+            }
+            container.innerHTML = r.responseText;
+        };
+        r.send();
+    }
+
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ar,el,en,fa', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+
+    function router(position) {
+        console.log(position);
+        var target = nearestCity(position.coords.latitude, position.coords.longitude);
+        if (docLink !== target.link) {
+            docLink = target.link;
+            getPage();
+        }
+    }
+
+    function pythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+        lat1 = Deg2Rad(lat1);
+        lat2 = Deg2Rad(lat2);
+        lon1 = Deg2Rad(lon1);
+        lon2 = Deg2Rad(lon2);
+        var R = 6371; // km
+        var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+        var y = (lat2 - lat1);
+        var d = Math.sqrt(x * x + y * y) * R;
+        return d;
+    }
+
+    // Convert Degress to Radians
+    function Deg2Rad(deg) {
+        return deg * Math.PI / 180;
+    }
+
+    function nearestCity(latitude, longitude) {
+        var mindif = 99999;
+        var closest;
+
+        for (index = 0; index < cities.length; ++index) {
+            var dif = pythagorasEquirectangular(latitude, longitude, cities[index].latitude, cities[index].longitude);
+            if (dif < mindif) {
+                closest = index;
+                mindif = dif;
+            }
+        }
+        console.log(cities[closest]);
+        return cities[closest];
+    }
+
+    detectLanguage();
+    getPage();
+
+    // if(navigator.geolocation){
+    //   console.log('#Navigator support');
+    //   navigator.geolocation.getCurrentPosition(router);
+    // }
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+</body>
+</html>
