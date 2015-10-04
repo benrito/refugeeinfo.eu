@@ -16,6 +16,10 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
+GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -126,9 +130,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-if 'GEOS_LIBRARY_PATH' in os.environ:
-    GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
-
-if 'GDAL_LIBRARY_PATH' in os.environ:
-    GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
