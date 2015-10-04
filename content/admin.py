@@ -13,7 +13,7 @@ class LocationTitleInline(admin.StackedInline):
     extra = 0
 
 
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(admin.GeoModelAdmin):
     inlines = [
         LocationTitleInline,
     ]

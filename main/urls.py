@@ -6,5 +6,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    url(r'lookup$', views.location_from_device, name="lookup-device"),
+    url(r'page/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/$', views.index),
     url(r'$', views.landing),
 ]

@@ -1,12 +1,132 @@
+{% load i18n %}
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
+    <!-- Meta info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width" name="viewport">
+
+    <title>Information Hub </title>
+    <meta name="description" content="{{ cons.descr_copy }} {{ cons.title_copy }}">
+
+    <!-- Facebook info -->
+    <meta content="{{ cons.title_copy }}" property="og:title">
+    <meta content="article" property="og:type">
+    <meta content="{{ cons.website_url }}" property="og:url">
+    <meta content="{{ cons.website_url }}{{ cons.preview_image }}" property="og:image">
+    <meta content="{{ cons.descr_copy }} {{ cons.title_copy }}" property="og:description">
+
+    <!-- Twitter info -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ cons.tw_author }}">
+    <meta name="twitter:creator" content="{{ cons.tw_author }}">
+    <meta name="twitter:title" content="{{ cons.title_copy }}">
+    <meta name="twitter:description" content="{{ cons.descr_copy }} {{ cons.title_copy }}">
+    <meta name="twitter:image:src" content="{{ cons.website_url }}{{ cons.preview_image }}">
+
+    <!-- Itemprop info -->
+    <meta content="{{ cons.title_copy }}" itemprop="name">
+    <meta content="{{ cons.website_url }}{{ cons.preview_image }}" itemprop="image">
+    <meta content="{{ cons.descr_copy }} {{ cons.title_copy }}" itemprop="description">
+
+    <!-- Favicons and Theme colors -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ cons.path.favicons }}/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ cons.path.favicons }}/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ cons.path.favicons }}/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ cons.path.favicons }}/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ cons.path.favicons }}/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ cons.path.favicons }}/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ cons.path.favicons }}/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ cons.path.favicons }}/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ cons.path.favicons }}/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="{{ cons.path.favicons }}/manifest.json">
+    <meta name="msapplication-TileColor" content="#005749">
+    <meta name="msapplication-TileImage" content="{{ cons.path.favicons }}/mstile-144x144.png">
+    <meta name="theme-color" content="#005749">
+
+    <style>
+        html, body {
+            height: 100%;
+            font: Arial, Helvetica, sans-serif;
+            color: white !important;
+        }
+
+        body {
+            background-color: #000 !important;
+            max-width: 566.9pt;
+            padding: 0 10px;
+            margin: 5px;
+        }
+
+        .lst-kix_6cj4gmv9r21z-0 > li:before {
+            color: #fff;
+        }
+
+        button {
+            border: 1px white solid;
+            color: white;
+            background-color: black;
+            height: 2.5em;
+            font-size: 1em;
+            width: 100%
+        }
+    </style>
+    {% get_current_language as LANGUAGE_CODE %}
+    <!-- Current language: {{ LANGUAGE_CODE }} -->
+
 </head>
 <body>
-{{ ip_position  }}<br/>
-{{ ip }} <br />
-{{ geocode }}
+<h1>Current location: <em id="location_name"></em></h1>
+<button onclick="load_from_browser()">{% trans "Detect my location" %}</button><br/><br/>
+<button onclick="goToPage()">{% trans "Go to page" %}</button>
+<script>
+    window.currentLocation = {{ current_location | safe }};
+    function load_from_browser() {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            window.currentPosition = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+
+            getCurrentLocation(position.coords.latitude, position.coords.longitude);
+        });
+    }
+
+    function goToPage() {
+        var language = navigator.language.split('-')[0]
+        location.href = '/page/' + window.currentLocation.id + '/' + language + '/';
+    }
+
+    window.onload = function () {
+        var location_name = document.getElementById('location_name');
+        location_name.innerHTML = window.currentLocation.name;
+    };
+
+
+    function getCurrentLocation(lat, long) {
+        var r = new XMLHttpRequest();
+        r.open('GET', '{%  url 'lookup-device' %}?lnglat=' + long + ' ' + lat, true);
+        r.onreadystatechange = function () {
+            if (r.readyState !== 4 || r.status !== 200) {
+                return;
+            }
+            window.currentLocation = JSON.parse(r.responseText);
+
+            var location_name = document.getElementById('location_name');
+            location_name.innerHTML = window.currentLocation.name;
+
+            goToPage();
+        };
+        r.send();
+    }
+
+</script>
 </body>
 </html>
