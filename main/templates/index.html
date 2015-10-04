@@ -64,7 +64,7 @@
         }
 
         body {
-            background-color: #000;
+            background-color: #000!important;
             max-width: 566.9pt;
             padding: 0 10px;
             margin: 5px;
@@ -82,9 +82,9 @@
 </head>
 <body data-timestamp="@@timestamp">
 
-<div class="g-translate" id="google_translate_element"></div>
-
-<div id="container"></div>
+<div id="container">
+    {{ google_doc|safe }}
+</div>
 
 <script>
     var container = document.getElementById('container');
@@ -197,7 +197,7 @@
     }
 
     detectLanguage();
-    getPage();
+    //getPage();
 
     // if(navigator.geolocation){
     //   console.log('#Navigator support');
