@@ -110,7 +110,7 @@ TEMPLATE_DIRS = (
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 
-if os.environ.has_key('DATABASE_URL'):
+if 'DATABASE_URL' in os.environ:
     DATABASES['default'] = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -127,7 +127,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-if os.environ.has_key('GEOS_LIBRARY_PATH'):
+if 'GEOS_LIBRARY_PATH' in os.environ:
     GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
-if os.environ.has_key('GDAL_LIBRARY_PATH'):
+
+if 'GDAL_LIBRARY_PATH' in os.environ:
     GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
