@@ -4,11 +4,11 @@ __author__ = 'reyrodrigues'
 
 from django.contrib.gis import admin
 
-from .models import Location, Language, LocationTitle
+from .models import Location, Language, LocationContent
 
 
 class LocationTitleInline(admin.StackedInline):
-    model = LocationTitle
+    model = LocationContent
     ordering = ('language', )
     extra = 0
 

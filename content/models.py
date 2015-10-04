@@ -26,11 +26,11 @@ class Location(models.Model):
         return unicode(self.name)
 
 
-class LocationTitle(models.Model):
+class LocationContent(models.Model):
     title = models.CharField(max_length=100)
     language = models.ForeignKey(Language)
+    google_doc = models.URLField(blank=True, null=True,)
     parent = models.ForeignKey(Location)
 
     def __unicode__(self):
         return unicode(self.title)
-
