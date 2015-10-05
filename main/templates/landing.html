@@ -108,7 +108,7 @@
     <option value="gr">Greek</option>
 </select>
 <br/><br/>
-<button onclick="goToPage()">{% trans "Go to page" %}</button>
+<button onclick="goToPage()" id="go">{% trans "Go to page" %}</button>
 <script>
     window.currentLocation = {{ current_location | safe }};
     function load_from_browser() {
@@ -130,7 +130,12 @@
     window.onload = function () {
         var language = navigator.language.split('-')[0];
         var location_name = document.getElementById('location_name');
-        location_name.innerHTML = window.currentLocation.name + ' (Based on IP)';
+        if (!window.currentLocation.name) {
+            location_name.innerHTML = 'Cannot determine location';
+            document.getElementById('go').disabled = true;
+        } else {
+            location_name.innerHTML = window.currentLocation.name + ' (Based on IP)';
+        }
         document.querySelector('[value=' + language + ']').selected = true;
     };
 
@@ -143,7 +148,7 @@
                 return;
             }
             window.currentLocation = JSON.parse(r.responseText);
-
+            document.getElementById('go').disabled = false;
             var location_name = document.getElementById('location_name');
             location_name.innerHTML = window.currentLocation.name + ' (Based on GPS)';
         };
