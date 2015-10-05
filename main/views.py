@@ -106,4 +106,15 @@ def location_best_guess(request):
     latitude = 0
     longitude = 0
 
+    try:
+        location_response = requests.get('http://ip-api.com/json/{}'.format(get_ip(request)))
+
+        location_info = location_response.json()
+
+        if location_info['status'] == 'success':
+            latitude = location_info['lat']
+            longitude = location_info['lon']
+    except Exception as e:
+        pass
+
     return {"latitude": latitude, "longitude": longitude}
