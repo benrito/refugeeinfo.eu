@@ -102,15 +102,8 @@ def location_from_device(request):
 
 
 def location_best_guess(request):
-    location_response = requests.get('http://www.telize.com/geoip/{}'.format(get_ip(request)))
-
-    location_info = location_response.json()
 
     latitude = 0
     longitude = 0
-
-    if 'code' not in location_info or location_info['code'] != 401:
-        latitude = location_info['latitude']
-        longitude = location_info['longitude']
 
     return {"latitude": latitude, "longitude": longitude}
