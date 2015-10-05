@@ -43,11 +43,36 @@ def landing(request):
 
 
 def index(request, page_id, language):
-    doc_path = 'https://docs.google.com/document/d/1NCCHyLKiSI7yHIZjbBGiIUg5_jFUOdTwgOa4vJjkYzM/pub?embedded=true'
-    google_doc = requests.get(doc_path).text
+    # doc_path = 'https://docs.google.com/document/d/1NCCHyLKiSI7yHIZjbBGiIUg5_jFUOdTwgOa4vJjkYzM/pub?embedded=true'
+    google_doc = '<h1 style="color: white">Your location is not supported by this platform.</h1>'
+    location = models.Location.objects.filter(id=page_id)
+
+    if location:
+        location = location[0]
+
+        content = location.content.filter(language__iso_code=language)
+
+        default_content = location.content.all()
+        content = content[0] if content else default_content[0] if default_content else None
+
+        if content and content.google_doc:
+            doc_path = content.google_doc
+
+            google_doc = requests.get(doc_path).text
+
     return render(request, 'index.html', context={
         "google_doc": google_doc
     }, context_instance=RequestContext(request))
+
+
+def depth(location):
+    d = 0
+    parent = location.parent
+    while parent:
+        d += 1
+        parent = parent.parent
+
+    return d
 
 
 def location_from_device(request):
@@ -55,7 +80,7 @@ def location_from_device(request):
     point = 'POINT({})'.format(lnglat)
     geopoint = fromstr(point, srid=4326)
 
-    location = models.Location.objects.filter(area__intersects=geopoint).order_by('-parent')
+    location = sorted(models.Location.objects.filter(area__intersects=geopoint), key=lambda x: -depth(x))
 
     if not location:
         raise Http404()

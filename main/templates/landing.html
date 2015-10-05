@@ -58,6 +58,10 @@
             color: white !important;
         }
 
+        h1, h2, h3, h4, h5 {
+            font: Arial, Helvetica, sans-serif;
+        }
+
         body {
             background-color: #000 !important;
             max-width: 566.9pt;
@@ -77,14 +81,33 @@
             font-size: 1em;
             width: 100%
         }
+
+        select {
+            border: 1px white solid;
+            color: white;
+            background-color: black;
+            height: 2.5em;
+            font-size: 1em;
+            width: 100%
+        }
     </style>
     {% get_current_language as LANGUAGE_CODE %}
     <!-- Current language: {{ LANGUAGE_CODE }} -->
 
 </head>
 <body>
-<h1>Current location: <em id="location_name"></em></h1>
-<button onclick="load_from_browser()">{% trans "Detect my location" %}</button><br/><br/>
+<h3>Current Location</h3>
+
+<h4 id="location_name"></h4>
+<button onclick="load_from_browser()">{% trans "Detect my location" %}</button>
+<br/><br/>
+<select id="language_picker">
+    <option value="en">English</option>
+    <option value="ar">Arabic</option>
+    <option value="fa">Farsi</option>
+    <option value="gr">Greek</option>
+</select>
+<br/><br/>
 <button onclick="goToPage()">{% trans "Go to page" %}</button>
 <script>
     window.currentLocation = {{ current_location | safe }};
@@ -100,13 +123,15 @@
     }
 
     function goToPage() {
-        var language = navigator.language.split('-')[0]
+        var language = document.getElementById('language_picker').value;
         location.href = '/page/' + window.currentLocation.id + '/' + language + '/';
     }
 
     window.onload = function () {
+        var language = navigator.language.split('-')[0];
         var location_name = document.getElementById('location_name');
-        location_name.innerHTML = window.currentLocation.name;
+        location_name.innerHTML = window.currentLocation.name + ' (Based on IP)';
+        document.querySelector('[value=' + language + ']').selected = true;
     };
 
 
@@ -120,9 +145,7 @@
             window.currentLocation = JSON.parse(r.responseText);
 
             var location_name = document.getElementById('location_name');
-            location_name.innerHTML = window.currentLocation.name;
-
-            goToPage();
+            location_name.innerHTML = window.currentLocation.name + ' (Based on GPS)';
         };
         r.send();
     }
