@@ -1,6 +1,6 @@
 import json
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import RequestContext
 import requests
 from django.contrib.gis.geos import fromstr
@@ -129,6 +129,11 @@ def slug_no_language(request, slug):
 
 
 def slug_index(request, slug, language):
-    location = models.Location.objects.get(slug=slug)
+    locations = models.Location.objects.filter(slug=slug)
+
+    if not locations:
+        return redirect('/')
+
+    location = locations[0]
 
     return index(request, location.id, language)
