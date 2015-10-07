@@ -123,7 +123,7 @@
 
     function goToPage() {
         var language = document.getElementById('language_picker').value;
-        location.href = '/page/' + window.currentLocation.id + '/' + language + '/';
+        location.href = '/' + window.currentLocation.slug + '/' + language + '/';
     }
 
     window.onload = function () {

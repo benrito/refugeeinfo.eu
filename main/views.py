@@ -35,6 +35,7 @@ def landing(request):
         current_location = {
             "id": found_location.id,
             "name": found_location.name,
+            "slug": found_location.slug,
             "contents": location_content
         }
 
@@ -99,6 +100,7 @@ def location_from_device(request):
     return HttpResponse(json.dumps({
         "id": found_location.id,
         "name": found_location.name,
+        "slug": found_location.slug,
         "contents": location_content
     }), content_type='application/json')
 
