@@ -24,7 +24,7 @@ GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0v7dglx7%_ani!lq7_v5xpe6uc(=^vobcmhjk4cj-^y%$m68kd'
+SECRET_KEY = os.environ.get('SECRET_KEY', '0v7dglx7%_ani!lq7_v5xpe6uc(=^vobcmhjk4cj-^y%$m68kd')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -102,6 +102,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+APPEND_SLASHheorky = True
 
 
 # Static files (CSS, JavaScript, Images)
