@@ -21,6 +21,7 @@ def landing(request):
     current_location = {}
 
     location = models.Location.objects.filter(area__intersects=geopoint).order_by('-parent')
+    languages = list(models.Language.objects.all())
 
     if location:
         found_location = location[0] if location else None
@@ -39,6 +40,7 @@ def landing(request):
 
     return render(request, 'landing.html', context={
         "current_location": json.dumps(current_location),
+        "languages": languages,
     }, context_instance=RequestContext(request))
 
 
