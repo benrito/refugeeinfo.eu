@@ -8,48 +8,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width" name="viewport">
 
-    <title>Information Hub </title>
-    <meta name="description" content="{{ cons.descr_copy }} {{ cons.title_copy }}">
+    <title>Information</title>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    <!-- Facebook info -->
-    <meta content="{{ cons.title_copy }}" property="og:title">
-    <meta content="article" property="og:type">
-    <meta content="{{ cons.website_url }}" property="og:url">
-    <meta content="{{ cons.website_url }}{{ cons.preview_image }}" property="og:image">
-    <meta content="{{ cons.descr_copy }} {{ cons.title_copy }}" property="og:description">
+        ga('create', 'UA-68574649-1', 'auto');
+        ga('send', 'pageview');
 
-    <!-- Twitter info -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="{{ cons.tw_author }}">
-    <meta name="twitter:creator" content="{{ cons.tw_author }}">
-    <meta name="twitter:title" content="{{ cons.title_copy }}">
-    <meta name="twitter:description" content="{{ cons.descr_copy }} {{ cons.title_copy }}">
-    <meta name="twitter:image:src" content="{{ cons.website_url }}{{ cons.preview_image }}">
-
-    <!-- Itemprop info -->
-    <meta content="{{ cons.title_copy }}" itemprop="name">
-    <meta content="{{ cons.website_url }}{{ cons.preview_image }}" itemprop="image">
-    <meta content="{{ cons.descr_copy }} {{ cons.title_copy }}" itemprop="description">
-
-    <!-- Favicons and Theme colors -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ cons.path.favicons }}/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ cons.path.favicons }}/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ cons.path.favicons }}/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ cons.path.favicons }}/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ cons.path.favicons }}/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ cons.path.favicons }}/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ cons.path.favicons }}/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ cons.path.favicons }}/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ cons.path.favicons }}/apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-194x194.png" sizes="194x194">
-    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/android-chrome-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="{{ cons.path.favicons }}/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="{{ cons.path.favicons }}/manifest.json">
-    <meta name="msapplication-TileColor" content="#005749">
-    <meta name="msapplication-TileImage" content="{{ cons.path.favicons }}/mstile-144x144.png">
-    <meta name="theme-color" content="#005749">
+    </script>
 
     <style>
         html, body {
