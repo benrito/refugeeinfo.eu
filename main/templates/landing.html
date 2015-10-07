@@ -90,34 +90,45 @@
             font-size: 1em;
             width: 100%
         }
+
+        .hide {
+            display: none;
+        }
     </style>
     {% get_current_language as LANGUAGE_CODE %}
     <!-- Current language: {{ LANGUAGE_CODE }} -->
 
 </head>
 <body>
-<h3>Current Location</h3>
+<div id="overlay" class="hide">
+    <h3>Current Location</h3>
 
-<h4 id="location_name"></h4>
-<button onclick="load_from_browser()">{% trans "Detect my location" %}</button>
-<br/><br/>
-<select id="language_picker">
-    {% for l in languages %}
-        <option value="{{ l.iso_code }}">{{ l.name }}</option>
-    {% endfor %}
-</select>
-<br/><br/>
-<button onclick="goToPage()" id="go">{% trans "Go to page" %}</button>
+    <h4 id="location_name"></h4>
+    <button onclick="load_from_browser()">{% trans "Detect my location" %}</button>
+    <br/><br/>
+    <select id="language_picker">
+        {% for l in languages %}
+            <option value="{{ l.iso_code }}">{{ l.name }}</option>
+        {% endfor %}
+    </select>
+    <br/><br/>
+    <button onclick="goToPage()" id="go">{% trans "Go to page" %}</button>
+</div>
 <script>
     window.currentLocation = {{ current_location | safe }};
-    function load_from_browser() {
+
+    function load_from_browser(then) {
         navigator.geolocation.getCurrentPosition(function (position) {
+            localStorage.allowedGeolocation = true;
+
             window.currentPosition = {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             };
 
-            getCurrentLocation(position.coords.latitude, position.coords.longitude);
+            getCurrentLocation(position.coords.latitude, position.coords.longitude, then);
+        }, function () {
+            document.getElementById('overlay').className = "";
         });
     }
 
@@ -127,19 +138,25 @@
     }
 
     window.onload = function () {
-        var language = navigator.language.split('-')[0];
-        var location_name = document.getElementById('location_name');
-        if (!window.currentLocation.name) {
-            location_name.innerHTML = 'Cannot determine location';
-            document.getElementById('go').disabled = true;
-        } else {
-            location_name.innerHTML = window.currentLocation.name + ' (Based on IP)';
+        if (!localStorage.allowedGeolocation) {
+            document.getElementById('overlay').className = "";
+
+            var language = navigator.language.split('-')[0];
+            var location_name = document.getElementById('location_name');
+            if (!window.currentLocation.name) {
+                location_name.innerHTML = 'Cannot determine location';
+                document.getElementById('go').disabled = true;
+            } else {
+                location_name.innerHTML = window.currentLocation.name + ' (Based on IP)';
+            }
+            document.querySelector('[value=' + language + ']').selected = true;
         }
-        document.querySelector('[value=' + language + ']').selected = true;
+        else {
+            load_from_browser(goToPage)
+        }
     };
 
-
-    function getCurrentLocation(lat, long) {
+    function getCurrentLocation(lat, long, then) {
         var r = new XMLHttpRequest();
         r.open('GET', '{%  url 'lookup-device' %}?lnglat=' + long + ' ' + lat, true);
         r.onreadystatechange = function () {
@@ -150,6 +167,10 @@
             document.getElementById('go').disabled = false;
             var location_name = document.getElementById('location_name');
             location_name.innerHTML = window.currentLocation.name + ' (Based on GPS)';
+
+            if (then) {
+                then();
+            }
         };
         r.send();
     }
