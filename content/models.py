@@ -17,7 +17,9 @@ class Language(models.Model):
 
 class Location(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
+    slug = models.SlugField(max_length=200, null=True, blank=True)
     area = models.PolygonField()
+    enabled = models.NullBooleanField(null=True, default=True)
     country = CountryField(blank=True, null=True)
     parent = models.ForeignKey('self', blank=True, null=True, related_name="children")
     objects = models.GeoManager()

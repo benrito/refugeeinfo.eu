@@ -20,7 +20,7 @@ def landing(request):
 
     current_location = {}
 
-    location = models.Location.objects.filter(area__intersects=geopoint).order_by('-parent')
+    location = models.Location.objects.filter(area__intersects=geopoint, enabled=True).order_by('-parent')
     languages = list(models.Language.objects.all())
 
     if location:
@@ -82,7 +82,7 @@ def location_from_device(request):
     point = 'POINT({})'.format(lnglat)
     geopoint = fromstr(point, srid=4326)
 
-    location = sorted(models.Location.objects.filter(area__intersects=geopoint), key=lambda x: -depth(x))
+    location = sorted(models.Location.objects.filter(area__intersects=geopoint, enabled=True), key=lambda x: -depth(x))
 
     if not location:
         raise Http404()
@@ -104,7 +104,6 @@ def location_from_device(request):
 
 
 def location_best_guess(request):
-
     latitude = 0
     longitude = 0
 
@@ -120,3 +119,16 @@ def location_best_guess(request):
         pass
 
     return {"latitude": latitude, "longitude": longitude}
+
+
+def slug_no_language(request, slug):
+    accept_language = request.META['HTTP_ACCEPT_LANGUAGE'].split(',')
+    first_language = accept_language[0].split('-')
+
+    return slug_index(request, slug, first_language)
+
+
+def slug_index(request, slug, language):
+    location = models.Location.objects.get(slug=slug)
+
+    return index(request, location.id, language)

@@ -17,9 +17,10 @@ class LocationAdmin(admin.GeoModelAdmin):
     inlines = [
         LocationTitleInline,
     ]
-    list_display = ('id', 'name', 'country')
+    list_display = ('id', 'name', 'country', 'enabled')
     list_filter = ('country',)
     search_fields = ('name', )
+    prepopulated_fields = {"slug": ('name',)}
 
 
 admin.site.register(Location, LocationAdmin)
