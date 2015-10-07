@@ -137,6 +137,7 @@
         r.open('GET', '{%  url 'lookup-device' %}?lnglat=' + long + ' ' + lat, true);
         r.onreadystatechange = function () {
             if (r.readyState !== 4 || r.status !== 200) {
+                            document.getElementById('overlay').className = "";
                 return;
             }
             window.currentLocation = JSON.parse(r.responseText);
