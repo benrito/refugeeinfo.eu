@@ -70,6 +70,16 @@
         .hide {
             display: none;
         }
+
+        .lang-active {
+            background-color: white;
+            color: black;
+        }
+
+        .language-button {
+            width: 20%;
+            margin-right: 5px;
+        }
     </style>
     {% get_current_language as LANGUAGE_CODE %}
     <!-- Current language: {{ LANGUAGE_CODE }} -->
@@ -77,23 +87,25 @@
 </head>
 <body>
 <div id="overlay" class="hide">
-    <h3>Current Location</h3>
+    <h1>RefugeeInfo.Eu</h1>
 
-    <h4 id="location_name"></h4>
-    <button onclick="load_from_browser()">{% trans "Detect my location" %}</button>
-    <br/><br/>
-    <select id="language_picker">
+    <p>
         {% for l in languages %}
-            <option value="{{ l.iso_code }}">{{ l.name }}</option>
+            <button class="language-button" data-language-code="{{ l.iso_code }}"
+                    onclick="flipLanguage('{{ l.iso_code }}')">{{ l.name }}</button>
         {% endfor %}
-    </select>
-    <br/><br/>
-    <button onclick="goToPage()" id="go">{% trans "Go to page" %}</button>
+    </p>
+
+    <button onclick="goToPage()" id="goToButton">Go to <span id="location_name"></span></button>
+    <div style="text-align: center; font-size: 1.2em; line-height: 20px">
+        <em id="orLabel">or</em>
+    </div>
+    <button onclick="load_from_browser()">{% trans "Detect my location" %}</button>
 </div>
 <script>
     window.currentLocation = {{ current_location | safe }};
 
-    function load_from_browser(then) {
+    function load_from_browser() {
         navigator.geolocation.getCurrentPosition(function (position) {
             localStorage.allowedGeolocation = true;
 
@@ -102,14 +114,23 @@
                 longitude: position.coords.longitude
             };
 
-            getCurrentLocation(position.coords.latitude, position.coords.longitude, then);
+            getCurrentLocation(position.coords.latitude, position.coords.longitude, goToPage);
         }, function () {
             document.getElementById('overlay').className = "";
         });
     }
 
+    function flipLanguage(language) {
+        localStorage.selectedLanguage = language;
+        var active = document.querySelector('.lang-active');
+        if (active)
+            active.className = 'language-button';
+
+        document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
+    }
+
     function goToPage() {
-        var language = document.getElementById('language_picker').value;
+        var language = localStorage.selectedLanguage;
         location.href = '/' + window.currentLocation.slug + '/' + language + '/';
     }
 
@@ -120,15 +141,22 @@
             var language = navigator.language.split('-')[0];
             var location_name = document.getElementById('location_name');
             if (!window.currentLocation.name) {
-                location_name.innerHTML = 'Cannot determine location';
-                document.getElementById('go').disabled = true;
+                location_name.innerHTML = 'N/A';
+                document.getElementById('goToButton').style.display = 'none';
+                document.getElementById('orLabel').style.display = 'none';
             } else {
-                location_name.innerHTML = window.currentLocation.name + ' (Based on IP)';
+                location_name.innerHTML = window.currentLocation.name;
             }
-            document.querySelector('[value=' + language + ']').selected = true;
+
+            localStorage.selectedLanguage = language;
+            var active = document.querySelector('.lang-active');
+            if (active)
+                active.className = 'language-button';
+
+            document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
         }
         else {
-            load_from_browser(goToPage)
+            load_from_browser()
         }
     };
 
@@ -137,13 +165,12 @@
         r.open('GET', '{%  url 'lookup-device' %}?lnglat=' + long + ' ' + lat, true);
         r.onreadystatechange = function () {
             if (r.readyState !== 4 || r.status !== 200) {
-                            document.getElementById('overlay').className = "";
+                document.getElementById('overlay').className = "";
                 return;
             }
             window.currentLocation = JSON.parse(r.responseText);
-            document.getElementById('go').disabled = false;
             var location_name = document.getElementById('location_name');
-            location_name.innerHTML = window.currentLocation.name + ' (Based on GPS)';
+            location_name.innerHTML = window.currentLocation.name;
 
             if (then) {
                 then();
