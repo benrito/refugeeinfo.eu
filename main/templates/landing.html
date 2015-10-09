@@ -139,12 +139,17 @@
     }
 
     window.onload = function () {
+        if (!localStorage.selectedLanguage) {
+
+            var found = navigator.language.split('-')[0];
+            localStorage.selectedLanguage = found || '{{ LANGUAGE_CODE }}';
+
+        }
+        var language = localStorage.selectedLanguage;
+
         var active = document.querySelector('.lang-active');
         if (active)
             active.className = 'language-button';
-
-        var language = navigator.language.split('-')[0];
-        localStorage.selectedLanguage = language || '{{ LANGUAGE_CODE }}';
 
         document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
 
