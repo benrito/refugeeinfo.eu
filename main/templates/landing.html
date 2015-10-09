@@ -139,10 +139,14 @@
     }
 
     window.onload = function () {
-        if(!localStorage.selectedLanguage) {
-            var language = navigator.language.split('-')[0];
-            localStorage.selectedLanguage = language || '{{ LANGUAGE_CODE }}';
-        }
+        var active = document.querySelector('.lang-active');
+        if (active)
+            active.className = 'language-button';
+
+        var language = navigator.language.split('-')[0];
+        localStorage.selectedLanguage = language || '{{ LANGUAGE_CODE }}';
+
+        document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
 
         if (!localStorage.allowedGeolocation) {
             document.getElementById('overlay').className = "";
@@ -155,11 +159,7 @@
             } else {
                 location_name.innerHTML = window.currentLocation.name;
             }
-            var active = document.querySelector('.lang-active');
-            if (active)
-                active.className = 'language-button';
 
-            document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
         }
         else {
             load_from_browser()
