@@ -135,10 +135,14 @@
     }
 
     window.onload = function () {
+        if(!localStorage.selectedLanguage) {
+            var language = navigator.language.split('-')[0];
+            localStorage.selectedLanguage = language;
+        }
+
         if (!localStorage.allowedGeolocation) {
             document.getElementById('overlay').className = "";
 
-            var language = navigator.language.split('-')[0];
             var location_name = document.getElementById('location_name');
             if (!window.currentLocation.name) {
                 location_name.innerHTML = 'N/A';
@@ -147,8 +151,6 @@
             } else {
                 location_name.innerHTML = window.currentLocation.name;
             }
-
-            localStorage.selectedLanguage = language;
             var active = document.querySelector('.lang-active');
             if (active)
                 active.className = 'language-button';
