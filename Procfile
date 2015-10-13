@@ -1,1 +1,1 @@
-web: newrelic-admin run-program gunicorn refugeeinfo.wsgi --log-file -
+web: gunicorn refugeeinfo.wsgi --log-file -
