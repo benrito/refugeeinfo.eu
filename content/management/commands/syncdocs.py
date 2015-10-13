@@ -28,17 +28,20 @@ class Command(BaseCommand):
         for key in documents.iterkeys():
             if '-' in key:
                 identifier = key.split('-')
-                existing_content = models.LocationContent.objects.filter(parent__slug=identifier[0],
-                                                                         language__iso_code=identifier[1])
-                if existing_content:
-                    content = existing_content[0]
-                    content.google_doc = documents[key]
-                    content.save()
-                else:
-                    location = models.Location.objects.get(slug=identifier[0])
-                    language = models.Language.objects.get(iso_code=identifier[1])
+                location = models.Location.objects.get(slug=identifier[0])
+                language = models.Language.objects.get(iso_code=identifier[1])
 
-                    models.LocationContent.objects.create(parent=location, language=language, google_doc=documents[key])
+                if location and language:
+                    existing_content = models.LocationContent.objects.filter(parent=location,
+                                                                             language=language)
+                    if existing_content:
+                        content = existing_content[0]
+                        content.google_doc = documents[key]
+                        content.title = location.name
+                        content.save()
+                    else:
+                        models.LocationContent.objects.create(parent=location, language=language, title=location.name,
+                                                              google_doc=documents[key])
 
         self.stdout.write('Successfully created/updated content!')
 
