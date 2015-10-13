@@ -24,7 +24,10 @@ class Command(BaseCommand):
 
             credentials.refresh(httplib2.Http())
 
-            t.token_text = credentials.to_json()
-            t.save()
+            if not credentials.invalid:
+                t.token_text = credentials.to_json()
+                t.save()
+            else:
+                t.delete()
 
             print ("Refreshed Google Drive")
