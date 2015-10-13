@@ -72,5 +72,5 @@ db.sqlite3
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-
+client_secret.json
 *.pyc
