@@ -31,8 +31,13 @@ class Location(models.Model):
 class LocationContent(models.Model):
     title = models.CharField(max_length=100)
     language = models.ForeignKey(Language)
-    google_doc = models.URLField(blank=True, null=True,)
+    google_doc = models.URLField(blank=True, null=True, )
     parent = models.ForeignKey(Location, related_name="content")
 
     def __unicode__(self):
         return unicode(self.title)
+
+
+class AuthorizationToken(models.Model):
+    type = models.PositiveIntegerField(blank=True, null=True, default=1, choices=((1, 'Google Drive'),))
+    token_text = models.TextField(blank=True, null=True)

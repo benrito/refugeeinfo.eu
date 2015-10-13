@@ -14,13 +14,14 @@ from content import models
 
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
-
-    def add_arguments(self, parser):
-        parser.add_argument('credentials', type=unicode)
+    help = 'Sync Docs from Folder Structure into Content'
 
     def handle(self, *args, **options):
-        credentials_text = options['credentials']
+        gdrive_tokens = models.AuthorizationToken.objects.filter(type=1)
+        if not gdrive_tokens:
+            return
+
+        credentials_text = gdrive_tokens[0].token_text
         credentials = oauth2client.client.Credentials.new_from_json(credentials_text)
 
         models.LocationContent.objects.all()

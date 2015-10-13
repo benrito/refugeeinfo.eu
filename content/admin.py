@@ -4,7 +4,7 @@ __author__ = 'reyrodrigues'
 
 from django.contrib.gis import admin
 
-from .models import Location, Language, LocationContent
+from .models import Location, Language, LocationContent,AuthorizationToken
 
 
 class LocationTitleInline(admin.StackedInline):
@@ -25,3 +25,4 @@ class LocationAdmin(admin.GeoModelAdmin):
 
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Language, admin.ModelAdmin)
+admin.site.register(AuthorizationToken, admin.ModelAdmin)
