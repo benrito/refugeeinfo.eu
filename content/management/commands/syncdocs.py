@@ -11,7 +11,8 @@ from oauth2client import client
 
 from django.core.management.base import BaseCommand
 from content import models
-
+import requests
+from django.core.cache import cache
 
 class Command(BaseCommand):
     help = 'Sync Docs from Folder Structure into Content'
@@ -27,6 +28,9 @@ class Command(BaseCommand):
         models.LocationContent.objects.all()
         documents, includes = self._list_folders(credentials)
         for key in documents.iterkeys():
+            document_link = documents[key]['exportLinks']['text/html']
+
+
             if '-' in key:
                 identifier = key.split('-')
                 location = models.Location.objects.get(slug=identifier[0])
@@ -37,12 +41,15 @@ class Command(BaseCommand):
                                                                              language=language)
                     if existing_content:
                         content = existing_content[0]
-                        content.google_doc = documents[key]
+                        content.google_doc = document_link
                         content.title = location.name
                         content.save()
                     else:
                         models.LocationContent.objects.create(parent=location, language=language, title=location.name,
-                                                              google_doc=documents[key])
+                                                              google_doc=document_link)
+
+                    content = requests.get(document_link).text
+                    cache.set("{}-{}-{}".format("PageCache", location.slug, language.iso_code), content)
 
         self.stdout.write('Successfully created/updated content!')
 
@@ -59,8 +66,8 @@ class Command(BaseCommand):
         main_folder = request.execute().get('items', [])
         expanded = [e for e in self._expand_folder(service, main_folder) if 'exportLinks' in e]
 
-        documents = dict([(p['title'], p['exportLinks']['text/html']) for p in expanded if 'include' not in p['title']])
-        includes = dict([(p['title'], p['exportLinks']['text/html']) for p in expanded if 'include' in p['title']])
+        documents = dict([(p['title'], p) for p in expanded if 'include' not in p['title']])
+        includes = dict([(p['title'], p) for p in expanded if 'include' in p['title']])
 
         return documents, includes
 

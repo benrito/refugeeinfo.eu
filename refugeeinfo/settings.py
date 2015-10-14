@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-        'django.contrib.gis',
+    'django.contrib.gis',
 
     'main',
     'content'
@@ -103,7 +103,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-APPEND_SLASHheorky = True
+APPEND_SLASH = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -132,3 +132,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'rieu_page_cache',
+    }
+}

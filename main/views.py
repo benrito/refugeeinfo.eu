@@ -8,7 +8,7 @@ from ipware.ip import get_ip
 from django.http import HttpResponse, Http404
 
 from content import models
-
+from django.core.cache import cache
 
 GOOGLE_API_KEY = 'AIzaSyBj1Eu5IP1NB9UOlxKdsI693LYLjIE5NXo'
 
@@ -60,8 +60,11 @@ def index(request, page_id, language):
 
         if content and content.google_doc:
             doc_path = content.google_doc
-
-            google_doc = requests.get(doc_path).text
+            cached = cache.get("{}-{}-{}".format("PageCache", content.parent.slug, content.language.iso_code))
+            if cached:
+                google_doc = cached
+            else:
+                google_doc = requests.get(doc_path).text
 
     return render(request, 'index.html', context={
         "google_doc": google_doc
