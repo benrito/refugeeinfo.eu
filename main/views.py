@@ -127,8 +127,11 @@ def location_best_guess(request):
 
 
 def slug_no_language(request, slug):
-    accept_language = request.META['HTTP_ACCEPT_LANGUAGE'].split(',')
-    first_language = accept_language[0].split('-')
+    if 'HTTP_ACCEPT_LANGUAGE' in request.META:
+        accept_language = request.META['HTTP_ACCEPT_LANGUAGE'].split(',')
+        first_language = accept_language[0].split('-')
+    else:
+        first_language = 'en'
 
     return slug_index(request, slug, first_language)
 
