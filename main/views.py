@@ -130,6 +130,9 @@ def slug_no_language(request, slug):
     if 'HTTP_ACCEPT_LANGUAGE' in request.META:
         accept_language = request.META['HTTP_ACCEPT_LANGUAGE'].split(',')
         first_language = accept_language[0].split('-')
+
+        if first_language:
+            first_language = first_language[0]
     else:
         first_language = 'en'
 
