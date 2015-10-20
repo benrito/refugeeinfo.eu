@@ -79,6 +79,7 @@
         .language-button {
             width: 23%;
             padding-right: -5px;
+            padding-bottom: 5px;
         }
 
         #overlay {
@@ -90,7 +91,7 @@
 
 </head>
 <body>
-<div id="overlay" class="hide">
+<div id="overlay">
     <h1>RefugeeInfo.Eu</h1>
 
     <p>
@@ -100,12 +101,17 @@
         {% endfor %}
     </p>
 
-    <button onclick="goToPage()" id="goToButton">Go to <span id="location_name"></span></button>
+    <button onclick="goToPage('lesbos')" >Go to Lesbos</button>
+<br/>
+<br/>
+    <button onclick="goToPage('kos')" >Go to Kos</button>
+
     <div style="text-align: center; font-size: 1.2em; line-height: 20px">
         <em id="orLabel">or</em>
     </div>
     <button onclick="load_from_browser()">{% trans "Detect my location" %}</button>
 </div>
+<span id="location_name" style="display: none">Lesbos</span>
 <script>
     window.currentLocation = {{ current_location | safe }};
 
@@ -133,9 +139,10 @@
         document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
     }
 
-    function goToPage() {
+    function goToPage(loc) {
+        var destination = loc || window.currentLocation.slug;
         var language = localStorage.selectedLanguage;
-        location.href = '/' + window.currentLocation.slug + '/' + language + '/';
+        location.href = '/' + destination + '/' + language + '/';
     }
 
     window.onload = function () {
@@ -154,16 +161,18 @@
         document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
 
         if (!localStorage.allowedGeolocation) {
-            document.getElementById('overlay').className = "";
+            /* document.getElementById('overlay').className = "";
 
             var location_name = document.getElementById('location_name');
             if (!window.currentLocation.name) {
                 location_name.innerHTML = 'N/A';
-                document.getElementById('goToButton').style.display = 'none';
-                document.getElementById('orLabel').style.display = 'none';
+                var gotoButton =  document.getElementById('goToButton');
+                if(gotoButton)
+                    gotoButton.style.display = 'none';
+                //document.getElementById('orLabel').style.display = 'none';
             } else {
                 location_name.innerHTML = window.currentLocation.name;
-            }
+            }*/
 
         }
         else {
