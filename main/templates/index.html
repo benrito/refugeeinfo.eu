@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <!--[if lt IE 7]>      <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8"> <![endif]-->
@@ -50,8 +51,9 @@
         body {
             background-color: #000 !important;
             max-width: 566.9pt;
-            padding: 0 10px;
-            margin: 5px;
+            padding-left: 10px;
+            margin-top: 0;
+            margin-left: 5px;
         }
 
         .g-translate {
@@ -62,10 +64,21 @@
         .lst-kix_6cj4gmv9r21z-0 > li:before {
             color: #fff;
         }
+        .logo-bar-container {
+            margin: 0;
+            padding: 0;
+        }
+        .line {
+            border: 0;
+            border-bottom: 1px white solid;
+        }
     </style>
 </head>
 <body>
-
+<div class="logo-bar-container">
+    <img src="../static/logobar.png" alt="IRC MercyCorps">
+    <hr class="line" />
+</div>
 <div id="container">
     {{ google_doc|safe }}
 </div>
