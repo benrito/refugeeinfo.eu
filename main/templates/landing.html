@@ -92,9 +92,8 @@
 </head>
 <body>
 <div id="overlay">
-    <div style="text-align: center; margin-top: 10px"><img src="{% static "wordmark.png" %}"></div>
-
-    <p>
+    <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;"><img src="{% static "wordmark.png" %}"></div>
+    <p style="margin-top: 0;">
         {% for l in languages %}
             <button class="language-button" data-language-code="{{ l.iso_code }}"
                     onclick="flipLanguage('{{ l.iso_code }}')">{{ l.name }}</button>
