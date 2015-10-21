@@ -1,5 +1,5 @@
 {% load i18n %}
-
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -92,7 +92,7 @@
 </head>
 <body>
 <div id="overlay">
-    <h1>RefugeeInfo.Eu</h1>
+    <div style="text-align: center"><img src="{% static "wordmark.png" %}"></div>
 
     <p>
         {% for l in languages %}
@@ -101,10 +101,10 @@
         {% endfor %}
     </p>
 
-    <button onclick="goToPage('lesbos')" >Go to Lesbos</button>
-<br/>
-<br/>
-    <button onclick="goToPage('kos')" >Go to Kos</button>
+    <button onclick="goToPage('lesbos')">Go to Lesbos</button>
+    <br/>
+    <br/>
+    <button onclick="goToPage('kos')">Go to Kos</button>
 
     <div style="text-align: center; font-size: 1.2em; line-height: 20px">
         <em id="orLabel">or</em>
@@ -163,16 +163,16 @@
         if (!localStorage.allowedGeolocation) {
             /* document.getElementById('overlay').className = "";
 
-            var location_name = document.getElementById('location_name');
-            if (!window.currentLocation.name) {
-                location_name.innerHTML = 'N/A';
-                var gotoButton =  document.getElementById('goToButton');
-                if(gotoButton)
-                    gotoButton.style.display = 'none';
-                //document.getElementById('orLabel').style.display = 'none';
-            } else {
-                location_name.innerHTML = window.currentLocation.name;
-            }*/
+             var location_name = document.getElementById('location_name');
+             if (!window.currentLocation.name) {
+             location_name.innerHTML = 'N/A';
+             var gotoButton =  document.getElementById('goToButton');
+             if(gotoButton)
+             gotoButton.style.display = 'none';
+             //document.getElementById('orLabel').style.display = 'none';
+             } else {
+             location_name.innerHTML = window.currentLocation.name;
+             }*/
 
         }
         else {
