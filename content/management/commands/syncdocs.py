@@ -49,7 +49,7 @@ class Command(BaseCommand):
                                                               google_doc=document_link)
 
                     content = requests.get(document_link).text
-                    cache.set("{}-{}-{}".format("PageCache", location.slug, language.iso_code), content)
+                    cache.set(document_links, content)
 
         self.stdout.write('Successfully created/updated content!')
 

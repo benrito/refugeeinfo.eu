@@ -62,7 +62,7 @@ def index(request, page_id, language):
 
         if content and content.google_doc:
             doc_path = content.google_doc
-            cached = cache.get("{}-{}-{}".format("PageCache", content.parent.slug, content.language.iso_code))
+            cached = cache.get(doc_path)
             if cached:
                 google_doc = cached
             else:
