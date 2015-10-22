@@ -149,4 +149,4 @@ def slug_index(request, slug, language):
 
     location = locations[0]
 
-    return cache_page(60 * 15)(index(request, location.id, language))()
+    return cache_page(60 * 15)(index)(request, location.id, language)
