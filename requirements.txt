@@ -21,3 +21,4 @@ six==1.10.0
 static3==0.6.1
 uritemplate==0.6
 wsgiref==0.1.2
+django-pylibmc

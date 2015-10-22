@@ -6,11 +6,12 @@ import requests
 from django.contrib.gis.geos import fromstr
 from ipware.ip import get_ip
 from django.http import HttpResponse, Http404
-
-from content import models
 from django.core.cache import cache
 
+from content import models
+
 GOOGLE_API_KEY = 'AIzaSyBj1Eu5IP1NB9UOlxKdsI693LYLjIE5NXo'
+from django.views.decorators.cache import cache_page
 
 
 def landing(request):
@@ -45,6 +46,7 @@ def landing(request):
     }, context_instance=RequestContext(request))
 
 
+@cache_page(60 * 15)
 def index(request, page_id, language):
     # doc_path = 'https://docs.google.com/document/d/1NCCHyLKiSI7yHIZjbBGiIUg5_jFUOdTwgOa4vJjkYzM/pub?embedded=true'
     google_doc = '<h1 style="color: white">Your location is not supported by this platform.</h1>'
@@ -147,4 +149,4 @@ def slug_index(request, slug, language):
 
     location = locations[0]
 
-    return index(request, location.id, language)
+    return cache_page(60 * 15)(index(request, location.id, language))()
