@@ -19,6 +19,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 
+# Database
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        # GeoDjango - Using mysql now, possibly Postres in the future.
+        'ENGINE': 'django.contrib.gis.db.backends.mysql',
+        'NAME': 'refugeeinfo',
+        'HOST': 'localhost',
+    }
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -74,21 +85,10 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'refugeeinfo.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.mysql',
-        'NAME': 'refugeeinfo',
-        'HOST': 'localhost',
-        'USER': 'refugeeinfo',
-        'PASSWORD': 'P@ssw0rd',
-    }
-}
 
 
 # Internationalization
@@ -139,3 +139,9 @@ CACHES = {
         'LOCATION': 'rieu_page_cache',
     }
 }
+
+try:
+    from local_settings import *
+except ImportError:
+    print("No local_settings file found.")
+    
