@@ -115,7 +115,7 @@ def location_best_guess(request):
     longitude = 0
 
     try:
-        location_response = requests.get('http://ip-api.com/json/{}'.format(get_ip(request)))
+        location_response = requests.get('http://ip-api.com/json/{}'.format(get_ip(request)), timeout=0.200)
 
         location_info = location_response.json()
 
