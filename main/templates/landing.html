@@ -144,7 +144,10 @@
     function goToPage(loc) {
         var destination = loc || window.currentLocation.slug;
         var language = localStorage.selectedLanguage;
-        location.href = '/' + destination + '/' + language + '/';
+        if (language)
+            location.href = '/' + destination + '/' + language + '/';
+        else
+            location.href = '/' + destination + '/';
     }
 
     window.onload = function () {

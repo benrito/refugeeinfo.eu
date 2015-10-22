@@ -68,8 +68,12 @@ def index(request, page_id, language):
             else:
                 google_doc = requests.get(doc_path).text
 
+    languages = list(models.Language.objects.all().order_by('name'))
+
     return render(request, 'index.html', context={
-        "google_doc": google_doc
+        "google_doc": google_doc,
+        "languages": languages,
+        "location": location,
     }, context_instance=RequestContext(request))
 
 
