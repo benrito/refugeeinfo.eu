@@ -92,7 +92,8 @@
 </head>
 <body>
 <div id="overlay">
-    <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;"><img src="{% static "wordmark.png" %}"></div>
+    <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;"><img src="{% static "wordmark.png" %}">
+    </div>
     <p style="margin-top: 0;">
         {% for l in languages %}
             <button class="language-button" data-language-code="{{ l.iso_code }}"
@@ -135,7 +136,9 @@
         if (active)
             active.className = 'language-button';
 
-        document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
+        var languageButton = document.querySelector('[data-language-code=' + language + ']');
+        if (languageButton)
+            languageButton.className = "language-button lang-active";
     }
 
     function goToPage(loc) {
@@ -157,7 +160,9 @@
         if (active)
             active.className = 'language-button';
 
-        document.querySelector('[data-language-code=' + language + ']').className = "language-button lang-active";
+        var languageButton = document.querySelector('[data-language-code=' + language + ']');
+        if (languageButton)
+            languageButton.className = "language-button lang-active";
 
         if (!localStorage.allowedGeolocation) {
             /* document.getElementById('overlay').className = "";
