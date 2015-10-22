@@ -14,6 +14,7 @@ from content import models
 import requests
 from django.core.cache import cache
 
+
 class Command(BaseCommand):
     help = 'Sync Docs from Folder Structure into Content'
 
@@ -30,26 +31,29 @@ class Command(BaseCommand):
         for key in documents.iterkeys():
             document_link = documents[key]['exportLinks']['text/html']
 
+            try:
+                if '-' in key:
+                    identifier = key.split('-')
+                    location = models.Location.objects.get(slug='-'.join(identifier[:-1]))
+                    language = models.Language.objects.get(iso_code=identifier[-1])
 
-            if '-' in key:
-                identifier = key.split('-')
-                location = models.Location.objects.get(slug=identifier[0])
-                language = models.Language.objects.get(iso_code=identifier[1])
+                    if location and language:
+                        existing_content = models.LocationContent.objects.filter(parent=location,
+                                                                                 language=language)
+                        if existing_content:
+                            content = existing_content[0]
+                            content.google_doc = document_link
+                            content.title = location.name
+                            content.save()
+                        else:
+                            models.LocationContent.objects.create(parent=location, language=language,
+                                                                  title=location.name,
+                                                                  google_doc=document_link)
 
-                if location and language:
-                    existing_content = models.LocationContent.objects.filter(parent=location,
-                                                                             language=language)
-                    if existing_content:
-                        content = existing_content[0]
-                        content.google_doc = document_link
-                        content.title = location.name
-                        content.save()
-                    else:
-                        models.LocationContent.objects.create(parent=location, language=language, title=location.name,
-                                                              google_doc=document_link)
-
-                    content = requests.get(document_link).text
-                    cache.set(document_link, content)
+                        content = requests.get(document_link).text
+                        cache.set(document_link, content)
+            except Exception as e:
+                print("Error loading one of the files: {}.".format(key))
 
         self.stdout.write('Successfully created/updated content!')
 
