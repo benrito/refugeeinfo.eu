@@ -37,7 +37,7 @@ DATABASES = {
 SECRET_KEY = os.environ.get('SECRET_KEY', '0v7dglx7%_ani!lq7_v5xpe6uc(=^vobcmhjk4cj-^y%$m68kd')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Application definition
 
