@@ -24,3 +24,4 @@ wsgiref==0.1.2
 django-pylibmc
 pylibmc
 djangorestframework
+whitenoise
