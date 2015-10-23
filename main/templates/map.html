@@ -94,7 +94,6 @@
             if (e.layer.options.available) {
                 var country = e.layer.options.country
                 document.getElementById('backButton').style.display = '';
-                map.fitBounds(e.layer.getBounds());
                 map.removeLayer(markers);
 
 
@@ -112,7 +111,7 @@
                     });
 
                     countryMarkers.addTo(map);
-
+                    map.fitBounds(countryMarkers);
                 });
             }
         });
