@@ -101,14 +101,11 @@
         {% endfor %}
     </p>
 
-    <button onclick="goToPage('lesbos')">Go to Lesbos</button>
-    <br/>
-    <br/>
+    <button onclick="goToPage('lesbos')" style="margin-bottom: 4px;">Go to Lesbos</button>
     <button onclick="goToPage('kos')">Go to Kos</button>
-
-    <div style="text-align: center; font-size: 1.2em; line-height: 20px">
-        <em id="orLabel">or</em>
-    </div>
+<hr style="border: 1px white solid" />
+    <button onclick="location.href = '/map/'">Open map</button>
+<hr style="border: 1px white solid" />
     <button onclick="load_from_browser()">{% trans "Detect my location" %}</button>
 </div>
 <span id="location_name" style="display: none">Lesbos</span>
