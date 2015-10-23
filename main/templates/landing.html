@@ -163,25 +163,6 @@
         var languageButton = document.querySelector('[data-language-code=' + language + ']');
         if (languageButton)
             languageButton.className = "language-button lang-active";
-
-        if (!localStorage.allowedGeolocation) {
-            /* document.getElementById('overlay').className = "";
-
-             var location_name = document.getElementById('location_name');
-             if (!window.currentLocation.name) {
-             location_name.innerHTML = 'N/A';
-             var gotoButton =  document.getElementById('goToButton');
-             if(gotoButton)
-             gotoButton.style.display = 'none';
-             //document.getElementById('orLabel').style.display = 'none';
-             } else {
-             location_name.innerHTML = window.currentLocation.name;
-             }*/
-
-        }
-        else {
-            load_from_browser()
-        }
     };
 
     function getCurrentLocation(lat, long, then) {
