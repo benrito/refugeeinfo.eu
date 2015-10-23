@@ -12,15 +12,15 @@ router = DefaultRouter()
 router.register(r'locations', api.LocationViewSet)
 
 urlpatterns = [
-    url(r'api/', include(router.urls)),
-    url(r'map/', views.map),
-    url(r'lookup$', views.location_from_device, name="lookup-device"),
-    url(r'page/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/$', views.index),
+    url(r'^api/', include(router.urls)),
+    url(r'^map/', views.map),
+    url(r'^lookup$', views.location_from_device, name="lookup-device"),
+    url(r'^page/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/$', views.index),
 
-    url(r'(?P<slug>[a-zA-Z\-0-9]+)/(?P<language>[a-zA-Z]+)/?$', views.slug_index, name="slug_index"),
+    url(r'^(?P<slug>[a-zA-Z\-0-9]+)/(?P<language>[a-zA-Z]+)/?$', views.slug_index, name="slug_index"),
 
-    url(r'(?P<slug>[a-zA-Z\-0-9]+)/?$', views.slug_no_language, ),
+    url(r'^(?P<slug>[a-zA-Z\-0-9]+)/?$', views.slug_no_language, ),
 
-    url(r'$', views.landing),
+    url(r'^/?$', views.landing),
 
 ]
