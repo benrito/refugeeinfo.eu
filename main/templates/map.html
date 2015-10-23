@@ -114,7 +114,9 @@
 
         {% if location.countryCode %}
             setTimeout(function () {
-                selectCountry('{{ location.countryCode }}');
+                var country = '{{ location.countryCode }}';
+                if(country in availableCountries)
+                    selectCountry('{{ location.countryCode }}');
             },400);
         {% endif %}
 
