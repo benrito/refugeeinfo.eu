@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width" name="viewport">
+    <title>RefugeeInfo.EU Site Map</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.css"/>
+
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
+    <script src="{% static "zepto.Deferred.js" %}"></script>
+    <script src="{% static "features.js" %}"></script>
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 100%;
+            margin: 0 0 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .button {
+            margin: 2px 2px 2px 2px;
+            padding: 5px 5px;
+            border-bottom: 1px black solid;
+            display: block;
+            color: black !important;
+        }
+
+        a {
+            color: black;
+        }
+    </style>
+</head>
+<body onload="initialize()">
+<button id="backButton" onclick="backToCountries()" ondblclick="backToCountries()"
+        style="background-color: black; color: white; border: 1px white solid; padding: 5px 5px; margin: 5px 5px; display: none;
+                z-index:12345; position: absolute; top: 0; right: 0;
+                ">
+    Back
+</button>
+<div id="map">
+</div>
+
+<script type="text/javascript">
+    var availableCountries = JSON.parse('{{ available_countries|safe }}');
+
+
+    function backToCountries() {
+        map.fitBounds(markers);
+        document.getElementById('backButton').style.display = 'none';
+
+        countryMarkers.clearLayers();
+        markers.addTo(map);
+        map.fitBounds(markers);
+    }
+
+    function initialize() {
+        var layer = new L.StamenTileLayer("toner");
+        window.map = new L.Map("map", {
+            center: new L.LatLng(49, 24),
+            zoom: 4
+        });
+        map.addLayer(layer);
+        window.markers = new L.FeatureGroup();
+        window.countryMarkers = new L.FeatureGroup();
+
+        for (var key in window.countryFeatureSets) {
+            var geoJSON = L.geoJson(window.countryFeatureSets[key], {
+                style: function (feature) {
+                    return {color: '#111111'};
+                },
+                country: key,
+                available: (availableCountries[key]) ? true : false
+            });
+            if (availableCountries[key]) {
+                geoJSON.bindPopup("Available");
+            } else {
+                geoJSON.bindPopup("Not Available");
+            }
+            geoJSON.addedProp = 'ADDED';
+            geoJSON.addTo(markers);
+
+        }
+
+        markers.addTo(map);
+        map.fitBounds(markers);
+
+        markers.on('click', function (e) {
+            if (e.layer.options.available) {
+                var country = e.layer.options.country
+                document.getElementById('backButton').style.display = '';
+                map.fitBounds(e.layer.getBounds());
+                map.removeLayer(markers);
+
+
+                $.getJSON('/api/locations/?country=' + country).then(function (c) {
+                    c.forEach(function (a) {
+                        console.log(a);
+                        L.geoJson(a.location)
+                                .bindPopup(
+                                        '<strong>' + a.name + '</strong><br/>' +
+                                        a.languages.map(function (b) {
+                                            return '<a class="button" href="/' + a.slug + '/' + b.iso_code + '/">' + b.name + '</a>';
+                                        }).join('')
+                        )
+                                .addTo(countryMarkers);
+                    });
+
+                    countryMarkers.addTo(map);
+
+                });
+            }
+        });
+
+        function onLocationFound(e) {
+            var radius = e.accuracy / 2;
+
+            L.marker(e.latlng).addTo(map)
+                    .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+            L.circle(e.latlng, radius).addTo(map);
+        }
+
+        map.on('locationfound', onLocationFound);
+
+    }
+</script>
+</body>
+</html>

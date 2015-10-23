@@ -12,6 +12,7 @@ from content import models
 
 GOOGLE_API_KEY = 'AIzaSyBj1Eu5IP1NB9UOlxKdsI693LYLjIE5NXo'
 from django.views.decorators.cache import cache_page
+import django.db.models
 
 
 def landing(request):
@@ -44,6 +45,21 @@ def landing(request):
         "current_location": json.dumps(current_location),
         "languages": languages,
     }, context_instance=RequestContext(request))
+
+
+def map(request):
+    query = models.Location.objects.filter(enabled=True,
+                                           country__isnull=False)
+    query = query.values('country').annotate(count=django.db.models.Count('*'))
+
+    countries = dict([(c['country'].lower(), c['count']) for c in query])
+
+    return render(request,
+                  "map.html",
+                  {
+                      "available_countries": json.dumps(countries),
+                  },
+                  RequestContext(request))
 
 
 @cache_page(60 * 15)
