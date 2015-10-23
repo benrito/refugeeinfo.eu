@@ -23,4 +23,4 @@ uritemplate==0.6
 wsgiref==0.1.2
 django-pylibmc
 pylibmc
-restframework
+djangorestframework
