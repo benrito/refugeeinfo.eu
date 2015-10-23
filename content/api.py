@@ -14,7 +14,7 @@ class LocationSerializer(serializers.ModelSerializer):
     languages = serializers.SerializerMethodField()
 
     def get_location(self, obj):
-        return json.loads(obj.area.centroid.json)
+        return dict(type="Point", cordinates=[obj.area.centroid.x, obj.area.centroid.y])
 
     def get_languages(self, obj):
         return [dict(iso_code=l.language.iso_code, name=l.language.name) for l in obj.content.all()]
