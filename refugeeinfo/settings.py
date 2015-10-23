@@ -131,11 +131,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-
 def get_cache():
     try:
         os.environ['MEMCACHE_SERVERS'] = os.environ['MEMCACHEDCLOUD_SERVERS'].replace(',', ';')
@@ -162,4 +157,4 @@ CACHES = get_cache()
 try:
     from local_settings import *
 except ImportError:
-    print("No local_settings file found.")
+    pass
