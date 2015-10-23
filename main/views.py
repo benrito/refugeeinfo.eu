@@ -53,11 +53,12 @@ def map(request):
     query = query.values('country').annotate(count=django.db.models.Count('*'))
 
     countries = dict([(c['country'].lower(), c['count']) for c in query])
-
+    best_guess = location_best_guess(request, timeout=2)
     return render(request,
                   "map.html",
                   {
                       "available_countries": json.dumps(countries),
+                      "location": best_guess,
                   },
                   RequestContext(request))
 
@@ -130,22 +131,24 @@ def location_from_device(request):
     }), content_type='application/json')
 
 
-def location_best_guess(request):
+def location_best_guess(request, timeout=0.2):
     latitude = 0
     longitude = 0
-
+    country_code = None
     try:
-        location_response = requests.get('http://ip-api.com/json/{}'.format(get_ip(request)), timeout=0.200)
+        location_response = requests.get('http://ip-api.com/json/{}'.format(get_ip(request)), timeout=timeout)
 
         location_info = location_response.json()
 
         if location_info['status'] == 'success':
             latitude = location_info['lat']
             longitude = location_info['lon']
+            if 'countryCode' in location_info:
+               country_code= location_info['countryCode'].lower()
     except Exception as e:
         pass
 
-    return {"latitude": latitude, "longitude": longitude}
+    return {"latitude": latitude, "longitude": longitude, 'countryCode': country_code}
 
 
 def slug_no_language(request, slug):
