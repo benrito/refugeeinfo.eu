@@ -37,11 +37,12 @@ DATABASES = {
 SECRET_KEY = os.environ.get('SECRET_KEY', '0v7dglx7%_ani!lq7_v5xpe6uc(=^vobcmhjk4cj-^y%$m68kd')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Application definition
 
 INSTALLED_APPS = (
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+
     'rest_framework',
 
     'main',
