@@ -33,12 +33,10 @@
     <meta name="msapplication-TileColor" content="#000000">
     <meta name="msapplication-TileImage" content="{{ cons.path.favicons }}/mstile-144x144.png">
     <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="{% static "css/site.css" %}"/>
 
     <!-- Font and Styles -->
     <style>
-        html, body {
-            height: 100%;
-        }
 
         iframe {
             display: block
@@ -46,14 +44,6 @@
 
         li:before {
             color: white;
-        }
-
-        body {
-            background-color: #000 !important;
-            max-width: 566.9pt;
-            padding-left: 10px;
-            margin-top: 0;
-            margin-left: 5px;
         }
 
         .g-translate {
@@ -65,118 +55,39 @@
             color: #fff;
         }
 
-        .logo-bar-container {
-            margin: 0;
-            padding: 0;
-            margin-top: 5px;
-        }
-
-        .line {
-            border: 0;
-            border-bottom: 1px white solid;
-        }
-
-        ul.menu {
-            text-align: left;
-            display: inline;
-            margin: 0;
-            position: absolute;
-            right: 15px;
-            padding: 0 0;
-            list-style: none;
-            -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-            -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-        }
-
-        ul.menu li {
-            font: bold 12px/18px sans-serif;
-            display: inline-block;
-            margin-right: -4px;
-            position: relative;
-            padding: 7px 6px;
-            background: #000;
-            cursor: pointer;
-            -webkit-transition: all 0.2s;
-            -moz-transition: all 0.2s;
-            -ms-transition: all 0.2s;
-            -o-transition: all 0.2s;
-            transition: all 0.2s;
-        }
-
-        ul.menu li:hover {
-            background: #000;
-            color: #fff;
-        }
-
-        ul.menu li ul {
-            padding: 0;
-            position: absolute;
-            top: 48px;
-            border-bottom: 1px white solid;
-
-            right: 10px;
-            width: 150px;
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-            box-shadow: none;
-            display: none;
-            opacity: 0;
-            visibility: hidden;
-            -webkit-transiton: opacity 0.2s;
-            -moz-transition: opacity 0.2s;
-            -ms-transition: opacity 0.2s;
-            -o-transition: opacity 0.2s;
-            -transition: opacity 0.2s;
-        }
-
-        ul.menu li ul li {
-            border-top: 1px white solid;
-            background: #000;
-            display: block;
-            color: #fff;
-            text-shadow: 0 -1px 0 #000;
-        }
-
-        ul.menu li ul li:hover {
-            background: #000;
-        }
-
-        ul.menu li:hover ul {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: white;
-        }
     </style>
 </head>
-<body>
+<body class="content-page">
 <ul class="menu">
     <li>
-        <a href="/map/"> <img src="{% static "map-marker.png" %}" alt="Other Locations"
-                              style="height: 25px; border: 1px white solid; padding: 2px 2px;"/></a>
+        <a href="/map/"> <img src="{% static "images/map-marker.png" %}" alt="Other Locations" class="content-button"/></a>
     </li>
     <li>
-        <img src="{% static "translate.png" %}" alt="Other Languages"
-             style="height: 25px; border: 1px white solid; padding: 2px 2px;"/>
+        <img src="{% static "images/translate.png" %}" alt="Other Languages" class="content-button"/>
         <ul>
             {% for l in languages %}
                 <li><a href="/{{ location.slug }}/{{ l.iso_code }}/">{{ l.name }}</a></li>
             {% endfor %}
         </ul>
     </li>
+    {% if service_map_enabled %}
+        <li>
+            <a href="/{{ location.slug }}/services/">
+                <img src="{% static "images/book.png" %}" alt="Services" class="content-button"/>
+            </a>
+        </li>
+    {% endif %}
 </ul>
 <div class="logo-bar-container">
-    <img src="{% static "logobar.png" %}" alt="IRC | MercyCorps">
-    <hr class="line"/>
+    <img src="{% static "images/logobar.png" %}" alt="IRC | MercyCorps">
+    <hr/>
 </div>
 <div id="container">
     {{ google_doc|safe }}
 </div>
-<div style="position: absolute; margin-top: 30px; margin-bottom: 5px;color:white; font-family: 'Courier New', Courier, monospace">Powered by <a href="http://www.rescue.org" style=" color:white; ">The International Rescue Committee</a>, <a href="https://github.com/theirc/refugeeinfo.eu/blob/master/LICENSE" style=" color:white; ">Copyleft</a> 2015</div>
+<div class="powered-by">
+    Powered by <a href="http://www.rescue.org" style=" color:white; ">The International Rescue Committee</a>, <a
+        href="https://github.com/theirc/refugeeinfo.eu/blob/master/LICENSE" style=" color:white; ">Copyleft</a> 2015
+</div>
 </body>
 </html>

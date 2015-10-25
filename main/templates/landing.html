@@ -27,6 +27,7 @@
 
     </script>
 
+    <link rel="stylesheet" href="{% static "css/site.css" %}"/>
     <style>
         html, body {
             height: 100%;
@@ -91,9 +92,9 @@
 
 </head>
 <body>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;"><img src="{% static "images/wordmark.png" %}">
+</div>
 <div id="overlay">
-    <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;"><img src="{% static "wordmark.png" %}">
-    </div>
     <p style="margin-top: 0;">
         {% for l in languages %}
             <button class="language-button" data-language-code="{{ l.iso_code }}"
@@ -103,9 +104,9 @@
 
     <button onclick="goToPage('lesbos')" style="margin-bottom: 4px;">Go to Lesbos</button>
     <button onclick="goToPage('kos')">Go to Kos</button>
-<hr style="border: 1px white solid" />
+    <hr />
     <button onclick="location.href = '/map/'">Open map</button>
-<hr style="border: 1px white solid" />
+    <hr />
     <button onclick="load_from_browser()">{% trans "Detect my location" %}</button>
 </div>
 <span id="location_name" style="display: none">Lesbos</span>
@@ -186,7 +187,17 @@
 
 </script>
 
-<div style="position: absolute; margin-top: 30px; margin-bottom: 5px;color:white; font-family: 'Courier New', Courier, monospace">Powered by <a href="http://www.rescue.org" style=" color:white; ">The International Rescue Committee</a>, <a href="https://github.com/theirc/refugeeinfo.eu/blob/master/LICENSE" style=" color:white; ">Copyleft</a> 2015</div>
+<div class="logo-bar-container">
+        <hr />
+    <img src="{% static "images/logobar.png" %}" alt="IRC | MercyCorps" style="zoom: .75">
+    <map>
+
+    </map>
+</div>
+<div class="powered-by">
+    Powered by <a href="http://www.rescue.org" style=" color:white; ">The International Rescue Committee</a>, <a
+        href="https://github.com/theirc/refugeeinfo.eu/blob/master/LICENSE" style=" color:white; ">Copyleft</a> 2015
+</div>
 
 </body>
 </html>

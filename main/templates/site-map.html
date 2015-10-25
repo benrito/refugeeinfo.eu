@@ -4,11 +4,8 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width" name="viewport">
-    <title>RefugeeInfo.EU Site Map</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.js"></script>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.css"/>
-
-    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <script>
@@ -29,9 +26,11 @@
 
     </script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
-    <script src="{% static "zepto.Deferred.js" %}"></script>
-    <script src="{% static "features.js" %}"></script>
+    <script src="{% static "js/zepto.Deferred.js" %}"></script>
+    <script src="{% static "js/features.js" %}"></script>
     <style type="text/css">
         #map {
             width: 100%;
@@ -56,10 +55,18 @@
     </style>
 </head>
 <body onload="initialize()">
-<button id="backButton" onclick="backToCountries()" ondblclick="backToCountries()"
-        style="background-color: black; color: white; border: 1px white solid; padding: 5px 5px; margin: 5px 5px; display: none;
-                z-index:12345; position: absolute; top: 0; right: 0;
-                ">
+<button id="backButton" onclick="backToCountries()" ondblclick="backToCountries()" style="
+            background-color: black;
+            color: white;
+            border: 1px white solid;
+            padding: 5px 5px;
+            margin: 5px 5px;
+            display: none;
+            z-index: 12345;
+            position: absolute;
+            top: 0;
+            right: 0;
+">
     <i class="fa fa-globe fa-2x" style="font-size: 4em!important;"></i>
 </button>
 <div id="map">
@@ -133,9 +140,9 @@
         {% if location.countryCode %}
             setTimeout(function () {
                 var country = '{{ location.countryCode }}';
-                if(country in availableCountries)
+                if (country in availableCountries)
                     selectCountry('{{ location.countryCode }}');
-            },100);
+            }, 100);
         {% endif %}
 
     }

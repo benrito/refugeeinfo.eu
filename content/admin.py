@@ -14,6 +14,10 @@ class LocationTitleInline(admin.StackedInline):
 
 
 class LocationAdmin(admin.GeoModelAdmin):
+    default_lat = 48.69096
+    default_lon = 12.480469
+    default_zoom = 5
+
     inlines = [
         LocationTitleInline,
     ]

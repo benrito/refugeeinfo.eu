@@ -1,0 +1,1103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width" name="viewport">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-68574649-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
+    <script src="{% static "zepto.Deferred.js" %}"></script>
+    <script src="{% static "features.js" %}"></script>
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 100%;
+            margin: 0 0 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body onload="initialize()">
+<button id="backButton" onclick="backToInfoPage()" style="
+            background-color: black;
+            color: white;
+            border: 1px white solid;
+            padding: 5px 5px;
+            margin: 5px 5px;
+            z-index: 12345;
+            position: absolute;
+            top: 0;
+            right: 0;
+">
+    <i class="fa fa-info-circle fa-2x" style="font-size: 4em!important;"></i>
+</button>
+<div id="map">
+</div>
+<script id="features">
+window.features = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.504002,
+                    39.133194,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Moria Detention Center Entrance",
+                "description": "Camp for non-Syrian migrants"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.5440711,
+                    39.1288535,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Kara Tepe Reg Area (approximate)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.3046786,
+                    39.3673336,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Eurorelief Sykimanea Transit Center",
+                "description": "No power. No Internet."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.337436,
+                    39.3054836,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "MSF MantamadosTransit Center ",
+                "description": "No power. CradlePoint Wifi on battery."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.171354,
+                    39.344437,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Oxy Transit Center"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.5633886,
+                    39.1083749,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "MSF Port Site"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.5441387,
+                    39.126998,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Electrical Shop (DSL site)",
+                "description": "Shop hosts VDSL for DTL. DSL NOT CURRENTLY ACTIVE."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.512531,
+                    39.144973,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Water Tower Relay Point",
+                "description": "Water tower to host Disaster Tech Lab relay connecting Moria and Kara Tepe networks."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        26.1927797,
+                        39.3796916,
+                        0
+                    ],
+                    [
+                        26.205826,
+                        39.377966,
+                        0
+                    ],
+                    [
+                        26.220932,
+                        39.384998,
+                        0
+                    ],
+                    [
+                        26.242733,
+                        39.384866,
+                        0
+                    ],
+                    [
+                        26.271057000000003,
+                        39.37916,
+                        0
+                    ],
+                    [
+                        26.294060000000005,
+                        39.378099,
+                        0
+                    ],
+                    [
+                        26.320152,
+                        39.37783400000001,
+                        0
+                    ],
+                    [
+                        26.335945,
+                        39.39004,
+                        0
+                    ],
+                    [
+                        26.343327,
+                        39.394418,
+                        0
+                    ],
+                    [
+                        26.35397,
+                        39.385927,
+                        0
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Primary Landing Zone"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        26.35397,
+                        39.385927,
+                        0
+                    ],
+                    [
+                        26.3695908,
+                        39.3796912,
+                        0
+                    ],
+                    [
+                        26.3716507,
+                        39.3702698,
+                        0
+                    ],
+                    [
+                        26.362381,
+                        39.3653595,
+                        0
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Occasional Arrivals"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        26.177845,
+                        39.3748148,
+                        0
+                    ],
+                    [
+                        26.1797333,
+                        39.3752128,
+                        0
+                    ],
+                    [
+                        26.1812353,
+                        39.3759427,
+                        0
+                    ],
+                    [
+                        26.1816645,
+                        39.377535,
+                        0
+                    ],
+                    [
+                        26.182565700000005,
+                        39.3792268,
+                        0
+                    ],
+                    [
+                        26.1845398,
+                        39.3802883,
+                        0
+                    ],
+                    [
+                        26.1869431,
+                        39.3801887,
+                        0
+                    ],
+                    [
+                        26.192522,
+                        39.3797575,
+                        0
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Occasional Arrivals"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.166841,
+                    39.369395,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Captain's Table Arrival Tents",
+                "description": "Coast guard brings rescued shipwrecks here."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.21442100000002,
+                    39.378801,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Eftalou Arrival Tent",
+                "description": "WAHA"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.299875,
+                    39.374562100000006,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Skala Sykaminea Landing Point"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.34147,
+                    39.390115,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Korakas Lighthouse Landing Area"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.5544271,
+                    39.1039227,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Radio Electronic Shop",
+                "description": "Electicals, electronic, and bait shop"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.342994600000004,
+                    39.3839339,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Light House Arrival Tent (approximate)",
+                "description": "WAHA, La Chaîne de L'espoire"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.206159999999954,
+                    39.22835,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Aggallia Rest Station",
+                "description": "Shop in town with beds, water, etc... so that walkers can rest."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.593908000000003,
+                    39.067259,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Village of all Together (approximate)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.2972085,
+                    39.3608102,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "[CLOSED] Family Transit Center",
+                "description": "Volunteer run assembly point."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.3185968,
+                    39.3424871,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Cheese Factory"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    25.851628000000005,
+                    39.212751,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Harbour Sigri"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.5612527,
+                    39.105000700000005,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Port of Mytilene"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.5539336,
+                    39.1022783,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Mercy Corps—Apostoli #4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.543961,
+                    39.127676,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Kara Tepe Entrance"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.23749799999996,
+                    39.379891,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Proposed Windy Hill Transit Site"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.1754417,
+                    39.3280568,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Proposed Petra Transit site (approximate)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.55979400000001,
+                    39.105035,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "PAPERLAND Printers",
+                "description": "Banners and leaflets"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.557235400000003,
+                    39.1116984,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "IRC"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.54882299999997,
+                    39.098355,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Police HQ",
+                "description": "DSL backhaul location for DTL's Moria net"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.3873363,
+                    39.2930384,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Disaster Tech Lab HQ"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.593908000000056,
+                    39.067259,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Pikpa"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.5440255,
+                            39.1279505,
+                            0
+                        ],
+                        [
+                            26.544207899999996,
+                            39.12770909999999,
+                            0
+                        ],
+                        [
+                            26.544712199999996,
+                            39.127392799999996,
+                            0
+                        ],
+                        [
+                            26.5455115,
+                            39.12740529999999,
+                            0
+                        ],
+                        [
+                            26.545758200000005,
+                            39.1277257,
+                            0
+                        ],
+                        [
+                            26.545699199999998,
+                            39.1282501,
+                            0
+                        ],
+                        [
+                            26.5448248,
+                            39.1294069,
+                            0
+                        ],
+                        [
+                            26.5442938,
+                            39.12938200000001,
+                            0
+                        ],
+                        [
+                            26.543591,
+                            39.1286038,
+                            0
+                        ],
+                        [
+                            26.5440255,
+                            39.1279505,
+                            0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Kara Tepe camp (rough)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.1713514,
+                            39.3443584,
+                            0
+                        ],
+                        [
+                            26.1714828,
+                            39.34432940000001,
+                            0
+                        ],
+                        [
+                            26.171496200000004,
+                            39.3443875,
+                            0
+                        ],
+                        [
+                            26.171472100000003,
+                            39.3445721,
+                            0
+                        ],
+                        [
+                            26.171394300000003,
+                            39.34474010000001,
+                            0
+                        ],
+                        [
+                            26.1711851,
+                            39.3446924,
+                            0
+                        ],
+                        [
+                            26.1713514,
+                            39.3443584,
+                            0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Oxy Transit Center (rough)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.3044962,
+                            39.367346,
+                            0
+                        ],
+                        [
+                            26.3044909,
+                            39.3672009,
+                            0
+                        ],
+                        [
+                            26.304590100000002,
+                            39.3671532,
+                            0
+                        ],
+                        [
+                            26.3050944,
+                            39.3670889,
+                            0
+                        ],
+                        [
+                            26.305166800000002,
+                            39.36741030000001,
+                            0
+                        ],
+                        [
+                            26.3049737,
+                            39.3675078,
+                            0
+                        ],
+                        [
+                            26.3046572,
+                            39.3676032,
+                            0
+                        ],
+                        [
+                            26.3044962,
+                            39.367346,
+                            0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Sykimanea Transit Center (rough)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.560475499999995,
+                            39.1046761,
+                            0
+                        ],
+                        [
+                            26.560775899999996,
+                            39.1041953,
+                            0
+                        ],
+                        [
+                            26.5621492,
+                            39.1047323,
+                            0
+                        ],
+                        [
+                            26.5616557,
+                            39.1054837,
+                            0
+                        ],
+                        [
+                            26.560918100000002,
+                            39.1051569,
+                            0
+                        ],
+                        [
+                            26.5604246,
+                            39.1048073,
+                            0
+                        ],
+                        [
+                            26.560475499999995,
+                            39.1046761,
+                            0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Port waiting area (rough)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.337310400000003,
+                            39.3058636,
+                            0
+                        ],
+                        [
+                            26.3372996,
+                            39.3050729,
+                            0
+                        ],
+                        [
+                            26.3365272,
+                            39.30503349999999,
+                            0
+                        ],
+                        [
+                            26.336537899999996,
+                            39.3048259,
+                            0
+                        ],
+                        [
+                            26.3368249,
+                            39.3047553,
+                            0
+                        ],
+                        [
+                            26.3377342,
+                            39.3047782,
+                            0
+                        ],
+                        [
+                            26.337809299999996,
+                            39.3052638,
+                            0
+                        ],
+                        [
+                            26.337608100000008,
+                            39.3056561,
+                            0
+                        ],
+                        [
+                            26.337310400000003,
+                            39.3058636,
+                            0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Mantamados Transit Center (rough)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            26.5017915,
+                            39.1353365,
+                            0
+                        ],
+                        [
+                            26.502049000000003,
+                            39.13466240000002,
+                            0
+                        ],
+                        [
+                            26.5028107,
+                            39.1338635,
+                            0
+                        ],
+                        [
+                            26.5040553,
+                            39.1330979,
+                            0
+                        ],
+                        [
+                            26.50521399999999,
+                            39.1346791,
+                            0
+                        ],
+                        [
+                            26.503036,
+                            39.1361937,
+                            0
+                        ],
+                        [
+                            26.5017915,
+                            39.1353365,
+                            0
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Moria camp (rough)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.5574654,
+                    39.1091371,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Ermou Electrical Shop, 225 Ermou St",
+                "description": "Has networking cable and gear."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.698946999999976,
+                    37.98281,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Eleonas District Camp\n",
+                "description": "Good conditions. WiFi, power, hot water"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.725829999999974,
+                    37.901126,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Elliniko District Camp",
+                "description": "Former Olympic Hockey Stadium. Very few migrants (as of 19-Oct-2015)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.760528000000022,
+                    38.027227,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Galatsi District Camp\n",
+                "description": "Former 2004 Olympic Gymnastics stadium. Heavily used. Shelter, food, water available. $00 residents (19-Oct-2015.)"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.55227500000001,
+                    39.075075000000005,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Telecoms mast",
+                "description": "Mast at highest point on the island. Used by Disaster Tech Lab as a relay for point-2-point links connecting Moria, Kara Tepe and Police HQ in Mytilini."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        26.5524101,
+                        39.0781086,
+                        0
+                    ],
+                    [
+                        26.5440711,
+                        39.1288535,
+                        0
+                    ],
+                    [
+                        26.537132300000003,
+                        39.13328930000001,
+                        0
+                    ],
+                    [
+                        26.5125847,
+                        39.1472358,
+                        0
+                    ],
+                    [
+                        26.503036,
+                        39.1361937,
+                        0
+                    ]
+                ]
+            },
+            "properties": {
+                "name": "Wireless radio link",
+                "description": "Point-2-point radio links built by Disaster Tech Lab to provide wifi internet access."
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.562472222222254,
+                    39.10516666666667,
+                    0
+                ]
+            },
+            "properties": {
+                "name": "Lesbos Port Swimming Pool Shelter"
+            }
+        }
+    ]
+}
+</script>
+<script type="text/javascript">
+    function backToInfoPage() {
+        location.href = '/{{ slug }}/';
+    }
+    function initialize() {
+        var layer = new L.StamenTileLayer("toner");
+        window.map = new L.Map("map", {
+            center: new L.LatLng(49, 24),
+            zoom: 4
+        });
+        map.addLayer(layer);
+
+        var geoJson = {{ extent|safe }};
+        var extent = L.geoJson(geoJson);
+
+        var featureGroups = L.geoJson(features);
+
+
+        featureGroups.on('click', function (e) {
+           console.log(e);
+            L.popup({},e).setContent('Hello').openOn(map);
+        });
+
+        featureGroups.addTo(map);
+        map.fitBounds(extent);
+    }
+
+</script>
+</body>
+</html>

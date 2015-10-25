@@ -7,13 +7,12 @@ from django.contrib.gis.geos import fromstr
 from ipware.ip import get_ip
 from django.http import HttpResponse, Http404
 from django.core.cache import cache
-
-from content import models
-
-GOOGLE_API_KEY = 'AIzaSyBj1Eu5IP1NB9UOlxKdsI693LYLjIE5NXo'
 from django.views.decorators.cache import cache_page
 import django.db.models
+import geojson
+from django.conf import settings
 
+from content import models
 
 def landing(request):
     ip_position = location_best_guess(request)
@@ -46,8 +45,7 @@ def landing(request):
         "languages": languages,
     }, context_instance=RequestContext(request))
 
-
-def map(request):
+def site_map(request):
     query = models.Location.objects.filter(enabled=True,
                                            country__isnull=False)
     query = query.values('country').annotate(count=django.db.models.Count('*'))
@@ -55,7 +53,7 @@ def map(request):
     countries = dict([(c['country'].lower(), c['count']) for c in query])
     best_guess = location_best_guess(request, timeout=2)
     return render(request,
-                  "map.html",
+                  "site-map.html",
                   {
                       "available_countries": json.dumps(countries),
                       "location": best_guess,
@@ -65,7 +63,6 @@ def map(request):
 
 @cache_page(60 * 15)
 def index(request, page_id, language):
-    # doc_path = 'https://docs.google.com/document/d/1NCCHyLKiSI7yHIZjbBGiIUg5_jFUOdTwgOa4vJjkYzM/pub?embedded=true'
     google_doc = '<h1 style="color: white">Your location is not supported by this platform.</h1>'
     location = models.Location.objects.filter(id=page_id)
 
@@ -91,6 +88,7 @@ def index(request, page_id, language):
         "google_doc": google_doc,
         "languages": languages,
         "location": location,
+        "service_map_enabled": settings.DEBUG or False,
     }, context_instance=RequestContext(request))
 
 
@@ -144,7 +142,7 @@ def location_best_guess(request, timeout=0.2):
             latitude = location_info['lat']
             longitude = location_info['lon']
             if 'countryCode' in location_info:
-               country_code= location_info['countryCode'].lower()
+                country_code = location_info['countryCode'].lower()
     except Exception as e:
         pass
 
@@ -173,3 +171,33 @@ def slug_index(request, slug, language):
     location = locations[0]
 
     return cache_page(60 * 15)(index)(request, location.id, language)
+
+
+def services(request, slug, service_category=None):
+    if 'HTTP_ACCEPT_LANGUAGE' in request.META:
+        accept_language = request.META['HTTP_ACCEPT_LANGUAGE'].split(',')
+        first_language = accept_language[0].split('-')
+
+        if first_language:
+            first_language = first_language[0]
+    else:
+        first_language = 'en'
+
+    location = models.Location.objects.filter(slug=slug)
+
+    if location:
+        location = location[0]
+    else:
+        return redirect('/')
+
+    extent = geojson.Polygon(([(a[0], a[1], 0) for a in location.area.shell.array],))
+
+    print extent
+
+    return render(request,
+                  "service-map.html",
+                  {
+                      "extent": unicode(extent),
+                      "slug": location.slug,
+                  },
+                  RequestContext(request))
