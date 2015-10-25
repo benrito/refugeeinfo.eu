@@ -27,3 +27,5 @@ static3==0.6.1
 uritemplate==0.6
 whitenoise==2.0.4
 wsgiref==0.1.2
+django-pylibmc
+pylibmc
