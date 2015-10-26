@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static "css/Leaflet.vector-markers.css" %}">
     <link rel="stylesheet" href="{% static "css/site.css" %}"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
 
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -244,12 +246,6 @@ angular.module('serviceApp', ['ngRoute', 'ngAnimate'])
 
         })
 
-        .filter('toGoogleMaps', function (wktToLatLong) {
-            return function (wkt) {
-                return wktToLatLong(wkt).join("%2C")
-            }
-        })
-
         .directive('miniMap', function () {
             return {
                 restrict: 'C',
@@ -301,8 +297,13 @@ angular.module('serviceApp', ['ngRoute', 'ngAnimate'])
 
                     function onLocationFound(e) {
                         var radius = e.accuracy / 2;
+                        var manMarker = L.VectorMarkers.icon({
+                            icon: 'male',
+                            markerColor: 'blue'
+                        });
 
-                        L.marker(e.latlng).addTo(map)
+
+                        L.marker(e.latlng, {icon: manMarker}).addTo(map)
                                 .bindPopup("You are within " + radius + " meters from this point");
 
                         L.circle(e.latlng, radius).addTo(map);
