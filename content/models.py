@@ -31,7 +31,7 @@ class Location(models.Model):
 class LocationContent(models.Model):
     title = models.CharField(max_length=100)
     language = models.ForeignKey(Language)
-    google_doc = models.URLField(blank=True, null=True, )
+    html_url = models.URLField(blank=True, null=True, )
     parent = models.ForeignKey(Location, related_name="content")
 
     def __unicode__(self):

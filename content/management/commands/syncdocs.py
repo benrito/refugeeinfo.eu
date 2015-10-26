@@ -42,13 +42,13 @@ class Command(BaseCommand):
                                                                                  language=language)
                         if existing_content:
                             content = existing_content[0]
-                            content.google_doc = document_link
+                            content.html_url = document_link
                             content.title = location.name
                             content.save()
                         else:
                             models.LocationContent.objects.create(parent=location, language=language,
                                                                   title=location.name,
-                                                                  google_doc=document_link)
+                                                                  html_url=document_link)
 
                         content = requests.get(document_link).text
                         cache.set(document_link, content)
