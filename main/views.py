@@ -90,7 +90,7 @@ def index(request, page_id, language):
         "html_content": html_content,
         "languages": languages,
         "location": location,
-        "service_map_enabled": settings.DEBUG or False,
+        "service_map_enabled": settings.ENABLE_SERVICES or False,
     }, context_instance=RequestContext(request))
 
 
