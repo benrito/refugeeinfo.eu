@@ -38,6 +38,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '0v7dglx7%_ani!lq7_v5xpe6uc(=^vobcmhjk
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if 'DATABASE_URL' in os.environ else True
+ENABLE_SERVICES = DEBUG or 'ENABLE_SERVICES' in os.environ
 
 # Application definition
 
@@ -87,7 +88,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'refugeeinfo.wsgi.application'
 
 
@@ -129,7 +129,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -167,6 +166,7 @@ def get_cache():
                 'LOCATION': 'rieu_page_cache',
             }
         }
+
 
 CACHES = get_cache()
 

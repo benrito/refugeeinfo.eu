@@ -4,7 +4,21 @@ __author__ = 'reyrodrigues'
 
 from django.contrib.gis import admin
 
-from .models import Location, Language, LocationContent,AuthorizationToken
+from .models import Location, Language, LocationContent, AuthorizationToken
+
+
+def disable_location(modeladmin, request, queryset):
+    queryset.update(enabled=False)
+
+
+disable_location.short_description = 'Disable location'
+
+
+def enable_location(modeladmin, request, queryset):
+    queryset.update(enabled=True)
+
+
+enable_location.short_description = 'Enable location'
 
 
 class LocationTitleInline(admin.StackedInline):
@@ -25,6 +39,7 @@ class LocationAdmin(admin.GeoModelAdmin):
     list_filter = ('country',)
     search_fields = ('name', )
     prepopulated_fields = {"slug": ('name',)}
+    actions = [enable_location, disable_location]
 
 
 admin.site.register(Location, LocationAdmin)
