@@ -1,0 +1,86 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">  <!--<![endif]-->
+<head>
+    <!-- Meta info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width" name="viewport">
+
+    <title>Information </title>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-68574649-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="{{ cons.path.favicons }}/mstile-144x144.png">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="{% static "css/site.css" %}"/>
+
+    <!-- Font and Styles -->
+    <style>
+
+        iframe {
+            display: block
+        }
+
+        li:before {
+            color: white;
+        }
+
+        .g-translate {
+            float: right;
+            margin-top: 15px;
+        }
+
+        .lst-kix_6cj4gmv9r21z-0 > li:before {
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body class="content-page">
+<h1>Mercy Corps</h1>
+
+<p>
+    <small>Mercy Corps' mission is to alleviate suffering, poverty and oppression by helping people build secure,
+        productive and just communities.
+        <br/>
+        <br/>
+        More information about Mercy Corps can be found on their website: <a href="http://mercycorps.org"
+                                                                             target="_blank" style="color: white">mercycorps.org</a>.
+    </small>
+</p>
+<h1>Disaster Tech Lab</h1>
+
+<p>
+    <small>Disaster Tech Lab provides rapid response communication networks for use in disaster relief and humanitarian
+        aid work. Our networks and services help to connect responding organisations as well as affected communities.
+
+        <br/>
+        <br/>
+        More information about Disaster Tech Lab can be found on their website: <a href="http://disastertechlab.org"
+                                                                                   target="_blank" style="color: white">disastertechlab.org</a>.
+    </small>
+</p>
+<a href="/" style="color: white">Back</a>
+</body>
+</html>

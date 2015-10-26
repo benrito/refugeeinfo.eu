@@ -14,6 +14,7 @@ from django.conf import settings
 
 from content import models
 
+
 def landing(request):
     ip_position = location_best_guess(request)
     point = 'POINT({} {})'.format(ip_position['longitude'], ip_position['latitude'])
@@ -44,6 +45,7 @@ def landing(request):
         "current_location": json.dumps(current_location),
         "languages": languages,
     }, context_instance=RequestContext(request))
+
 
 def site_map(request):
     query = models.Location.objects.filter(enabled=True,
@@ -201,3 +203,7 @@ def services(request, slug, service_category=None):
                       "slug": location.slug,
                   },
                   RequestContext(request))
+
+
+def acknowledgements(request):
+    return render(request, "acknowledgments.html", {}, RequestContext(request))

@@ -13,6 +13,7 @@ router.register(r'locations', api.LocationViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
+    url(r'^acknowledgements/', views.acknowledgements),
     url(r'^map/', views.site_map),
     url(r'^lookup$', views.location_from_device, name="lookup-device"),
     url(r'^page/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/$', views.index),
