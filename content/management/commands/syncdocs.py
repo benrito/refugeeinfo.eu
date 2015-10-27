@@ -56,6 +56,7 @@ class Command(BaseCommand):
                         content = requests.get(document_link).text
                         cache.set(document_link, content)
             except Exception as e:
+                print(e.message)
                 print("Error loading one of the files: {}.".format(key))
 
         self.stdout.write('Successfully created/updated content!')
