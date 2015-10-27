@@ -17,6 +17,9 @@ from lxml import etree
 from content import models
 
 
+CACHE_LENGTH = 0  # 60 * 15
+
+
 def landing(request):
     ip_position = location_best_guess(request)
     point = 'POINT({} {})'.format(ip_position['longitude'], ip_position['latitude'])
@@ -65,7 +68,7 @@ def site_map(request):
                   RequestContext(request))
 
 
-@cache_page(60 * 15)
+@cache_page(CACHE_LENGTH)
 def index(request, page_id, language):
     location = models.Location.objects.filter(id=page_id)
     html_content = ""
@@ -74,9 +77,6 @@ def index(request, page_id, language):
         location = location[0]
 
         if location.managed_locally:
-            if language not in [a[0] for a in settings.LANGUAGES]:
-                language = 'en'
-
             url_parts = [location.slug]
             m = location
             while m.parent:
@@ -85,12 +85,14 @@ def index(request, page_id, language):
 
             page_to_url = '/'.join(reversed(url_parts))
 
-            r = requests.get(settings.CMS_URL + '/{}/{}/'.format(language, page_to_url))
+            r = requests.get(settings.CMS_URL + '/{}/{}/'.format(language, page_to_url),
+                             headers={"Accept-Language": language})
 
             if r.status_code == 200:
                 html_content = r.text
             elif language != 'en':
-                r = requests.get(settings.CMS_URL + '/{}/{}/'.format('en', page_to_url))
+                r = requests.get(settings.CMS_URL + '/{}/{}/'.format('en', page_to_url),
+                                 headers={"Accept-Language": 'en'})
                 if r.status_code == 200:
                     html_content = r.text
                 else:
@@ -203,7 +205,7 @@ def slug_index(request, slug, language):
 
     location = locations[0]
 
-    return cache_page(60 * 15)(index)(request, location.id, language)
+    return cache_page(CACHE_LENGTH)(index)(request, location.id, language)
 
 
 def services(request, slug, service_category=None):

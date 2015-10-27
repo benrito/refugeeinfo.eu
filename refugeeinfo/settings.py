@@ -39,7 +39,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '0v7dglx7%_ani!lq7_v5xpe6uc(=^vobcmhjk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if 'DATABASE_URL' in os.environ else True
 ENABLE_SERVICES = DEBUG or 'ENABLE_SERVICES' in os.environ
-CMS_URL = os.environ.get('CMS_URL', 'http://cms.refugeeinfo.eu')
+CMS_URL = os.environ.get('CMS_URL', 'http://localhost:9191')
 
 # Application definition
 
