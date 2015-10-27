@@ -85,12 +85,12 @@ def index(request, page_id, language):
 
             page_to_url = '/'.join(reversed(url_parts))
 
-            r = requests.get(settings.CMS_URL + '/{}/cms/{}/'.format(language, page_to_url))
+            r = requests.get(settings.CMS_URL + '/{}/{}/'.format(language, page_to_url))
 
             if r.status_code == 200:
                 html_content = r.text
             elif language != 'en':
-                r = requests.get(settings.CMS_URL + '/{}/cms/{}/'.format('en', page_to_url))
+                r = requests.get(settings.CMS_URL + '/{}/{}/'.format('en', page_to_url))
                 if r.status_code == 200:
                     html_content = r.text
                 else:
