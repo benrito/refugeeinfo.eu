@@ -129,4 +129,36 @@ ul.menu li:hover ul {
     height: 25px;
     border: 1px white solid;
     padding: 2px 2px;
+}quit(*)
+
+@media print and (color) {
+    table {
+        display: none;
+    }
+
+    body {
+        background-color: #fff;
+    }
+
+    p,
+    span {
+        color: #000 !important;
+        font-size: 13px !important;
+    }
+
+    ul > li:before {
+        color: #000;
+    }
+
+    img {
+        display: none;
+    }
+
+    canvas {
+        display: block;
+    }
+
+    a[href^="#"] {
+        display: none;
+    }
 }

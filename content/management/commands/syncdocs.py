@@ -34,10 +34,13 @@ class Command(BaseCommand):
             try:
                 if '-' in key:
                     identifier = key.split('-')
-                    location = models.Location.objects.get(slug='-'.join(identifier[:-1]))
-                    language = models.Language.objects.get(iso_code=identifier[-1])
+                    location = models.Location.objects.find(slug='-'.join(identifier[:-1]), managed_locally=False)
+                    language = models.Language.objects.find(iso_code=identifier[-1])
 
                     if location and language:
+                        location = location[0]
+                        language = language[0]
+
                         existing_content = models.LocationContent.objects.filter(parent=location,
                                                                                  language=language)
                         if existing_content:

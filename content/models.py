@@ -22,6 +22,7 @@ class Location(models.Model):
     enabled = models.NullBooleanField(null=True, default=True)
     country = CountryField(blank=True, null=True)
     parent = models.ForeignKey('self', blank=True, null=True, related_name="children")
+    managed_locally = models.BooleanField(default=False,)
     objects = models.GeoManager()
 
     def __unicode__(self):

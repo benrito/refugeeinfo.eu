@@ -100,7 +100,7 @@
             position: absolute;
             top: 0;
             right: 0;">
-        <i class="fa fa-info-circle fa-2x" style="font-size: 4em!important;"></i>
+        <i class="fa fa-info-circle fa-2x"></i>
     </button>
     <div id="map" class="page" service-map>
 
@@ -117,7 +117,7 @@
             position: absolute;
             top: 0;
             right: 0;">
-        <i class="fa fa-globe fa-2x" style="font-size: 4em!important;"></i>
+        <i class="fa fa-globe fa-2x"></i>
     </button>
     <div id="content" class="page">
         <!-- {% verbatim %} -->
@@ -353,9 +353,17 @@ angular.module('serviceApp', ['ngRoute', 'ngAnimate'])
             var fetchUrl = apiRoot + '/services/search/?id=' + $routeParams.serviceId;
             $http.get(fetchUrl).then(function (req) {
                 $scope.service = req.data[0];
-                var obj = translateObject($scope.service);
-                console.log(obj);
-                $scope.coords = wktToLatLong($scope.service.location);
+                var providerUrl = apiRoot + $scope.service.provider_fetch_url.replace("/api", "");
+
+                $http.get(providerUrl).then(function (preq) {
+                    $scope.provider = preq.data;
+
+                    translateObject($scope.service);
+                    translateObject($scope.provider);
+
+                    $scope.coords = wktToLatLong($scope.service.location);
+                });
+
             });
 
             $scope.back = function () {

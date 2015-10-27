@@ -1,8 +1,8 @@
 import json
+from StringIO import StringIO
 
 from django.shortcuts import render, redirect
 from django.template import RequestContext
-import requests
 from django.contrib.gis.geos import fromstr
 from ipware.ip import get_ip
 from django.http import HttpResponse, Http404
@@ -11,6 +11,8 @@ from django.views.decorators.cache import cache_page
 import django.db.models
 import geojson
 from django.conf import settings
+import requests
+from lxml import etree
 
 from content import models
 
@@ -66,23 +68,52 @@ def site_map(request):
 @cache_page(60 * 15)
 def index(request, page_id, language):
     location = models.Location.objects.filter(id=page_id)
+    html_content = ""
 
     if location:
-        html_content = ""
         location = location[0]
 
-        content = location.content.filter(language__iso_code=language)
+        if location.managed_locally:
+            if language not in [a[0] for a in settings.LANGUAGES]:
+                language = 'en'
 
-        default_content = location.content.all()
-        content = content[0] if content else default_content[0] if default_content else None
+            url_parts = [location.slug]
+            m = location
+            while m.parent:
+                url_parts.append(m.parent.slug)
+                m = m.parent
 
-        if content and content.html_url:
-            doc_path = content.html_url
-            cached = cache.get(doc_path)
-            if cached:
-                html_content = cached
+            page_to_url = '/'.join(reversed(url_parts))
+
+            r = requests.get(settings.CMS_URL + '/{}/cms/{}/'.format(language, page_to_url))
+
+            if r.status_code == 200:
+                html_content = r.text
+            elif language != 'en':
+                r = requests.get(settings.CMS_URL + '/{}/cms/{}/'.format('en', page_to_url))
+                if r.status_code == 200:
+                    html_content = r.text
+                else:
+                    html_content = ""
             else:
-                html_content = requests.get(doc_path).text
+                html_content = ""
+
+            html_content = _get_body_content(html_content)
+        else:
+            html_content = ""
+
+            content = location.content.filter(language__iso_code=language)
+
+            default_content = location.content.all()
+            content = content[0] if content else default_content[0] if default_content else None
+
+            if content and content.html_url:
+                doc_path = content.html_url
+                cached = cache.get(doc_path)
+                if cached:
+                    html_content = cached
+                else:
+                    html_content = requests.get(doc_path).text
 
     languages = list(models.Language.objects.all().order_by('name'))
 
@@ -207,3 +238,22 @@ def services(request, slug, service_category=None):
 
 def acknowledgements(request):
     return render(request, "acknowledgments.html", {}, RequestContext(request))
+
+
+def _get_body_content(text):
+    result = text
+
+    try:
+        parser = etree.HTMLParser()
+        tree = etree.parse(StringIO(text), parser)
+        body = tree.getroot().xpath('body')
+
+        if len(body):
+            body = body[0]
+            result = ""
+            for c in body.getchildren():
+                result += etree.tostring(c, pretty_print=True, method="html")
+    except Exception as e:
+        pass
+
+    return result
