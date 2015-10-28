@@ -40,6 +40,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '0v7dglx7%_ani!lq7_v5xpe6uc(=^vobcmhjk
 DEBUG = False if 'DATABASE_URL' in os.environ else True
 ENABLE_SERVICES = DEBUG or 'ENABLE_SERVICES' in os.environ
 CMS_URL = os.environ.get('CMS_URL', 'http://localhost:9191')
+CMS_ENVIRONMENT = os.environ.get('CMS_ENVIRONMENT', 'staging')
 
 # Application definition
 

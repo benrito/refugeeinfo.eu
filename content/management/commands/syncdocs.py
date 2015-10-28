@@ -13,51 +13,70 @@ from django.core.management.base import BaseCommand
 from content import models
 import requests
 from django.core.cache import cache
+from content import utils
 
 
 class Command(BaseCommand):
     help = 'Sync Docs from Folder Structure into Content'
 
     def handle(self, *args, **options):
-        gdrive_tokens = models.AuthorizationToken.objects.filter(type=1)
-        if not gdrive_tokens:
-            return
+        locations = models.Location.objects.filter(managed_locally=True)
+        for location in locations:
+            url_parts = [location.slug]
+            m = location
+            while m.parent:
+                url_parts.append(m.parent.slug)
+                m = m.parent
 
-        credentials_text = gdrive_tokens[0].token_text
-        credentials = oauth2client.client.Credentials.new_from_json(credentials_text)
+            complete_url = '/'.join(reversed(url_parts))
 
-        models.LocationContent.objects.all()
-        documents, includes = self._list_folders(credentials)
-        for key in documents.iterkeys():
-            document_link = documents[key]['exportLinks']['text/html']
+            languages = models.Language.objects.all()
+            for l in languages:
+                cms_url = utils.get_cms_url(l.iso_code, complete_url)
+                html_content = utils.get_cms_page(l.iso_code, complete_url)
+                cache.set(cms_url, html_content)
+        try:
+            gdrive_tokens = models.AuthorizationToken.objects.filter(type=1)
+            if not gdrive_tokens:
+                return
 
-            try:
-                if '-' in key:
-                    identifier = key.split('-')
-                    location = models.Location.objects.find(slug='-'.join(identifier[:-1]), managed_locally=False)
-                    language = models.Language.objects.find(iso_code=identifier[-1])
+            credentials_text = gdrive_tokens[0].token_text
+            credentials = oauth2client.client.Credentials.new_from_json(credentials_text)
 
-                    if location and language:
-                        location = location[0]
-                        language = language[0]
+            documents, includes = self._list_folders(credentials)
 
-                        existing_content = models.LocationContent.objects.filter(parent=location,
-                                                                                 language=language)
-                        if existing_content:
-                            content = existing_content[0]
-                            content.html_url = document_link
-                            content.title = location.name
-                            content.save()
-                        else:
-                            models.LocationContent.objects.create(parent=location, language=language,
-                                                                  title=location.name,
-                                                                  html_url=document_link)
+            for key in documents.iterkeys():
+                document_link = documents[key]['exportLinks']['text/html']
 
-                        content = requests.get(document_link).text
-                        cache.set(document_link, content)
-            except Exception as e:
-                print(e.message)
-                print("Error loading one of the files: {}.".format(key))
+                try:
+                    if '-' in key:
+                        identifier = key.split('-')
+                        location = models.Location.objects.filter(slug='-'.join(identifier[:-1]), managed_locally=False)
+                        language = models.Language.objects.filter(iso_code=identifier[-1])
+
+                        if location and language:
+                            location = location[0]
+                            language = language[0]
+
+                            existing_content = models.LocationContent.objects.filter(parent=location,
+                                                                                     language=language)
+                            if existing_content:
+                                content = existing_content[0]
+                                content.html_url = document_link
+                                content.title = location.name
+                                content.save()
+                            else:
+                                models.LocationContent.objects.create(parent=location, language=language,
+                                                                      title=location.name,
+                                                                      html_url=document_link)
+
+                            content = requests.get(document_link).text
+                            cache.set(document_link, content)
+                except Exception as e:
+                    print(e.message)
+                    print("Error loading one of the files: {}.".format(key))
+        except Exception as e:
+            pass
 
         self.stdout.write('Successfully created/updated content!')
 

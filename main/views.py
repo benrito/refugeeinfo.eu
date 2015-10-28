@@ -12,12 +12,11 @@ import django.db.models
 import geojson
 from django.conf import settings
 import requests
-from lxml import etree
 
-from content import models
+from content import models, utils
 
 
-CACHE_LENGTH = 0  # 60 * 15
+CACHE_LENGTH = 60 * 15
 
 
 def landing(request):
@@ -77,31 +76,28 @@ def index(request, page_id, language):
         location = location[0]
 
         if location.managed_locally:
+            """
+            Loading content from a CMS or CMS-like site
+            """
             url_parts = [location.slug]
             m = location
             while m.parent:
                 url_parts.append(m.parent.slug)
                 m = m.parent
 
-            page_to_url = '/'.join(reversed(url_parts))
+            complete_url = '/'.join(reversed(url_parts))
 
-            r = requests.get(settings.CMS_URL + '/{}/{}/'.format(language, page_to_url),
-                             headers={"Accept-Language": language})
+            cms_url = utils.get_cms_url(language, complete_url)
 
-            if r.status_code == 200:
-                html_content = r.text
-            elif language != 'en':
-                r = requests.get(settings.CMS_URL + '/{}/{}/'.format('en', page_to_url),
-                                 headers={"Accept-Language": 'en'})
-                if r.status_code == 200:
-                    html_content = r.text
-                else:
-                    html_content = ""
+            if cms_url in cache:
+                html_content = cache.get(cms_url)
             else:
-                html_content = ""
-
-            html_content = _get_body_content(html_content)
+                html_content = utils.get_cms_page(language, complete_url)
+                cache.set(cms_url, html_content)
         else:
+            """
+            Loading content from a google doc
+            """
             html_content = ""
 
             content = location.content.filter(language__iso_code=language)
@@ -240,22 +236,3 @@ def services(request, slug, service_category=None):
 
 def acknowledgements(request):
     return render(request, "acknowledgments.html", {}, RequestContext(request))
-
-
-def _get_body_content(text):
-    result = text
-
-    try:
-        parser = etree.HTMLParser()
-        tree = etree.parse(StringIO(text), parser)
-        body = tree.getroot().xpath('body')
-
-        if len(body):
-            body = body[0]
-            result = ""
-            for c in body.getchildren():
-                result += etree.tostring(c, pretty_print=True, method="html")
-    except Exception as e:
-        pass
-
-    return result
