@@ -7,6 +7,7 @@ from django.conf import settings
 from lxml import etree
 import requests
 from StringIO import StringIO
+from lxml.cssselect import CSSSelector
 
 
 def get_cms_url(language, slug):
@@ -45,7 +46,9 @@ def _get_body_content(text):
     try:
         parser = etree.HTMLParser()
         tree = etree.parse(StringIO(text), parser)
-        body = tree.getroot().xpath('body')
+        selector = CSSSelector('div.cms-content')
+
+        body = selector(tree.getroot())
 
         if len(body):
             body = body[0]
