@@ -51,9 +51,8 @@ def _get_body_content(text):
         body = selector(tree.getroot())
 
         if len(body):
-            body = body[0]
             result = ""
-            for c in body.getchildren():
+            for c in body:
                 result += etree.tostring(c, pretty_print=True, method="html")
     except Exception as e:
         pass
