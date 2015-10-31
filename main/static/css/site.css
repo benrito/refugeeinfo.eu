@@ -277,6 +277,31 @@ a.link-button {
     }
 }
 
+div.table-responsive {
+    display: block;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 400px) {
+    div.table-responsive {
+        width: 100%;
+        overflow: auto;
+
+    }
+
+    div.table-responsive table {
+        border-spacing: 0;
+        width: 100%
+    }
+
+    div.table-responsive table td {
+        border: 1px white solid;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+}
+
 table.content-table {
     border-spacing: 0;
     width: 100%

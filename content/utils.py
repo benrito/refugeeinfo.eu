@@ -41,6 +41,13 @@ def get_cms_page(language, slug):
 
 
 def _get_body_content(text):
+    """
+    Takes in HTML from the CMS, removes headers, footers and Javascript and spits out the content to be cached.
+
+    It also goes into the content looks for all <tables /> and adds a div.table-responsive around it
+    :param text:
+    :return:
+    """
     result = text
 
     try:
@@ -53,6 +60,19 @@ def _get_body_content(text):
         if len(body):
             result = ""
             for c in body:
+                table_selector = CSSSelector('table:not(.toc)')
+                for table in table_selector(c):
+                    # Removes Table from HTML
+                    parent = table.getparent()
+                    sibling = table.getprevious()
+                    parent.remove(table)
+                    # Attaches a div to it
+                    d = etree.Element('div', attrib={"class": "table-responsive"})
+                    d.append(table)
+
+                    # Inserts into back to the document at the same point
+                    parent.insert(parent.index(sibling) + 1, d)
+
                 result += etree.tostring(c, pretty_print=True, method="html")
     except Exception as e:
         pass
