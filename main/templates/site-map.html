@@ -82,7 +82,7 @@
 
 <script type="text/javascript">
     var availableCountries = JSON.parse('{{ available_countries|safe }}');
-
+    var languages = JSON.parse('{{ languages|safe }}');
 
     function backToCountries() {
         map.fitBounds(markers);
@@ -166,7 +166,7 @@
                 L.geoJson(a.location)
                         .bindPopup(
                                 '<strong>' + a.name + '</strong><br/>' +
-                                a.languages.map(function (b) {
+                                        a.languages.map(function (b) {
                                     return '<a class="button" href="/' + a.slug + '/' + b.iso_code + '/">' + b.name + '</a>';
                                 }).join('')
                 )

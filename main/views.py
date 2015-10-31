@@ -1,5 +1,4 @@
 import json
-from StringIO import StringIO
 
 from django.shortcuts import render, redirect
 from django.template import RequestContext
@@ -16,7 +15,7 @@ import requests
 from content import models, utils
 
 
-CACHE_LENGTH = 0# 60 * 15
+CACHE_LENGTH = 60 * 15
 
 
 def landing(request):
@@ -63,6 +62,8 @@ def site_map(request):
                   {
                       "available_countries": json.dumps(countries),
                       "location": best_guess,
+                      "languages": json.dumps(
+                          [dict(iso_code=a.iso_code, name=a.name, id=a.id) for a in models.Language.objects.all()]),
                   },
                   RequestContext(request))
 

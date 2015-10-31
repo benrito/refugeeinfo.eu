@@ -18,6 +18,10 @@ urlpatterns = [
     url(r'^lookup$', views.location_from_device, name="lookup-device"),
     url(r'^page/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/$', views.index),
 
+    # Les[vb]os Hack
+    url(r'^lesbos/(?P<language>[a-zA-Z]+)/?', lambda r, language='': views.slug_index(r, 'lesvos', language)),
+    url(r'^lesbos/?', lambda r: views.slug_no_language(r, 'lesvos')),
+
     url(r'^(?P<slug>[a-zA-Z\-0-9]+)/services/?$', views.services, ),
     url(r'^(?P<slug>[a-zA-Z\-0-9]+)/services/(?P<service_category>[a-zA-Z\-0-9]+)/?$', views.services, ),
 
