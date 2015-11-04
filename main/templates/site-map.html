@@ -57,6 +57,7 @@
         .leaflet-popup {
             color: black;
         }
+
         .leaflet-popup a {
             color: black;
         }
@@ -85,7 +86,6 @@
     var languages = JSON.parse('{{ languages|safe }}');
 
     function backToCountries() {
-        map.fitBounds(markers);
         document.getElementById('backButton').style.display = 'none';
 
         countryMarkers.clearLayers();
@@ -121,8 +121,7 @@
 
         }
 
-        markers.addTo(map);
-        map.fitBounds(markers);
+        backToCountries();
 
         markers.on('click', function (e) {
             if (e.layer.options.available) {
@@ -166,7 +165,7 @@
                 L.geoJson(a.location)
                         .bindPopup(
                                 '<strong>' + a.name + '</strong><br/>' +
-                                        a.languages.map(function (b) {
+                                a.languages.map(function (b) {
                                     return '<a class="button" href="/' + a.slug + '/' + b.iso_code + '/">' + b.name + '</a>';
                                 }).join('')
                 )
@@ -174,7 +173,7 @@
             });
 
             countryMarkers.addTo(map);
-            map.fitBounds(countryMarkers);
+            map.fitBounds(countryMarkers, { maxZoom: 12});
         });
     }
 </script>
