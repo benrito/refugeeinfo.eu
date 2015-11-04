@@ -163,6 +163,10 @@ h1.page-title {
     font-size: 75%;
 }
 
+.cms-content a {
+    color: white
+}
+
 table.important {
     border: 1px white dashed;
     width: 100%;
@@ -188,7 +192,6 @@ table.toc td {
 
 table.toc a {
     color: white;
-    text-decoration: none;
 }
 
 table.toc > tbody > tr > td:first-child {
