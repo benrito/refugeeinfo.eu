@@ -191,7 +191,7 @@ table.toc td {
 }
 
 table.toc a {
-    color: white;
+    text-decoration: none;
 }
 
 table.toc > tbody > tr > td:first-child {
