@@ -27,6 +27,8 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'NAME': 'refugeeinfo',
         'HOST': 'localhost',
+        'USER': 'ubuntu',
+        'PASSWORD': 'ubuntu'
     }
 }
 

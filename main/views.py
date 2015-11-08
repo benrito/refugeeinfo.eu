@@ -19,12 +19,12 @@ from content import models, utils
 
 CACHE_LENGTH = 60 * 15
 
-LOCATIONS = {   'lesvos':'Lesvos',
-                'kos': 'Kos',
-                'athens': 'Athens',
-                'gevgelija': 'Gevgelija',
-                'tabanovce': 'Tabanovce/Preševo'
-            }
+LOCATIONS = (   ('lesvos','Lesvos'),
+                ('kos', 'Kos'),
+                ('athens', 'Athens'),
+                ('gevgelija', 'Gevgelija'),
+                ('tabanovce', 'Tabanovce/Preševo')
+            )
 
 
 def landing(request):

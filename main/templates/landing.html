@@ -104,7 +104,7 @@
         {% endfor %}
     </p>
 
-    {% for slg, nme in locations.items %}
+    {% for slg, nme in locations %}
         {% if forloop.counter0 %}
             <button onclick="goToPage('{{ slg }}')" style="margin-top: 4px;">Go to {{ nme }}</button>
         {% else %}
