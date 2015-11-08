@@ -104,8 +104,13 @@
         {% endfor %}
     </p>
 
-    <button onclick="goToPage('lesbos')" style="margin-bottom: 4px;">Go to Lesbos</button>
-    <button onclick="goToPage('kos')">Go to Kos</button>
+    {% for slg, nme in locations.items %}
+        {% if forloop.counter0 %}
+            <button onclick="goToPage('{{ slg }}')" style="margin-top: 4px;">Go to {{ nme }}</button>
+        {% else %}
+            <button onclick="goToPage('{{ slg }}')">Go to {{ nme }}</button>
+        {% endif %}
+    {% endfor %}
     <hr/>
     <button onclick="location.href = '/map/'">Open map</button>
     <hr/>
