@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import json
 
 from django.shortcuts import render, redirect
@@ -16,6 +18,13 @@ from content import models, utils
 
 
 CACHE_LENGTH = 60 * 15
+
+LOCATIONS = (   ('lesvos','Lesvos'),
+                ('kos', 'Kos'),
+                ('athens', 'Athens'),
+                ('gevgelija', 'Gevgelija'),
+                ('tabanovce', 'Tabanovce/Preševo')
+            )
 
 
 def landing(request):
@@ -47,6 +56,7 @@ def landing(request):
     return render(request, 'landing.html', context={
         "current_location": json.dumps(current_location),
         "languages": languages,
+        "locations": LOCATIONS
     }, context_instance=RequestContext(request))
 
 
