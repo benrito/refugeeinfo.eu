@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import json
+import urllib
 
 from django.shortcuts import render, redirect
+
 from django.template import RequestContext
 from django.contrib.gis.geos import fromstr
 from ipware.ip import get_ip
@@ -15,7 +17,6 @@ from django.conf import settings
 import requests
 
 from content import models, utils
-
 
 CACHE_LENGTH = 60 * 15
 
@@ -76,7 +77,8 @@ def site_map(request):
 
 def capture_captive(request):
     if 'base_grant_url' in request.GET:
-        return redirect("{}?continue_url={}".format(request.GET['base_grant_url'], request.GET['user_continue_url']))
+        return redirect("{}?continue_url={}".format(request.GET['base_grant_url'],
+                                                    urllib.urlencode(request.GET['user_continue_url'])))
     else:
         return redirect('/')
 
@@ -92,7 +94,11 @@ def index(request, page_id, language):
 
     if 'base_grant_url' in request.GET:
         context['is_captive'] = True
-        context['next'] = "{}?continue_url={}".format(request.GET['base_grant_url'], request.GET['user_continue_url'])
+        context['next'] = "{}?continue_url={}".format(
+            request.GET['base_grant_url'],
+            urllib.urlencode(request.GET['user_continue_url'])
+        )
+
         print("Request from meraki: {}".format(' '.join([': '.join(a) for a in request.GET.iterkeys()])))
 
     if 'provider' in request.GET:
