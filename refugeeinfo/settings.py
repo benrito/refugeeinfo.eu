@@ -19,6 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
+CACHE_LENGTH = int(os.environ.get('CACHE_LENGTH', 60 * 15))
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
