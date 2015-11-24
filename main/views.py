@@ -78,7 +78,7 @@ def site_map(request):
 def capture_captive(request):
     if 'base_grant_url' in request.GET:
         return redirect("{}?continue_url={}".format(request.GET['base_grant_url'],
-                                                    urllib.urlencode(request.GET['user_continue_url'])))
+                                                    urllib.quote_plus(request.GET['user_continue_url'])))
     else:
         return redirect('/')
 
@@ -96,7 +96,7 @@ def index(request, page_id, language):
         context['is_captive'] = True
         context['next'] = "{}?continue_url={}".format(
             request.GET['base_grant_url'],
-            urllib.urlencode(request.GET['user_continue_url'])
+            urllib.quote_plus(request.GET['user_continue_url'])
         )
 
         print("Request from meraki: {}".format(' '.join([': '.join(a) for a in request.GET.iterkeys()])))
