@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Django settings for refugeeinfo project.
 
@@ -10,7 +12,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 import os
-
+from gettext import gettext as _
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -173,6 +175,20 @@ def get_cache():
 
 
 CACHES = get_cache()
+
+"""
+This has to be moved to the base sooner or later
+"""
+LOCATIONS = (
+    ('lesvos', _('Lesvos')),
+    ('kos', _('Kos')),
+    ('athens', _('Athens')),
+    ('gevgelija', _('Gevgelija')),
+    ('tabanovce', _(u'Tabanovce/Preševo'))
+)
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 try:
     from local_settings import *

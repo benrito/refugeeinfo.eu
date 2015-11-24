@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!doctype html>
 <!--[if lt IE 7]>      <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html itemscope itemtype="http://schema.org/CollectionPage" lang="en" class="lt-ie9 lt-ie8"> <![endif]-->
@@ -67,6 +68,22 @@
     <img src="{% static "images/logobar.png" %}" alt="IRC | MercyCorps">
     <hr/>
 </div>
+
+{% if is_captive %}
+<div>
+    <h3>
+        {% if provider %}
+            {% trans "This is a free wifi hotspot provider by " %} {{ provider }}.
+        {% endif %}
+        {% blocktrans %}
+            Tap the button below to continue to the internet, or
+            scroll
+            below for important information about this location.
+        {% endblocktrans %}</h3>
+    <a class="link-button" href="{{ next }}">{% trans "CONTINUE TO THE INTERNET" %}</a>
+</div>
+{% endif %}
+
 <div id="container">
     {{ html_content|safe }}
 </div>

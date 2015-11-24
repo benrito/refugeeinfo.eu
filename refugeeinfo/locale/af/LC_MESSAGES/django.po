@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-24 04:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: main/templates/index.html:76
+msgid "This is a free wifi hotspot provider by "
+msgstr ""
+
+#: main/templates/index.html:78
+msgid ""
+"\n"
+"            Tap the button below to continue to the internet, or\n"
+"            scroll\n"
+"            below for important information about this location.\n"
+"        "
+msgstr ""
+
+#: main/templates/index.html:83
+msgid "CONTINUE TO THE INTERNET"
+msgstr ""
+
+#: main/templates/landing.html:109 main/templates/landing.html.py:111
+msgid "Go to"
+msgstr ""
+
+#: main/templates/landing.html:115
+msgid "Open Map"
+msgstr ""
+
+#: main/templates/landing.html:117
+msgid "Detect my location"
+msgstr ""
+
+#: refugeeinfo/settings.py:183
+msgid "Lesvos"
+msgstr ""
+
+#: refugeeinfo/settings.py:184
+msgid "Kos"
+msgstr ""
+
+#: refugeeinfo/settings.py:185
+msgid "Athens"
+msgstr ""
+
+#: refugeeinfo/settings.py:186
+msgid "Gevgelija"
+msgstr ""
+
+#: refugeeinfo/settings.py:187
+msgid "Tabanovce/Preševo"
+msgstr ""

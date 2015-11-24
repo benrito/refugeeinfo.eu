@@ -19,15 +19,10 @@ from content import models, utils
 
 CACHE_LENGTH = 60 * 15
 
-LOCATIONS = (   ('lesvos','Lesvos'),
-                ('kos', 'Kos'),
-                ('athens', 'Athens'),
-                ('gevgelija', 'Gevgelija'),
-                ('tabanovce', 'Tabanovce/Preševo')
-            )
-
 
 def landing(request):
+    context = {}
+
     ip_position = location_best_guess(request)
     point = 'POINT({} {})'.format(ip_position['longitude'], ip_position['latitude'])
     geopoint = fromstr(point, srid=4326)
@@ -52,12 +47,13 @@ def landing(request):
             "slug": found_location.slug,
             "contents": location_content
         }
-
-    return render(request, 'landing.html', context={
+    context.update({
         "current_location": json.dumps(current_location),
         "languages": languages,
-        "locations": LOCATIONS
-    }, context_instance=RequestContext(request))
+        "locations": settings.LOCATIONS,
+    })
+
+    return render(request, 'landing.html', context=context, context_instance=RequestContext(request))
 
 
 def site_map(request):
@@ -78,10 +74,29 @@ def site_map(request):
                   RequestContext(request))
 
 
+def capture_captive(request):
+    if 'base_grant_url' in request.GET:
+        return redirect("{}?continue_url={}".format(request.GET['base_grant_url'], request.GET['user_continue_url']))
+    else:
+        return redirect('/')
+
+
 @cache_page(CACHE_LENGTH)
 def index(request, page_id, language):
     location = models.Location.objects.filter(id=page_id)
     html_content = ""
+
+
+    # Handling Meraki:
+    context = {}
+
+    if 'base_grant_url' in request.GET:
+        context['is_captive'] = True
+        context['next'] = "{}?continue_url={}".format(request.GET['base_grant_url'], request.GET['user_continue_url'])
+        print("Request from meraki: {}".format(' '.join([': '.join(a) for a in request.GET.iterkeys()])))
+
+    if 'provider' in request.GET:
+        context['provider'] = request.GET['provider']
 
     if location:
         location = location[0]
@@ -126,12 +141,14 @@ def index(request, page_id, language):
 
     languages = list(models.Language.objects.all().order_by('name'))
 
-    return render(request, 'index.html', context={
+    context.update({
         "html_content": html_content,
         "languages": languages,
         "location": location,
         "service_map_enabled": settings.ENABLE_SERVICES or False,
-    }, context_instance=RequestContext(request))
+    })
+
+    return render(request, 'index.html', context=context, context_instance=RequestContext(request))
 
 
 def depth(location):
