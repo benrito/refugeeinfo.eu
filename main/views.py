@@ -18,7 +18,7 @@ import requests
 
 from content import models, utils
 
-CACHE_LENGTH = 60 * 15
+CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH',  60 * 15)
 
 
 def landing(request):
