@@ -154,9 +154,14 @@ LOGGING = {
 
 def get_cache():
     try:
-        os.environ['MEMCACHE_SERVERS'] = os.environ['MEMCACHEDCLOUD_SERVERS'].replace(',', ';')
-        os.environ['MEMCACHE_USERNAME'] = os.environ['MEMCACHEDCLOUD_USERNAME']
-        os.environ['MEMCACHE_PASSWORD'] = os.environ['MEMCACHEDCLOUD_PASSWORD']
+        if 'MEMCACHE_SERVERS' not in os.environ and 'MEMCACHEDCLOUD_SERVERS' in os.environ:
+            os.environ['MEMCACHE_SERVERS'] = os.environ['MEMCACHEDCLOUD_SERVERS'].replace(',', ';')
+
+        if 'MEMCACHE_USERNAME' not in os.environ and 'MEMCACHEDCLOUD_USERNAME' in os.environ:
+            os.environ['MEMCACHE_USERNAME'] = os.environ['MEMCACHEDCLOUD_USERNAME']
+
+        if 'MEMCACHE_PASSWORD' not in os.environ and 'MEMCACHEDCLOUD_PASSWORD' in os.environ:
+            os.environ['MEMCACHE_PASSWORD'] = os.environ['MEMCACHEDCLOUD_PASSWORD']
         return {
             'default': {
                 'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
