@@ -134,7 +134,6 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
 
 LOGGING = {
     'version': 1,
@@ -190,6 +189,25 @@ LOCATIONS = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+# Storages
+
+# Amazon S3 credentials
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+# Amazon S3 URL
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+CLOUDFRONT_URL = os.environ.get('CLOUDFRONT_URL', 'https://dttv0ybwk2jfe.cloudfront.net/')
+
+# Static files location
+STATICFILES_STORAGE = 'refugeeinfo.custom_storages.StaticFilesStorage'
+
+# Default File storage
+MEDIAFILES_LOCATION = 'media'
+STATICFILES_LOCATION = 'static'
+
+MEDIA_URL = "%s%s/" % (CLOUDFRONT_URL, MEDIAFILES_LOCATION,)
+STATIC_URL = CLOUDFRONT_URL
 
 try:
     from local_settings import *
