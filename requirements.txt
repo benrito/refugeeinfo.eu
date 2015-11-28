@@ -31,4 +31,3 @@ uritemplate==0.6
 whitenoise==2.0.4
 lxml
 cssselect
-django-storages==1.1.8
