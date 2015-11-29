@@ -73,3 +73,4 @@ client_secret.json
 *.pyc
 
 local_settings.py
+.env

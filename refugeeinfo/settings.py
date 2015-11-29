@@ -162,14 +162,22 @@ def get_cache():
 
         if 'MEMCACHE_PASSWORD' not in os.environ and 'MEMCACHEDCLOUD_PASSWORD' in os.environ:
             os.environ['MEMCACHE_PASSWORD'] = os.environ['MEMCACHEDCLOUD_PASSWORD']
-        return {
-            'default': {
-                'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
-                'TIMEOUT': 500,
-                'BINARY': True,
-                'OPTIONS': {'tcp_nodelay': True}
+        if 'MEMCACHE_SERVERS' in os.environ:
+            return {
+                'default': {
+                    'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+                    'TIMEOUT': 500,
+                    'BINARY': True,
+                    'OPTIONS': {'tcp_nodelay': True}
+                }
             }
-        }
+        else:
+            return {
+                'default': {
+                    'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+                    'LOCATION': 'rieu_page_cache',
+                }
+            }
     except:
         return {
             'default': {
