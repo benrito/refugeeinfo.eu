@@ -15,9 +15,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 @sched.scheduled_job('interval', minutes=15)
-def one_minute():
-    subprocess.call(['python', 'manage.py', 'syncdocs'], stderr=sys.stderr, stdout=sys.stdout)
+def sync_docs():
+    print('Running Syncdocs')
 
-    print('This job is run every three minutes.')
+    subprocess.call(['python', 'manage.py', 'syncdocs'], stderr=sys.stderr, stdout=sys.stdout)
 
 sched.start()
