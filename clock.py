@@ -6,16 +6,17 @@ __author__ = 'reyrodrigues'
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 import os
-
+import subprocess
 sched = BlockingScheduler()
+
+import sys
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 @sched.scheduled_job('interval', minutes=1)
 def one_minute():
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "refugeeinfo.settings")
-
-    from django.core.management import execute_from_command_line
-
-    execute_from_command_line(['manage.py', 'syncdocs'])
+    subprocess.call(['python', 'manage.py', 'syncdocs'], stderr=sys.stderr, stdout=sys.stdout)
 
     print('This job is run every three minutes.')
 
