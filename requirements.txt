@@ -34,3 +34,4 @@ cssselect
 boto==2.38.0
 tornado
 websocket
+apscheduler
