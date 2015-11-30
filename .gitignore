@@ -73,3 +73,6 @@ client_secret.json
 *.pyc
 
 local_settings.py
+
+# emacs backups
+*~
