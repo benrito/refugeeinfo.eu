@@ -31,6 +31,7 @@ class LocationAdmin(admin.GeoModelAdmin):
     default_lat = 48.69096
     default_lon = 12.480469
     default_zoom = 5
+    openlayers_url = "https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"
 
     inlines = [
         LocationTitleInline,
