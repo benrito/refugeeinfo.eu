@@ -197,8 +197,11 @@ LOCATIONS = (
     ('kos', _('Kos')),
     ('athens', _('Athens')),
     ('gevgelija', _('Gevgelija')),
-    ('tabanovce', _(u'Tabanovce/Preševo'))
+    ('tabanovce', _(u'Tabanovce/Preševo')),
+    ('sid', _(u'Šid')),
+    ('slavonski-brod', _('Slavonski Brod'))
 )
+
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
