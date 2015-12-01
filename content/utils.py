@@ -18,7 +18,7 @@ def get_cms_page(language, slug):
     cms_url = get_cms_url(language, slug)
     cms_url_en = get_cms_url(language, slug)
 
-    print('Requesting: ',cms_url)
+    print('Requesting: ', cms_url)
 
     r = requests.get(cms_url,
                      headers={"Accept-Language": language},
