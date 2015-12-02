@@ -28,7 +28,10 @@ def landing(request):
 
     languages = list(models.Language.objects.all().order_by('name'))
     root_locations = models.Location.objects.filter(parent__isnull=True)
-    child_locations = [(a, list(a.children.all())) for a in root_locations]
+
+    child_locations = [(a, [b for b in a.children.all() if b.enabled]) for a in root_locations]
+    root_locations = [a[0] for a in child_locations if len(a[1]) > 0]
+
     try:
         ip_position = location_best_guess(request)
         point = 'POINT({} {})'.format(ip_position['longitude'], ip_position['latitude'])
