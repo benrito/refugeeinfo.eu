@@ -74,4 +74,5 @@ client_secret.json
 
 local_settings.py
 .env
+.env-staging
 *~

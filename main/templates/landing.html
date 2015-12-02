@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <title>Information</title>
+    <title>RefugeeInfo</title>
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -103,13 +103,28 @@
                     onclick="flipLanguage('{{ l.iso_code }}')">{{ l.name }}</button>
         {% endfor %}
     </p>
+    <div id="countries">
+        <h3>{% trans "Select your location:" %}</h3>
+        {% for location in root_locations %}
+            <button onclick="openCountry('country__{{ location.id }}')"
+                    {% if forloop.counter0 %}style="margin-top: 4px;"{% endif %}>
+                {{ location.name }}
+            </button>
+        {% endfor %}
+    </div>
+    {% for parent, children in child_locations %}
+        <div id="country__{{ parent.id }}" style="display: none">
+            <h3>{{ parent.name }}</h3>
 
-    {% for slg, nme in locations %}
-        {% if forloop.counter0 %}
-            <button onclick="goToPage('{{ slg }}')" style="margin-top: 4px;">{% trans "Go to" %} {{ nme }}</button>
-        {% else %}
-            <button onclick="goToPage('{{ slg }}')">{% trans "Go to" %} {{ nme }}</button>
-        {% endif %}
+            {% for location in children %}
+                <button onclick="goToPage('{{ location.slug }}')"
+                        {% if forloop.counter0 %}style="margin-top: 4px;"{% endif %}>
+                    {% trans "Go to" %} {{ location.name }}
+                </button>
+            {% endfor %}
+            <button onclick="showCountries('country__{{ parent.id }}')"
+                    style="margin-top: 4px;">{% trans "Back" %}</button>
+        </div>
     {% endfor %}
     <hr/>
     <button onclick="location.href = '/map/'">{% trans "Open Map" %}</button>
@@ -133,6 +148,26 @@
         }, function () {
             document.getElementById('overlay').className = "";
         });
+    }
+
+    function openCountry(countryId) {
+        var countriesList = document.querySelector('#countries');
+        var selectedCountry = document.querySelector('#' + countryId);
+
+        if (countriesList && selectedCountry) {
+            countriesList.style.display = 'none';
+            selectedCountry.style.display = '';
+        }
+    }
+
+    function showCountries(countryId) {
+        var countriesList = document.querySelector('#countries');
+        var selectedCountry = document.querySelector('#' + countryId);
+
+        if (countriesList && selectedCountry) {
+            countriesList.style.display = '';
+            selectedCountry.style.display = 'none';
+        }
     }
 
     function flipLanguage(language) {

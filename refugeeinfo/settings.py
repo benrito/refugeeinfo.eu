@@ -174,15 +174,16 @@ def get_cache():
         else:
             return {
                 'default': {
-                    'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-                    'LOCATION': 'rieu_page_cache',
+                    'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+                    'LOCATION': 'unique-snowflake',
                 }
+
             }
     except:
         return {
             'default': {
-                'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-                'LOCATION': 'rieu_page_cache',
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+                'LOCATION': 'unique-snowflake',
             }
         }
 

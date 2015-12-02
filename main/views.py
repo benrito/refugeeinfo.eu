@@ -4,7 +4,6 @@ import json
 import urllib
 
 from django.shortcuts import render, redirect
-
 from django.template import RequestContext
 from django.contrib.gis.geos import fromstr
 from ipware.ip import get_ip
@@ -18,20 +17,26 @@ import requests
 
 from content import models, utils
 
-CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH',  60 * 15)
+
+CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH', 60 * 15)
 
 
 def landing(request):
     context = {}
-
-    ip_position = location_best_guess(request)
-    point = 'POINT({} {})'.format(ip_position['longitude'], ip_position['latitude'])
-    geopoint = fromstr(point, srid=4326)
-
+    location = None
     current_location = {}
 
-    location = models.Location.objects.filter(area__intersects=geopoint, enabled=True).order_by('-parent')
     languages = list(models.Language.objects.all().order_by('name'))
+    root_locations = models.Location.objects.filter(parent__isnull=True)
+    child_locations = [(a, list(a.children.all())) for a in root_locations]
+    try:
+        ip_position = location_best_guess(request)
+        point = 'POINT({} {})'.format(ip_position['longitude'], ip_position['latitude'])
+        geopoint = fromstr(point, srid=4326)
+
+        location = models.Location.objects.filter(area__intersects=geopoint, enabled=True).order_by('-parent')
+    except Exception as e:
+        pass
 
     if location:
         found_location = location[0] if location else None
@@ -52,6 +57,9 @@ def landing(request):
         "current_location": json.dumps(current_location),
         "languages": languages,
         "locations": settings.LOCATIONS,
+
+        "root_locations": root_locations,
+        "child_locations": child_locations,
     })
 
     return render(request, 'landing.html', context=context, context_instance=RequestContext(request))
