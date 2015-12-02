@@ -108,7 +108,7 @@
         {% for location in root_locations %}
             <button onclick="openCountry('country__{{ location.id }}')"
                     {% if forloop.counter0 %}style="margin-top: 4px;"{% endif %}>
-                {{ location.name }}
+                {% trans location.name %}
             </button>
         {% endfor %}
     </div>
@@ -119,7 +119,7 @@
             {% for location in children %}
                 <button onclick="goToPage('{{ location.slug }}')"
                         {% if forloop.counter0 %}style="margin-top: 4px;"{% endif %}>
-                    {% trans "Go to" %} {{ location.name }}
+                    {% trans "Go to" %} {% trans location.name %}
                 </button>
             {% endfor %}
             <button onclick="showCountries('country__{{ parent.id }}')"
