@@ -2242,8 +2242,7 @@ var slovenia = {
         'at': austria,
         'si': slovenia,
         'mk': fyrom,
-        'rs': serbia,
-        'hu': hungary
+        'rs': serbia
     };
 
 })(window);
