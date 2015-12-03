@@ -61,6 +61,10 @@
             width: 100%
         }
 
+        button.second-level {
+            background-color: #222;
+        }
+
         select {
             border: 1px white solid;
             color: white;
@@ -117,7 +121,7 @@
             <h3>{{ parent.name }}</h3>
 
             {% for location in children %}
-                <button onclick="goToPage('{{ location.slug }}')"
+                <button class="second-level" onclick="goToPage('{{ location.slug }}')"
                         {% if forloop.counter0 %}style="margin-top: 4px;"{% endif %}>
                     {% trans "Go to" %} {% trans location.name %}
                 </button>
