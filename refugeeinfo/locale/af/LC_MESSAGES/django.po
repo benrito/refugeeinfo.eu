@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-02 23:28+0000\n"
+"POT-Creation-Date: 2015-12-03 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,33 +25,41 @@ msgstr ""
 #: main/templates/index.html:78
 msgid ""
 "\n"
-"            Tap the button below to continue to the internet, or\n"
-"            scroll\n"
-"            below for important information about this location.\n"
-"        "
+"                Tap the button below to continue to the internet, or\n"
+"                scroll\n"
+"                below for important information about this location.\n"
+"            "
 msgstr ""
 
 #: main/templates/index.html:83
 msgid "CONTINUE TO THE INTERNET"
 msgstr ""
 
-#: main/templates/landing.html:107
+#: main/templates/index.html:92
+msgid "OTHER LOCATIONS"
+msgstr ""
+
+#: main/templates/index.html:96
+msgid "GO TO OTHER LOCATIONS"
+msgstr ""
+
+#: main/templates/landing.html:111
 msgid "Select your location:"
 msgstr ""
 
-#: main/templates/landing.html:122
+#: main/templates/landing.html:126
 msgid "Go to"
 msgstr ""
 
-#: main/templates/landing.html:126
+#: main/templates/landing.html:130
 msgid "Other Countries"
 msgstr ""
 
-#: main/templates/landing.html:130
+#: main/templates/landing.html:134
 msgid "Open Map"
 msgstr ""
 
-#: main/templates/landing.html:132
+#: main/templates/landing.html:136
 msgid "Detect my location"
 msgstr ""
 
