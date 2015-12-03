@@ -70,23 +70,30 @@
 </div>
 
 {% if is_captive %}
-<div>
-    <h3>
-        {% if provider %}
-            {% trans "This is a free wifi hotspot provider by " %} {{ provider }}.
-        {% endif %}
-        {% blocktrans %}
-            Tap the button below to continue to the internet, or
-            scroll
-            below for important information about this location.
-        {% endblocktrans %}</h3>
-    <a class="link-button" href="{{ next }}">{% trans "CONTINUE TO THE INTERNET" %}</a>
-</div>
+    <div>
+        <h3>
+            {% if provider %}
+                {% trans "This is a free wifi hotspot provider by " %} {{ provider }}.
+            {% endif %}
+            {% blocktrans %}
+                Tap the button below to continue to the internet, or
+                scroll
+                below for important information about this location.
+            {% endblocktrans %}</h3>
+        <a class="link-button" href="{{ next }}">{% trans "CONTINUE TO THE INTERNET" %}</a>
+    </div>
 {% endif %}
 
 <div id="container">
     {{ html_content|safe }}
 </div>
+
+<h3 class="anchor">
+    <a name="OtherLocations">{% trans "OTHER LOCATIONS" %}</a><br>
+    <a href="#top" class="back-to-top">Back to top</a>
+</h3>
+<hr class="title-hr" style="margin-bottom: 1em;" />
+<a class="link-button" href="/">{% trans "GO TO OTHER LOCATIONS" %}</a>
 {% include "footer.html" %}
 </body>
 </html>
