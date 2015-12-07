@@ -5,9 +5,10 @@ __author__ = 'reyrodrigues'
 from django.conf import settings
 
 from lxml import etree
+from lxml.cssselect import CSSSelector
+
 import requests
 from StringIO import StringIO
-from lxml.cssselect import CSSSelector
 
 
 def get_cms_url(language, slug):
