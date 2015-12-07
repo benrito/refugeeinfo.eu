@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 14:22+0000\n"
+"POT-Creation-Date: 2015-12-07 18:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgid "Select your location:"
 msgstr ""
 
 #: main/templates/landing.html:126
-msgid "Go to"
+msgid "View info for"
 msgstr ""
 
 #: main/templates/landing.html:130
@@ -63,30 +63,30 @@ msgstr ""
 msgid "Detect my location"
 msgstr ""
 
-#: refugeeinfo/settings.py:197
+#: refugeeinfo/local_settings.py:186 refugeeinfo/settings.py:197
 msgid "Lesvos"
 msgstr ""
 
-#: refugeeinfo/settings.py:198
+#: refugeeinfo/local_settings.py:187 refugeeinfo/settings.py:198
 msgid "Kos"
 msgstr ""
 
-#: refugeeinfo/settings.py:199
+#: refugeeinfo/local_settings.py:188 refugeeinfo/settings.py:199
 msgid "Athens"
 msgstr ""
 
-#: refugeeinfo/settings.py:200
+#: refugeeinfo/local_settings.py:189 refugeeinfo/settings.py:200
 msgid "Gevgelija"
+msgstr ""
+
+#: refugeeinfo/local_settings.py:190 refugeeinfo/settings.py:202
+msgid "Šid"
+msgstr ""
+
+#: refugeeinfo/local_settings.py:191 refugeeinfo/settings.py:203
+msgid "Slavonski Brod"
 msgstr ""
 
 #: refugeeinfo/settings.py:201
 msgid "Tabanovce/Preševo"
-msgstr ""
-
-#: refugeeinfo/settings.py:202
-msgid "Šid"
-msgstr ""
-
-#: refugeeinfo/settings.py:203
-msgid "Slavonski Brod"
 msgstr ""

@@ -123,7 +123,7 @@
             {% for location in children %}
                 <button class="second-level" onclick="goToPage('{{ location.slug }}')"
                         {% if forloop.counter0 %}style="margin-top: 4px;"{% endif %}>
-                    {% trans "Go to" %} {% trans location.name %}
+                    {% trans "View info for" %} {% trans location.name %}
                 </button>
             {% endfor %}
             <button onclick="showCountries('country__{{ parent.id }}')"

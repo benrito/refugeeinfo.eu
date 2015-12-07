@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 14:22+0000\n"
+"POT-Creation-Date: 2015-12-07 18:47+0000\n"
 "PO-Revision-Date: 2015-12-02 16:46+0000\n"
 "Last-Translator: Rey Rodrigues <Reynaldo.Rodrigues@rescue.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/refugeeinfo/refugeeinfo/"
@@ -63,8 +63,8 @@ msgid "Select your location:"
 msgstr "حدّد مكان تواجدي الآن"
 
 #: main/templates/landing.html:126
-msgid "Go to"
-msgstr "توجه إلى"
+msgid "View info for"
+msgstr ""
 
 #: main/templates/landing.html:130
 msgid "Other Countries"
@@ -78,34 +78,37 @@ msgstr "تصفح الخارطة"
 msgid "Detect my location"
 msgstr "حدّد مكان تواجدي الآن"
 
-#: refugeeinfo/settings.py:197
+#: refugeeinfo/local_settings.py:186 refugeeinfo/settings.py:197
 msgid "Lesvos"
 msgstr "ليسفوس"
 
-#: refugeeinfo/settings.py:198
+#: refugeeinfo/local_settings.py:187 refugeeinfo/settings.py:198
 msgid "Kos"
 msgstr "كوس"
 
-#: refugeeinfo/settings.py:199
+#: refugeeinfo/local_settings.py:188 refugeeinfo/settings.py:199
 msgid "Athens"
 msgstr "آثينا"
 
-#: refugeeinfo/settings.py:200
+#: refugeeinfo/local_settings.py:189 refugeeinfo/settings.py:200
 msgid "Gevgelija"
 msgstr "غيفغليا"
+
+#: refugeeinfo/local_settings.py:190 refugeeinfo/settings.py:202
+msgid "Šid"
+msgstr ""
+
+#: refugeeinfo/local_settings.py:191 refugeeinfo/settings.py:203
+msgid "Slavonski Brod"
+msgstr ""
 
 #: refugeeinfo/settings.py:201
 #, fuzzy
 msgid "Tabanovce/Preševo"
 msgstr "تابانوفسي/بريسيفو "
 
-#: refugeeinfo/settings.py:202
-msgid "Šid"
-msgstr ""
-
-#: refugeeinfo/settings.py:203
-msgid "Slavonski Brod"
-msgstr ""
+#~ msgid "Go to"
+#~ msgstr "توجه إلى"
 
 #~ msgid "Tabanovce"
 #~ msgstr "تابانوفسي/بريسيفو "
