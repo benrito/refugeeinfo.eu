@@ -14,8 +14,8 @@ from lxml.cssselect import CSSSelector
 class LocationSerializer(serializers.ModelSerializer):
     location = serializers.SerializerMethodField()
     languages = serializers.SerializerMethodField()
-    content = serializers.SerializerMethodField()
-    parent_id = serializers.SerializerMethodField()
+    # content = serializers.SerializerMethodField()
+    # parent_id = serializers.SerializerMethodField()
 
     def get_location(self, obj):
         return dict(type="Point", coordinates=[obj.area.centroid.x, obj.area.centroid.y])
@@ -98,9 +98,28 @@ class LocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Location
-        fields = ('id', 'name', 'slug', 'location', 'languages', 'content', 'parent_id')
+        fields = (
+            'id',
+            'name',
+            'slug',
+            'location',
+            'languages',
+            #'content',
+            #'parent_id'
+        )
 
 
 class LocationViewSet(viewsets.ModelViewSet, ):
-    queryset = models.Location.objects.all()
+    queryset = models.Location.objects.filter(enabled=True)
     serializer_class = LocationSerializer
+
+
+    def get_queryset(self):
+        country = self.request.query_params.get('country', None)
+
+        if country is not None:
+            queryset = self.queryset.filter(country=country)
+        else:
+            queryset = self.queryset.none()
+
+        return queryset
