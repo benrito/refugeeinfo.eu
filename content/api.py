@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals, division, print_functi
 
 __author__ = 'reyrodrigues'
 
-from rest_framework import serializers, viewsets
+from rest_framework import serializers, viewsets, decorators, status, request, response
 from . import models
 from django.core.cache import cache
 
@@ -14,8 +14,28 @@ from lxml.cssselect import CSSSelector
 class LocationSerializer(serializers.ModelSerializer):
     location = serializers.SerializerMethodField()
     languages = serializers.SerializerMethodField()
-    # content = serializers.SerializerMethodField()
-    # parent_id = serializers.SerializerMethodField()
+
+    def get_location(self, obj):
+        return dict(type="Point", coordinates=[obj.area.centroid.x, obj.area.centroid.y])
+
+    def get_languages(self, obj):
+        return [dict(iso_code=l.language.iso_code, name=l.language.name) for l in obj.content.all()]
+
+    class Meta:
+        model = models.Location
+        fields = (
+            'id',
+            'name',
+            'slug',
+            'location',
+            'languages',
+        )
+
+class LocationContentSerializer(serializers.ModelSerializer):
+    location = serializers.SerializerMethodField()
+    languages = serializers.SerializerMethodField()
+    content = serializers.SerializerMethodField()
+    parent_id = serializers.SerializerMethodField()
 
     def get_location(self, obj):
         return dict(type="Point", coordinates=[obj.area.centroid.x, obj.area.centroid.y])
@@ -104,8 +124,8 @@ class LocationSerializer(serializers.ModelSerializer):
             'slug',
             'location',
             'languages',
-            #'content',
-            #'parent_id'
+            'content',
+            'parent_id'
         )
 
 
@@ -113,6 +133,14 @@ class LocationViewSet(viewsets.ModelViewSet, ):
     queryset = models.Location.objects.filter(enabled=True)
     serializer_class = LocationSerializer
 
+    @decorators.detail_route(methods=['get'])
+    def content(self, request, pk=None):
+        if not pk:
+            return response.Response(status.HTTP_400_BAD_REQUEST)
+
+        object = self.get_object()
+
+        return response.Response(LocationContentSerializer(object).data)
 
     def get_queryset(self):
         country = self.request.query_params.get('country', None)
@@ -120,6 +148,6 @@ class LocationViewSet(viewsets.ModelViewSet, ):
         if country is not None:
             queryset = self.queryset.filter(country=country)
         else:
-            queryset = self.queryset.none()
+            queryset = self.queryset
 
         return queryset
