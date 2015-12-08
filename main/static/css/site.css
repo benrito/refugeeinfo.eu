@@ -318,6 +318,6 @@ table.content-table td {
 
 span.tel {
     direction: ltr !important;
-    display: inline;
+    display: inline-block;
 }
 
