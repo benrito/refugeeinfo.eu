@@ -318,5 +318,6 @@ table.content-table td {
 
 span.tel {
     direction: ltr !important;
-    display: block;
+    display: inline;
 }
+
