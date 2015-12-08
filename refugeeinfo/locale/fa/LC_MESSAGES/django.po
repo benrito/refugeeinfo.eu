@@ -1,26 +1,26 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+# Translators:
+# Amirhossein Hashemi <amirhs@stanford.edu>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 18:47+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2015-12-03 14:25+0000\n"
+"PO-Revision-Date: 2015-12-08 17:46+0000\n"
+"Last-Translator: Heather Bourbeau <hb@heatherbourbeau.com>\n"
+"Language-Team: Persian (http://www.transifex.com/refugeeinfo/refugeeinfo/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: main/templates/index.html:76
 msgid "This is a free wifi hotspot provider by "
-msgstr ""
+msgstr "این یک هات‌اسپات مجانی است، تهیه‌شده توسط"
 
 #: main/templates/index.html:78
 msgid ""
@@ -29,64 +29,64 @@ msgid ""
 "                scroll\n"
 "                below for important information about this location.\n"
 "            "
-msgstr ""
+msgstr "\nدکمه‌ی زیر را بزنید تا به جستجو در اینترنت ادامه بدهید، یا برای کسب اطلاعات بیشتر در مورد این مکان، تا پایین صفحه بروید."
 
 #: main/templates/index.html:83
 msgid "CONTINUE TO THE INTERNET"
-msgstr ""
+msgstr "ادامه جستجو در اينترنت"
 
 #: main/templates/index.html:92
 msgid "OTHER LOCATIONS"
-msgstr ""
+msgstr "مكانهاي ديگر"
 
 #: main/templates/index.html:96
 msgid "GO TO OTHER LOCATIONS"
-msgstr ""
+msgstr "رفتن به مكانهاي ديگر"
 
 #: main/templates/landing.html:111
 msgid "Select your location:"
-msgstr ""
+msgstr "مكان خود را انتخاب كنيد:"
 
 #: main/templates/landing.html:126
-msgid "View info for"
-msgstr ""
+msgid "Go to"
+msgstr "برو به"
 
 #: main/templates/landing.html:130
 msgid "Other Countries"
-msgstr ""
+msgstr "کشورهای دیگر"
 
 #: main/templates/landing.html:134
 msgid "Open Map"
-msgstr ""
+msgstr "بازكردن نقشه"
 
 #: main/templates/landing.html:136
 msgid "Detect my location"
-msgstr ""
+msgstr "موقعيت من را مشخص كن"
 
-#: refugeeinfo/local_settings.py:186 refugeeinfo/settings.py:197
+#: refugeeinfo/settings.py:197
 msgid "Lesvos"
-msgstr ""
+msgstr "لزوس"
 
-#: refugeeinfo/local_settings.py:187 refugeeinfo/settings.py:198
+#: refugeeinfo/settings.py:198
 msgid "Kos"
-msgstr ""
+msgstr "كاس"
 
-#: refugeeinfo/local_settings.py:188 refugeeinfo/settings.py:199
+#: refugeeinfo/settings.py:199
 msgid "Athens"
-msgstr ""
+msgstr "آتن"
 
-#: refugeeinfo/local_settings.py:189 refugeeinfo/settings.py:200
+#: refugeeinfo/settings.py:200
 msgid "Gevgelija"
-msgstr ""
-
-#: refugeeinfo/local_settings.py:190 refugeeinfo/settings.py:202
-msgid "Šid"
-msgstr ""
-
-#: refugeeinfo/local_settings.py:191 refugeeinfo/settings.py:203
-msgid "Slavonski Brod"
-msgstr ""
+msgstr "گفليا"
 
 #: refugeeinfo/settings.py:201
 msgid "Tabanovce/Preševo"
-msgstr ""
+msgstr "تابانوچ/پرشوو"
+
+#: refugeeinfo/settings.py:202
+msgid "Šid"
+msgstr "سید"
+
+#: refugeeinfo/settings.py:203
+msgid "Slavonski Brod"
+msgstr "اسلوونسكي برود"
