@@ -10,12 +10,12 @@ import json
 from django.contrib.gis import geos
 import requests
 import xmltodict
-import gzip
 import tarfile
 from StringIO import StringIO
 import tempfile
 import os
 import shutil
+
 
 class Command(BaseCommand):
     help = 'Load GeoJSON and gets the location out of it'
@@ -50,7 +50,7 @@ class Command(BaseCommand):
             if not level_index:
                 return
 
-            selected_file = all_files[int(level_index)-1]
+            selected_file = all_files[int(level_index) - 1]
             with open(os.path.join(json_file_path, selected_file)) as f:
                 current_json = f.read()
 
@@ -63,11 +63,12 @@ class Command(BaseCommand):
             content = json.loads(json_input)
             features = content['features']
 
-        locations = sorted([a for a in features if 'name:en' in a['properties']],
-                           key=lambda x: x['properties']['name:en'])
+        locations = sorted([a for a in features if 'name' in a['properties']],
+                           key=lambda x: x['properties']['name'])
 
         for i, l in enumerate(locations):
-            print("{}: {} ({})".format(i + 1, l['properties']['name:en'], l['properties']['name']))
+            print("{}: {} ({})".format(i + 1, l['properties']['name:en'] if 'name:en' in l['properties'] else '',
+                                       l['properties']['name']))
 
         feature_index = raw_input('Enter selected feature: ')
         if not feature_index:
