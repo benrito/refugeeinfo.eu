@@ -8,31 +8,66 @@ from django.utils.text import slugify
 import sys
 import json
 from django.contrib.gis import geos
-
+import requests
+import xmltodict
+import gzip
+import tarfile
+from StringIO import StringIO
+import tempfile
+import os
+import shutil
 
 class Command(BaseCommand):
     help = 'Load GeoJSON and gets the location out of it'
 
 
     def handle(self, *args, **options):
-        json_input = sys.stdin.read()
+        json_input = False
         if not json_input:
-            print("""
-            This application expects the STDIN to be filled with data from GeoJSON with features.
-            You can download the files for the country you are trying to load here https://mapzen.com/data/borders/.
-            Admin levels 1 and 2 are usually country, and municipalities and metro area are usually within levels 6-8
-            """)
+            original_url = 'https://s3.amazonaws.com/osm-polygons.mapzen.com/'
+            countries = requests.get(original_url).text
+            countries = xmltodict.parse(countries)
+            for i, c in enumerate(countries['ListBucketResult']['Contents'][1:], start=1):
+                print("{}: {}".format(i, c['Key']))
+            country_index = raw_input('Enter selected country: ')
+            if not country_index:
+                return
+            selected = countries['ListBucketResult']['Contents'][int(country_index)]
+            response = requests.get(original_url + selected['Key'])
 
-        content = json.loads(json_input)
-        features = content['features']
+            tar_file = tarfile.open(mode='r:gz', fileobj=StringIO(response.content))
+
+            tmpdir = tempfile.mkdtemp()
+            tar_file.extractall(tmpdir)
+
+            json_file_path = os.path.join(tmpdir, os.listdir(tmpdir)[0])
+            all_files = os.listdir(json_file_path)
+
+            for i, f in enumerate(all_files, start=1):
+                print("{}: {}".format(i, f))
+
+            level_index = raw_input('Enter selected file: ')
+            if not level_index:
+                return
+
+            selected_file = all_files[int(level_index)-1]
+            with open(os.path.join(json_file_path, selected_file)) as f:
+                current_json = f.read()
+
+            content = json.loads(current_json)
+            features = content['features']
+
+            shutil.rmtree(tmpdir)
+        else:
+            sys.stdin = open('/dev/tty')
+            content = json.loads(json_input)
+            features = content['features']
 
         locations = sorted([a for a in features if 'name:en' in a['properties']],
                            key=lambda x: x['properties']['name:en'])
 
         for i, l in enumerate(locations):
             print("{}: {} ({})".format(i + 1, l['properties']['name:en'], l['properties']['name']))
-
-        sys.stdin = open('/dev/tty')
 
         feature_index = raw_input('Enter selected feature: ')
         if not feature_index:
@@ -63,7 +98,7 @@ class Command(BaseCommand):
         is_new_location = True if 'Y' in is_new_location.upper() else False
 
         merged = feature.convex_hull if len(feature) > 3 else feature[0]
-        merged = merged.simplify(tolerance=0.01)
+        #merged = merged.simplify(tolerance=0.01)
 
         if is_new_location:
             location_name = raw_input('Name of location: ')
@@ -74,7 +109,7 @@ class Command(BaseCommand):
                 name=location_name,
                 country=country,
                 slug=location_slug,
-                parent_id=int(parent_id),
+                parent_id=int(parent_id) if parent_id else None,
                 area=merged,
             )
         else:
