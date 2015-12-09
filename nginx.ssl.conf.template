@@ -4,9 +4,21 @@ server {
   server_name $NOSSL_SERVER_NAME;
   access_log  /var/log/nginx/${APP}-access.log;
   error_log   /var/log/nginx/${APP}-error.log;
+  return 301 https://\$host:$NGINX_SSL_PORT\$request_uri;
+}
 
+server {
+  listen      [::]:$NGINX_SSL_PORT ssl spdy;
+  listen      $NGINX_SSL_PORT ssl spdy;
+  server_name $SSL_SERVER_NAME;
+  access_log  /var/log/nginx/${APP}-access.log;
+  error_log   /var/log/nginx/${APP}-error.log;
+$SSL_DIRECTIVES
+
+  keepalive_timeout   70;
+
+  add_header          Alternate-Protocol  $NGINX_SSL_PORT:npn-spdy/2;
   add_header Access-Control-Allow-Origin *;
-
 
   location    / {
 
