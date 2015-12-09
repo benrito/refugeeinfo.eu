@@ -41,7 +41,7 @@ class Command(BaseCommand):
             tar_file.extractall(tmpdir)
 
             json_file_path = os.path.join(tmpdir, os.listdir(tmpdir)[0])
-            all_files = os.listdir(json_file_path)
+            all_files = sorted(os.listdir(json_file_path))
 
             for i, f in enumerate(all_files, start=1):
                 print("{}: {}".format(i, f))
@@ -98,7 +98,7 @@ class Command(BaseCommand):
         is_new_location = True if 'Y' in is_new_location.upper() else False
 
         merged = feature.convex_hull if len(feature) > 3 else feature[0]
-        #merged = merged.simplify(tolerance=0.01)
+        merged = merged.simplify(tolerance=0.01, preserve_topology=True)
 
         if is_new_location:
             location_name = raw_input('Name of location: ')
