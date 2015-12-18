@@ -46,6 +46,9 @@
 <body class="content-page">
 <ul class="menu">
     <li>
+        <a href="{{ feedback_url }}"> <img src="{% static "images/feedback.png" %}" alt="{% trans "Feedback" %}" class="content-button"/></a>
+    </li>
+    <li>
         <a href="/map/"> <img src="{% static "images/map-marker.png" %}" alt="Other Locations" class="content-button"/></a>
     </li>
     <li>
@@ -56,17 +59,10 @@
             {% endfor %}
         </ul>
     </li>
-    {% if service_map_enabled %}
-        <li>
-            <a href="/{{ location.slug }}/services/">
-                <img src="{% static "images/book.png" %}" alt="Services" class="content-button"/>
-            </a>
-        </li>
-    {% endif %}
 </ul>
 <div class="logo-bar-container">
     <img src="{% static "images/logobar.png" %}" alt="IRC | MercyCorps">
-    <hr/>
+    <hr />
 </div>
 
 {% if is_captive %}
@@ -94,6 +90,13 @@
 </h3>
 <hr class="title-hr" style="margin-bottom: 1em;" />
 <a class="link-button" href="/">{% trans "GO TO OTHER LOCATIONS" %}</a>
+
+<h3 class="anchor">
+    <a name="OtherLocations">{% trans "FEEDBACK" %}</a><br>
+    <a href="#top" class="back-to-top">Back to top</a>
+</h3>
+<hr class="title-hr" style="margin-bottom: 1em;" />
+<a class="link-button" href="{{ feedback_url }}">{% trans "GIVE FEEDBACK ON THIS PAGE" %}</a>
 {% include "footer.html" %}
 </body>
 </html>

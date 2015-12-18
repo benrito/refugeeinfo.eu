@@ -226,6 +226,23 @@ STATICFILES_LOCATION = 'static'
 MEDIA_URL = "%s%s/" % (CLOUDFRONT_URL, MEDIAFILES_LOCATION,)
 STATIC_URL = CLOUDFRONT_URL
 
+
+FEEDBACK_URL = os.environ.get("FEEDBACK_URL", "http://goo.gl/forms/NPJVLMbHQt")
+
+"""
+Below are links to be hardcoded into the landing page
+
+format of the dictionary:
+"<destination parent": [<list of foreign children>]
+
+"""
+OVERRIDE_SLUG_LINKS = {
+    "serbia": [
+        "tabanovce"
+    ]
+}
+
+
 try:
     from local_settings import *
 except ImportError:

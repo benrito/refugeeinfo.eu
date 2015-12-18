@@ -32,14 +32,14 @@ def landing(request):
     child_locations = [(a, [b for b in a.children.all() if b.enabled]) for a in root_locations]
     root_locations = [a[0] for a in child_locations if len(a[1]) > 0]
 
-    try:
-        ip_position = location_best_guess(request)
-        point = 'POINT({} {})'.format(ip_position['longitude'], ip_position['latitude'])
-        geopoint = fromstr(point, srid=4326)
+    def get_linked(parent):
+        link_dictionary = getattr(settings, 'OVERRIDE_SLUG_LINKS', {})
+        if parent in link_dictionary:
+            links = link_dictionary[parent]
+            return list(models.Location.objects.filter(slug__in=links))
+        return []
 
-        location = models.Location.objects.filter(area__intersects=geopoint, enabled=True).order_by('-parent')
-    except Exception as e:
-        pass
+    child_locations = [(a, b + get_linked(a.slug)) for a, b in child_locations]
 
     if location:
         found_location = location[0] if location else None
@@ -101,7 +101,9 @@ def index(request, page_id, language):
 
 
     # Handling Meraki:
-    context = {}
+    context = {
+        'feedback_url': settings.FEEDBACK_URL
+    }
 
     if 'base_grant_url' in request.GET:
         context['is_captive'] = True
