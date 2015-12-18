@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Mumen Ghazi Shafiq El-Tibi <bromumen@gmail.com>, 2015
 # Rey Rodrigues <Reynaldo.Rodrigues@rescue.org>, 2015
@@ -9,48 +9,65 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 14:25+0000\n"
-"PO-Revision-Date: 2015-12-08 18:19+0000\n"
+"POT-Creation-Date: 2015-12-18 21:33+0000\n"
+"PO-Revision-Date: 2015-12-15 15:24+0000\n"
 "Last-Translator: sandy salloum <ssalloum@mercycorps.org>\n"
-"Language-Team: Arabic (http://www.transifex.com/refugeeinfo/refugeeinfo/language/ar/)\n"
+"Language-Team: Arabic (http://www.transifex.com/refugeeinfo/refugeeinfo/"
+"language/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: main/templates/index.html:76
+#: main/templates/index.html:49
+msgid "Feedback"
+msgstr ""
+
+#: main/templates/index.html:72
 msgid "This is a free wifi hotspot provider by "
 msgstr "هذا الإتصال بالإنترنت اللاسلكي مقدم مجاناً من قبل: "
 
-#: main/templates/index.html:78
+#: main/templates/index.html:74
 msgid ""
 "\n"
 "                Tap the button below to continue to the internet, or\n"
 "                scroll\n"
 "                below for important information about this location.\n"
 "            "
-msgstr "\nاضغط على زر التالي للمتابعة إلى الإنترنت، أو انتقل أدناه للحصول على معلومات هامة حول هذا الموقع."
+msgstr ""
+"\n"
+"اضغط على زر التالي للمتابعة إلى الإنترنت، أو انتقل أدناه للحصول على معلومات "
+"هامة حول هذا الموقع."
 
-#: main/templates/index.html:83
+#: main/templates/index.html:79
 msgid "CONTINUE TO THE INTERNET"
 msgstr "الإستمرار لتصفح الإنترنت"
 
-#: main/templates/index.html:92
+#: main/templates/index.html:88
 msgid "OTHER LOCATIONS"
 msgstr "مناطق أخرى"
 
-#: main/templates/index.html:96
+#: main/templates/index.html:92
 msgid "GO TO OTHER LOCATIONS"
 msgstr "الذهاب إلى مناطق أخرى"
+
+#: main/templates/index.html:95
+msgid "FEEDBACK"
+msgstr ""
+
+#: main/templates/index.html:99
+msgid "GIVE FEEDBACK ON THIS PAGE"
+msgstr ""
 
 #: main/templates/landing.html:111
 msgid "Select your location:"
 msgstr "إختر منطقتك:"
 
 #: main/templates/landing.html:126
-msgid "Go to"
-msgstr "توجه إلى"
+msgid "View info for"
+msgstr "عرض المعلومـات الخاصة بـ"
 
 #: main/templates/landing.html:130
 msgid "Other Countries"
@@ -64,30 +81,34 @@ msgstr "تصفح الخارطة"
 msgid "Detect my location"
 msgstr "حدّد مكان تواجدي الآن"
 
-#: refugeeinfo/settings.py:197
+#: main/templates/landing.html:241
+msgid "Acknowledgements"
+msgstr ""
+
+#: refugeeinfo/settings.py:198
 msgid "Lesvos"
 msgstr "ليسفوس"
 
-#: refugeeinfo/settings.py:198
+#: refugeeinfo/settings.py:199
 msgid "Kos"
 msgstr "كوس"
 
-#: refugeeinfo/settings.py:199
+#: refugeeinfo/settings.py:200
 msgid "Athens"
 msgstr "آثينا"
 
-#: refugeeinfo/settings.py:200
+#: refugeeinfo/settings.py:201
 msgid "Gevgelija"
 msgstr "غيفغليا"
 
-#: refugeeinfo/settings.py:201
+#: refugeeinfo/settings.py:202
 msgid "Tabanovce/Preševo"
 msgstr "تابانوفسي/بريسيفو "
 
-#: refugeeinfo/settings.py:202
+#: refugeeinfo/settings.py:203
 msgid "Šid"
 msgstr "شيد"
 
-#: refugeeinfo/settings.py:203
+#: refugeeinfo/settings.py:204
 msgid "Slavonski Brod"
 msgstr "سلافونسكي برود"

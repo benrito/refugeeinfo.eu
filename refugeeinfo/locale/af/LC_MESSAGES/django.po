@@ -1,28 +1,35 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
+# Translators:
+# Ghulam Mujtaba <gahmadzai@af.mercycorps.org>, 2015
+# Haji Razmi <hrazmi@aol.com>, 2015
+# Marina Sahban <drmarinasbn@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 18:47+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2015-12-18 21:33+0000\n"
+"PO-Revision-Date: 2015-12-16 18:19+0000\n"
+"Last-Translator: Haji Razmi <hrazmi@aol.com>\n"
+"Language-Team: Pushto (http://www.transifex.com/refugeeinfo/refugeeinfo/"
+"language/ps/)\n"
+"Language: ps\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main/templates/index.html:76
-msgid "This is a free wifi hotspot provider by "
+#: main/templates/index.html:49
+msgid "Feedback"
 msgstr ""
 
-#: main/templates/index.html:78
+#: main/templates/index.html:72
+msgid "This is a free wifi hotspot provider by "
+msgstr "دغه د انترنت یو وړیا مرکز دی چې تیار شوی دی له طرفه د"
+
+#: main/templates/index.html:74
 msgid ""
 "\n"
 "                Tap the button below to continue to the internet, or\n"
@@ -30,63 +37,78 @@ msgid ""
 "                below for important information about this location.\n"
 "            "
 msgstr ""
+"\n"
+"لاندی دوکمی ته فشار ورکړی چه انترنت ته ادامه ورکړی ،اویا \n"
+" .لاندی ورشی چي د دغه موقعيت په اړه مهمه لارښونه ده  "
 
-#: main/templates/index.html:83
+#: main/templates/index.html:79
 msgid "CONTINUE TO THE INTERNET"
-msgstr ""
+msgstr "انترنت سره وصل پاتې شئ "
+
+#: main/templates/index.html:88
+msgid "OTHER LOCATIONS"
+msgstr "نورځایونه"
 
 #: main/templates/index.html:92
-msgid "OTHER LOCATIONS"
+msgid "GO TO OTHER LOCATIONS"
+msgstr "نورو ځایونو ته لاړشئ"
+
+#: main/templates/index.html:95
+msgid "FEEDBACK"
 msgstr ""
 
-#: main/templates/index.html:96
-msgid "GO TO OTHER LOCATIONS"
+#: main/templates/index.html:99
+msgid "GIVE FEEDBACK ON THIS PAGE"
 msgstr ""
 
 #: main/templates/landing.html:111
 msgid "Select your location:"
-msgstr ""
+msgstr "خپل ځاې وتاکئ"
 
 #: main/templates/landing.html:126
 msgid "View info for"
-msgstr ""
+msgstr "دلارښونی معلومات"
 
 #: main/templates/landing.html:130
 msgid "Other Countries"
-msgstr ""
+msgstr "نور هیوادونه"
 
 #: main/templates/landing.html:134
 msgid "Open Map"
-msgstr ""
+msgstr "نقشه پرانیزه"
 
 #: main/templates/landing.html:136
 msgid "Detect my location"
+msgstr "زما څاې پیدا کړه"
+
+#: main/templates/landing.html:241
+msgid "Acknowledgements"
 msgstr ""
 
-#: refugeeinfo/local_settings.py:186 refugeeinfo/settings.py:197
+#: refugeeinfo/settings.py:198
 msgid "Lesvos"
-msgstr ""
+msgstr "لسؤس"
 
-#: refugeeinfo/local_settings.py:187 refugeeinfo/settings.py:198
+#: refugeeinfo/settings.py:199
 msgid "Kos"
-msgstr ""
+msgstr "کاس"
 
-#: refugeeinfo/local_settings.py:188 refugeeinfo/settings.py:199
+#: refugeeinfo/settings.py:200
 msgid "Athens"
-msgstr ""
-
-#: refugeeinfo/local_settings.py:189 refugeeinfo/settings.py:200
-msgid "Gevgelija"
-msgstr ""
-
-#: refugeeinfo/local_settings.py:190 refugeeinfo/settings.py:202
-msgid "Šid"
-msgstr ""
-
-#: refugeeinfo/local_settings.py:191 refugeeinfo/settings.py:203
-msgid "Slavonski Brod"
-msgstr ""
+msgstr "اتنز"
 
 #: refugeeinfo/settings.py:201
+msgid "Gevgelija"
+msgstr "ګيوګيليا"
+
+#: refugeeinfo/settings.py:202
 msgid "Tabanovce/Preševo"
-msgstr ""
+msgstr "تبانوس/ پریشيوو"
+
+#: refugeeinfo/settings.py:203
+msgid "Šid"
+msgstr "شيد"
+
+#: refugeeinfo/settings.py:204
+msgid "Slavonski Brod"
+msgstr "سلاونسکي براد"
