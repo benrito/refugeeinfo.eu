@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-18 21:33+0000\n"
+"POT-Creation-Date: 2015-12-18 21:37+0000\n"
 "PO-Revision-Date: 2015-12-15 15:24+0000\n"
 "Last-Translator: sandy salloum <ssalloum@mercycorps.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/refugeeinfo/refugeeinfo/"
@@ -50,7 +50,9 @@ msgid "OTHER LOCATIONS"
 msgstr "مناطق أخرى"
 
 #: main/templates/index.html:92
-msgid "GO TO OTHER LOCATIONS"
+#, fuzzy
+#| msgid "GO TO OTHER LOCATIONS"
+msgid "VIEW INFO ON OTHER LOCATIONS"
 msgstr "الذهاب إلى مناطق أخرى"
 
 #: main/templates/index.html:95

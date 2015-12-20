@@ -102,7 +102,7 @@ def index(request, page_id, language):
 
     # Handling Meraki:
     context = {
-        'feedback_url': settings.FEEDBACK_URL
+        'feedback_url': settings.FEEDBACK_URL.format(location.name)
     }
 
     if 'base_grant_url' in request.GET:
