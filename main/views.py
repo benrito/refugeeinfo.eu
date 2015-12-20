@@ -102,7 +102,6 @@ def index(request, page_id, language):
 
     # Handling Meraki:
     context = {
-        'feedback_url': settings.FEEDBACK_URL.format(location.name)
     }
 
     if 'base_grant_url' in request.GET:
@@ -119,6 +118,8 @@ def index(request, page_id, language):
 
     if location:
         location = location[0]
+
+        context.update({'feedback_url': settings.FEEDBACK_URL.format(location.name)})
 
         if location.managed_locally:
             """
