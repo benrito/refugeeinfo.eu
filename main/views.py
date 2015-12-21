@@ -119,7 +119,7 @@ def index(request, page_id, language):
     if location:
         location = location[0]
 
-        context.update({'feedback_url': settings.FEEDBACK_URL.format(location.name)})
+        context.update({'feedback_url': unicode(settings.FEEDBACK_URL).format(unicode(location.name))})
 
         if location.managed_locally:
             """
