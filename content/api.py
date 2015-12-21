@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals, division, print_functi
 
 __author__ = 'reyrodrigues'
 
-from rest_framework import serializers, viewsets, decorators, status, request, response
+from rest_framework import serializers, viewsets, decorators, status, response
 from . import models
 from django.core.cache import cache
 
@@ -30,6 +30,7 @@ class LocationSerializer(serializers.ModelSerializer):
             'location',
             'languages',
         )
+
 
 class LocationContentSerializer(serializers.ModelSerializer):
     location = serializers.SerializerMethodField()
@@ -86,10 +87,15 @@ class LocationContentSerializer(serializers.ModelSerializer):
         elements = list(CSSSelector('.cms-content')(tree)[0])
 
         headers = [i for i, e in enumerate(elements) if CSSSelector('.section-header')(e)]
+        title_icons = list(CSSSelector('.title-icon')(tree))
 
         page_contents = []
 
         for i, h in enumerate(headers):
+            icon = ""
+            if i < len(title_icons) and 'src' in title_icons[i].attrib:
+                icon = title_icons[i].attrib['src']
+
             element = elements[h]
             if (i + 1) == len(headers):
                 contents = elements[h + 1:]
@@ -108,7 +114,8 @@ class LocationContentSerializer(serializers.ModelSerializer):
             page_contents.append({
                 "is_important": True if CSSSelector('.important')(element) else False,
                 "title": section_title,
-                "body": section_body
+                "body": section_body,
+                "icon": icon
             })
 
         return {
