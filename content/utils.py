@@ -68,13 +68,15 @@ def _get_body_content(text):
                     # Removes Table from HTML
                     parent = table.getparent()
                     sibling = table.getprevious()
+                    index = parent.index(sibling) + 1 if sibling else 0
+
                     parent.remove(table)
                     # Attaches a div to it
                     d = etree.Element('div', attrib={"class": "table-responsive"})
                     d.append(table)
 
                     # Inserts into back to the document at the same point
-                    parent.insert(parent.index(sibling) + 1, d)
+                    parent.insert(index, d)
 
                 result += etree.tostring(c, pretty_print=True, method="html")
     except Exception as e:
