@@ -68,7 +68,9 @@ def _get_body_content(text):
                     # Removes Table from HTML
                     parent = table.getparent()
                     sibling = table.getprevious()
-                    index = parent.index(sibling) + 1 if sibling else 0
+                    if not sibling:
+                        continue
+                    index = parent.index(sibling) + 1
 
                     parent.remove(table)
                     # Attaches a div to it
