@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Mumen Ghazi Shafiq El-Tibi <bromumen@gmail.com>, 2015
 # Rey Rodrigues <Reynaldo.Rodrigues@rescue.org>, 2015
@@ -9,21 +9,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-18 21:37+0000\n"
-"PO-Revision-Date: 2015-12-15 15:24+0000\n"
-"Last-Translator: sandy salloum <ssalloum@mercycorps.org>\n"
-"Language-Team: Arabic (http://www.transifex.com/refugeeinfo/refugeeinfo/"
-"language/ar/)\n"
-"Language: ar\n"
+"POT-Creation-Date: 2015-12-29 15:44+0000\n"
+"PO-Revision-Date: 2016-01-04 15:15+0000\n"
+"Last-Translator: Hossam Khattab <htkhattab@gmail.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/refugeeinfo/refugeeinfo/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: main/templates/index.html:49
 msgid "Feedback"
-msgstr ""
+msgstr "تقيـيم محتـوى المـوقع"
 
 #: main/templates/index.html:72
 msgid "This is a free wifi hotspot provider by "
@@ -36,10 +34,7 @@ msgid ""
 "                scroll\n"
 "                below for important information about this location.\n"
 "            "
-msgstr ""
-"\n"
-"اضغط على زر التالي للمتابعة إلى الإنترنت، أو انتقل أدناه للحصول على معلومات "
-"هامة حول هذا الموقع."
+msgstr "\nاضغط على زر التالي للمتابعة إلى الإنترنت، أو انتقل أدناه للحصول على معلومات هامة حول هذا الموقع."
 
 #: main/templates/index.html:79
 msgid "CONTINUE TO THE INTERNET"
@@ -50,18 +45,16 @@ msgid "OTHER LOCATIONS"
 msgstr "مناطق أخرى"
 
 #: main/templates/index.html:92
-#, fuzzy
-#| msgid "GO TO OTHER LOCATIONS"
 msgid "VIEW INFO ON OTHER LOCATIONS"
-msgstr "الذهاب إلى مناطق أخرى"
+msgstr "عـرض معلـومات عن مـدن ومنـاطق أخـرى"
 
 #: main/templates/index.html:95
 msgid "FEEDBACK"
-msgstr ""
+msgstr "التقيـيـم"
 
 #: main/templates/index.html:99
 msgid "GIVE FEEDBACK ON THIS PAGE"
-msgstr ""
+msgstr "قـم بتقيـيـم هذه الصفحـة"
 
 #: main/templates/landing.html:111
 msgid "Select your location:"
@@ -85,7 +78,7 @@ msgstr "حدّد مكان تواجدي الآن"
 
 #: main/templates/landing.html:241
 msgid "Acknowledgements"
-msgstr ""
+msgstr "إقـرار وشكـر للجهـات المسـاهمة"
 
 #: refugeeinfo/settings.py:198
 msgid "Lesvos"

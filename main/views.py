@@ -171,6 +171,26 @@ def index(request, page_id, language):
     return render(request, 'index.html', context=context, context_instance=RequestContext(request))
 
 
+def feedback(request, page_id):
+    location = models.Location.objects.get(id=page_id)
+    feedback_url = unicode(settings.FEEDBACK_URL).format(unicode(location.name))
+
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
+    from . import models as main_models
+
+    main_models.FeedbackClick.objects.create(
+        ip_address=ip,
+        page=location.name,
+    )
+
+    return redirect(feedback_url)
+
+
 def depth(location):
     d = 0
     parent = location.parent

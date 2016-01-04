@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Ghulam Mujtaba <gahmadzai@af.mercycorps.org>, 2015
 # Haji Razmi <hrazmi@aol.com>, 2015
@@ -10,20 +10,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-18 21:37+0000\n"
-"PO-Revision-Date: 2015-12-16 18:19+0000\n"
+"POT-Creation-Date: 2015-12-29 15:44+0000\n"
+"PO-Revision-Date: 2015-12-30 20:36+0000\n"
 "Last-Translator: Haji Razmi <hrazmi@aol.com>\n"
-"Language-Team: Pushto (http://www.transifex.com/refugeeinfo/refugeeinfo/"
-"language/ps/)\n"
-"Language: ps\n"
+"Language-Team: Pushto (http://www.transifex.com/refugeeinfo/refugeeinfo/language/ps/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ps\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: main/templates/index.html:49
 msgid "Feedback"
-msgstr ""
+msgstr "فيد بک/ستاسي نظر"
 
 #: main/templates/index.html:72
 msgid "This is a free wifi hotspot provider by "
@@ -36,10 +35,7 @@ msgid ""
 "                scroll\n"
 "                below for important information about this location.\n"
 "            "
-msgstr ""
-"\n"
-"لاندی دوکمی ته فشار ورکړی چه انترنت ته ادامه ورکړی ،اویا \n"
-" .لاندی ورشی چي د دغه موقعيت په اړه مهمه لارښونه ده  "
+msgstr "\nلاندی دوکمی ته فشار ورکړی چه انترنت ته ادامه ورکړی ،اویا \n .لاندی ورشی چي د دغه موقعيت په اړه مهمه لارښونه ده  "
 
 #: main/templates/index.html:79
 msgid "CONTINUE TO THE INTERNET"
@@ -50,18 +46,16 @@ msgid "OTHER LOCATIONS"
 msgstr "نورځایونه"
 
 #: main/templates/index.html:92
-#, fuzzy
-#| msgid "GO TO OTHER LOCATIONS"
 msgid "VIEW INFO ON OTHER LOCATIONS"
-msgstr "نورو ځایونو ته لاړشئ"
+msgstr "د معلوماتو ښودنه په نورو ځایونو کې"
 
 #: main/templates/index.html:95
 msgid "FEEDBACK"
-msgstr ""
+msgstr "ستاسي نظر"
 
 #: main/templates/index.html:99
 msgid "GIVE FEEDBACK ON THIS PAGE"
-msgstr ""
+msgstr "د دې پاڼې په هکله فید بک/ خپل نظر راکړئ"
 
 #: main/templates/landing.html:111
 msgid "Select your location:"
@@ -85,7 +79,7 @@ msgstr "زما څاې پیدا کړه"
 
 #: main/templates/landing.html:241
 msgid "Acknowledgements"
-msgstr ""
+msgstr "مننه"
 
 #: refugeeinfo/settings.py:198
 msgid "Lesvos"
