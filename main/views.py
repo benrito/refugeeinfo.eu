@@ -165,15 +165,23 @@ def index(request, page_id, language):
         "html_content": html_content,
         "languages": languages,
         "location": location,
+        "language": language,
         "service_map_enabled": settings.ENABLE_SERVICES or False,
     })
 
     return render(request, 'index.html', context=context, context_instance=RequestContext(request))
 
 
-def feedback(request, page_id):
+def feedback(request, page_id, language):
     location = models.Location.objects.get(id=page_id)
-    feedback_url = unicode(settings.FEEDBACK_URL).format(unicode(location.name))
+
+    if isinstance(settings.FEEDBACK_URL, dict):
+        if language in settings.FEEDBACK_URL:
+            feedback_url = unicode(settings.FEEDBACK_URL[language]).format(unicode(location.name))
+        else:
+            feedback_url = unicode(settings.FEEDBACK_URL['en']).format(unicode(location.name))
+    else:
+        feedback_url = unicode(settings.FEEDBACK_URL).format(unicode(location.name))
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:

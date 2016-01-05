@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^lookup$', views.location_from_device, name="lookup-device"),
     url(r'^capture-captive/?$', views.capture_captive),
 
-    url(r'^feedback/(?P<page_id>\d+)/?$', views.feedback),
+    url(r'^feedback/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/?$', views.feedback),
     url(r'^page/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/$', views.index),
 
     # Les[vb]os Hack
