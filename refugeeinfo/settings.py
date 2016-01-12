@@ -231,8 +231,7 @@ STATIC_URL = CLOUDFRONT_URL
 FEEDBACK_URL = os.environ.get("FEEDBACK_URL", "https://docs.google.com/forms/d/1gc-hN_p5pqC3DoPXxTfCAmlIiCEd1mOIdQMWeAz2n_U/viewform?entry.1237329743={}&entry.76257945&entry.197209127&entry.2029928797&entry.1325640830")
 
 if '|' in FEEDBACK_URL:
-    feedback_languages = [a for a in FEEDBACK_URL.split('|') if a]
-    FEEDBACK_URL = dict([a.split(';') for a in feedback_languages])
+    FEEDBACK_URL = dict([a.split(';') for a in FEEDBACK_URL.split('|') if a])
 
 """
 Below are links to be hardcoded into the landing page
