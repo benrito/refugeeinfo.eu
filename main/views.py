@@ -14,6 +14,7 @@ import django.db.models
 import geojson
 from django.conf import settings
 import requests
+from django.utils import translation
 
 from content import models, utils
 
@@ -98,10 +99,15 @@ def capture_captive(request):
 def index(request, page_id, language):
     location = models.Location.objects.filter(id=page_id)
     html_content = ""
-    from django.utils import translation
 
-    translation.activate(language)
+    translation_shim = {
+        'af': 'ps'
+    }
 
+    if language in translation_shim.keys():
+        translation.activate(translation_shim[language])
+    else:
+        translation.activate(language)
 
     # Handling Meraki:
     context = {
