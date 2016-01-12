@@ -101,7 +101,6 @@ def index(request, page_id, language):
     html_content = ""
 
     translation_shim = {
-        'af': 'ps'
     }
 
     if language in translation_shim.keys():
