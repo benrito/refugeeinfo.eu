@@ -98,6 +98,9 @@ def capture_captive(request):
 def index(request, page_id, language):
     location = models.Location.objects.filter(id=page_id)
     html_content = ""
+    from django.utils import translation
+
+    translation.activate(language)
 
 
     # Handling Meraki:
