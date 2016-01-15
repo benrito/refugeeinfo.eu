@@ -18,8 +18,9 @@ import requests
 from django.utils import translation
 
 from content import models, utils
+from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def receive_telegram(request, token):
     content_type = request.META.get('CONTENT_TYPE')
     if 'json' in content_type:
