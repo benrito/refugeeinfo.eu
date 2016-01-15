@@ -29,8 +29,9 @@
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-68574649-1', 'auto');
-        ga('send', 'pageview');
+        ga('send', 'event', 'Language Hits', '{{ LANGUAGE_CODE }}');
 
+        ga('send', 'pageview');
     </script>
 
     <meta name="msapplication-TileColor" content="#000000">
@@ -46,7 +47,8 @@
 <body class="content-page">
 <ul class="menu">
     <li>
-        <a href="{{ feedback_url }}"> <img src="{% static "images/feedback.png" %}" alt="{% trans "Feedback" %}" class="content-button"/></a>
+        <a href="{{ feedback_url }}"> <img src="{% static "images/feedback.png" %}" alt="{% trans "Feedback" %}"
+                                           class="content-button"/></a>
     </li>
     <li>
         <a href="/map/"> <img src="{% static "images/map-marker.png" %}" alt="Other Locations" class="content-button"/></a>
@@ -62,7 +64,7 @@
 </ul>
 <div class="logo-bar-container">
     <img src="{% static "images/logobar.png" %}" alt="IRC | MercyCorps">
-    <hr />
+    <hr/>
 </div>
 
 {% if is_captive %}
@@ -88,14 +90,14 @@
     <a name="OtherLocations">{% trans "OTHER LOCATIONS" %}</a><br>
     <a href="#top" class="back-to-top">Back to top</a>
 </h3>
-<hr class="title-hr" style="margin-bottom: 1em;" />
+<hr class="title-hr" style="margin-bottom: 1em;"/>
 <a class="link-button" href="/">{% trans "VIEW INFO ON OTHER LOCATIONS" %}</a>
 
 <h3 class="anchor">
     <a name="OtherLocations">{% trans "FEEDBACK" %}</a><br>
     <a href="#top" class="back-to-top">Back to top</a>
 </h3>
-<hr class="title-hr" style="margin-bottom: 1em;" />
+<hr class="title-hr" style="margin-bottom: 1em;"/>
 <a class="link-button" href="/feedback/{{ location.id }}/{{ language }}/">{% trans "GIVE FEEDBACK ON THIS PAGE" %}</a>
 {% include "footer.html" %}
 </body>
