@@ -62,7 +62,9 @@ INSTALLED_APPS = (
     'rest_framework',
 
     'main',
-    'content'
+    'content',
+
+    'telegram'
 )
 
 MIDDLEWARE_CLASSES = (
