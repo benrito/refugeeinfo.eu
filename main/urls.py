@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^feedback/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/?$', views.feedback),
     url(r'^page/(?P<page_id>\d+)/(?P<language>[a-zA-Z]+)/$', views.index),
 
+    url(r'^l/(?P<language>.+)/$', views.reset_language),
+
     # Les[vb]os Hack
     url(r'^lesbos/(?P<language>[a-zA-Z]+)/?', lambda r, language='': views.slug_index(r, 'lesvos', language)),
     url(r'^lesbos/?', lambda r: views.slug_no_language(r, 'lesvos')),

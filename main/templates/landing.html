@@ -176,13 +176,8 @@
 
     function flipLanguage(language) {
         localStorage.selectedLanguage = language;
-        var active = document.querySelector('.lang-active');
-        if (active)
-            active.className = 'language-button';
 
-        var languageButton = document.querySelector('[data-language-code=' + language + ']');
-        if (languageButton)
-            languageButton.className = "language-button lang-active";
+        location.href = '/l/' + language + '/';
     }
 
     function goToPage(loc) {
@@ -196,9 +191,8 @@
 
     window.onload = function () {
         if (!localStorage.selectedLanguage) {
-
             var found = navigator.language.split('-')[0];
-            localStorage.selectedLanguage = found || '{{ LANGUAGE_CODE }}';
+            localStorage.selectedLanguage = '{{ LANGUAGE_CODE }}' || found;
 
         }
         var language = localStorage.selectedLanguage;
@@ -208,8 +202,13 @@
             active.className = 'language-button';
 
         var languageButton = document.querySelector('[data-language-code=' + language + ']');
-        if (languageButton)
+        if (languageButton) {
             languageButton.className = "language-button lang-active";
+        } else {
+            localStorage.selectedLanguage = 'en';
+            var englishButton = document.querySelector('[data-language-code=en]');
+            englishButton.className = "language-button lang-active";
+        }
     };
 
     function getCurrentLocation(lat, long, then) {

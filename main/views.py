@@ -21,6 +21,18 @@ from content import models, utils
 
 CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH', 60 * 15)
 
+TRANSLATION_SHIM = {
+}
+
+
+def reset_language(request, language):
+    if language in TRANSLATION_SHIM.keys():
+        translation.activate(TRANSLATION_SHIM[language])
+    else:
+        translation.activate(language)
+
+    return landing(request)
+
 
 def landing(request):
     context = {}
@@ -100,11 +112,8 @@ def index(request, page_id, language):
     location = models.Location.objects.filter(id=page_id)
     html_content = ""
 
-    translation_shim = {
-    }
-
-    if language in translation_shim.keys():
-        translation.activate(translation_shim[language])
+    if language in TRANSLATION_SHIM.keys():
+        translation.activate(TRANSLATION_SHIM[language])
     else:
         translation.activate(language)
 
