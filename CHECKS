@@ -1,0 +1,5 @@
+WAIT=5     # Wait 1/2 minute
+TIMEOUT=30  # Timeout after a minute
+ATTEMPTS=10  # attempt checks 10 times
+
+/                       RefugeeInfo
