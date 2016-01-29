@@ -19,7 +19,7 @@ from django.utils import translation
 from content import models, utils
 
 
-CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH', 60 * 15) * 0
+CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH', 60 * 15)
 
 TRANSLATION_SHIM = {
 }

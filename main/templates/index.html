@@ -76,17 +76,17 @@
     <div style="margin: 5px 0px 5px 0px; padding: 5px 5px 5px 5px; border: 1px white solid;">
         {% language 'en' %}
             <div style="direction: ltr">
-                {% include "splash_message.html" with location_slug=location.slug %}
+                {% include "splash_message.html" with location_slug=location.slug language_code='en' %}
             </div>
         {% endlanguage %}
         {% language 'ar' %}
             <div style="direction: rtl">
-                {% include "splash_message.html" with location_slug=location.slug %}
+                {% include "splash_message.html" with location_slug=location.slug language_code='ar' %}
             </div>
         {% endlanguage %}
         {% language 'fa' %}
             <div style="direction: rtl">
-                {% include "splash_message.html" with location_slug=location.slug %}
+                {% include "splash_message.html" with location_slug=location.slug language_code='fa' %}
             </div>
         {% endlanguage %}
     </div>

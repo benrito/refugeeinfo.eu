@@ -85,11 +85,11 @@ msgstr "إقـرار وشكـر للجهـات المسـاهمة"
 msgid ""
 "\n"
 "        Welcome to RefugeeInfo.eu!\n"
-"        <a class=\"click-here\" href=\"/%(location_slug)s/en/\" target=\"_blank\">Click here</a> for\n"
+"        <a class=\"click-here\" href=\"/%(location_slug)s/%(language_code)s/\" target=\"_blank\">Click here</a> for\n"
 "        important information about your\n"
 "        location and services available.\n"
 "    "
-msgstr "\nمرحبا بكم في RefugeeInfo.eu!\n<a class=\"click-here\" href=\"/%(location_slug)s/en/\" target=\"_blank\">انقر هنا</a>\nإلى\nمعلومات هامة حول بك\nالموقع والخدمات المتوفرة."
+msgstr "\nمرحبا بكم في RefugeeInfo.eu!\n<a class=\"click-here\" href=\"/%(location_slug)s/%(language_code)s/\" target=\"_blank\">انقر هنا</a>\nإلى\nمعلومات هامة حول بك\nالموقع والخدمات المتوفرة."
 
 #: refugeeinfo/settings.py:200
 msgid "Lesvos"
