@@ -19,7 +19,7 @@ from django.utils import translation
 from content import models, utils
 
 
-CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH', 60 * 15)
+CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH', 60 * 15) * 0
 
 TRANSLATION_SHIM = {
 }
@@ -121,8 +121,12 @@ def index(request, page_id, language):
     context = {
     }
 
+    if 'source' in request.GET:
+        context['is_captive'] = True
+
     if 'base_grant_url' in request.GET:
         context['is_captive'] = True
+        context['is_meraki'] = True
         context['next'] = "{}?continue_url={}".format(
             request.GET['base_grant_url'],
             urllib.quote_plus(request.GET['user_continue_url'])

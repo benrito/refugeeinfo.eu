@@ -167,6 +167,11 @@ h1.page-title {
     font-size: 75%;
 }
 
+.click-here {
+    color: white;
+    font-weight: bold;
+}
+
 .cms-content a {
     color: white
 }

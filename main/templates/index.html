@@ -41,7 +41,13 @@
 
     <!-- Font and Styles -->
     <style>
-
+        /*
+        Here for now because updating cloudfront is a nightmare
+        */
+        .click-here {
+            color: white;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body class="content-page">
@@ -66,8 +72,27 @@
     <img src="{% static "images/logobar.png" %}" alt="IRC | MercyCorps">
     <hr/>
 </div>
-
 {% if is_captive %}
+    <div style="margin: 5px 0px 5px 0px; padding: 5px 5px 5px 5px; border: 1px white solid;">
+        {% language 'en' %}
+            <div style="direction: ltr">
+                {% include "splash_message.html" with location_slug=location.slug %}
+            </div>
+        {% endlanguage %}
+        {% language 'ar' %}
+            <div style="direction: rtl">
+                {% include "splash_message.html" with location_slug=location.slug %}
+            </div>
+        {% endlanguage %}
+        {% language 'fa' %}
+            <div style="direction: rtl">
+                {% include "splash_message.html" with location_slug=location.slug %}
+            </div>
+        {% endlanguage %}
+    </div>
+{% endif %}
+
+{% if is_captive and is_meraki %}
     <div style="margin-bottom: 5px">
         <h3>
             {% if provider %}

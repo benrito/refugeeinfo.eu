@@ -4,16 +4,17 @@
 # 
 # Translators:
 # Amirhossein Hashemi <amirhs@stanford.edu>, 2015
-# Leila Faghfouri Azar <leila.faghfouri@gmail.com>, 2015
+# Leila Faghfouri Azar <leila.faghfouri@gmail.com>, 2015-2016
 # Mohammad Haroon Safi <hsafi@af.mercycorps.org>, 2015
 # Parsa Nowruzi <pnowruzi@stanford.edu>, 2015
+# Rey Rodrigues <Reynaldo.Rodrigues@rescue.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-29 15:44+0000\n"
-"PO-Revision-Date: 2015-12-31 17:55+0000\n"
-"Last-Translator: Leila Faghfouri Azar <leila.faghfouri@gmail.com>\n"
+"POT-Creation-Date: 2016-01-29 16:55+0000\n"
+"PO-Revision-Date: 2016-01-29 17:06+0000\n"
+"Last-Translator: Rey Rodrigues <Reynaldo.Rodrigues@rescue.org>\n"
 "Language-Team: Persian (http://www.transifex.com/refugeeinfo/refugeeinfo/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,15 +22,15 @@ msgstr ""
 "Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: main/templates/index.html:49
+#: main/templates/index.html:50
 msgid "Feedback"
 msgstr "بازخورد"
 
-#: main/templates/index.html:72
+#: main/templates/index.html:85
 msgid "This is a free wifi hotspot provider by "
 msgstr "این یک کانون دسترسی به اینترنت بی سیم مجانی است"
 
-#: main/templates/index.html:74
+#: main/templates/index.html:87
 msgid ""
 "\n"
 "                Tap the button below to continue to the internet, or\n"
@@ -38,23 +39,23 @@ msgid ""
 "            "
 msgstr "\nدکمه‌ی زیر را بزنید تا به جستجو در اینترنت ادامه بدهید، یا برای کسب اطلاعات بیشتر در مورد این مکان، تا پایین صفحه بروید."
 
-#: main/templates/index.html:79
+#: main/templates/index.html:92
 msgid "CONTINUE TO THE INTERNET"
 msgstr "ادامه جستجو در اينترنت"
 
-#: main/templates/index.html:88
+#: main/templates/index.html:101
 msgid "OTHER LOCATIONS"
 msgstr "مكانهاي ديگر"
 
-#: main/templates/index.html:92
+#: main/templates/index.html:105
 msgid "VIEW INFO ON OTHER LOCATIONS"
 msgstr "نمایش دادن اطلاعات در دیگر مکان ها"
 
-#: main/templates/index.html:95
+#: main/templates/index.html:108
 msgid "FEEDBACK"
 msgstr "بازخورد"
 
-#: main/templates/index.html:99
+#: main/templates/index.html:112
 msgid "GIVE FEEDBACK ON THIS PAGE"
 msgstr "در مورد این صفحه به ما بازخورد بدهید"
 
@@ -78,34 +79,87 @@ msgstr "بازكردن نقشه"
 msgid "Detect my location"
 msgstr "موقعيت من را مشخص كن"
 
-#: main/templates/landing.html:241
+#: main/templates/landing.html:240
 msgid "Acknowledgements"
 msgstr "تصدیق/سپاسگزاری"
 
-#: refugeeinfo/settings.py:198
+#: main/templates/splash_message.html:3
+#, python-format
+msgid ""
+"\n"
+"        Welcome to RefugeeInfo.eu!\n"
+"        <a class=\"click-here\" href=\"/%(location_slug)s/en/\" target=\"_blank\">Click here</a> for\n"
+"        important information about your\n"
+"        location and services available.\n"
+"    "
+msgstr "\nبه RefugeeInfo.eu خوش آمدید!\n<a class=\"click-here\" href=\"/%(location_slug)s/en/\" target=\"_blank\">اینجا کلیک کنید</a>\nبرای\nاطلاعات مهم در مورد خود\nمحل و خدمات در دسترس است."
+
+#: refugeeinfo/settings.py:200
 msgid "Lesvos"
 msgstr "لزبوس"
 
-#: refugeeinfo/settings.py:199
+#: refugeeinfo/settings.py:201
 msgid "Kos"
 msgstr "كاس"
 
-#: refugeeinfo/settings.py:200
+#: refugeeinfo/settings.py:202
 msgid "Athens"
 msgstr "آتن"
 
-#: refugeeinfo/settings.py:201
+#: refugeeinfo/settings.py:203
 msgid "Gevgelija"
 msgstr "گفليا"
 
-#: refugeeinfo/settings.py:202
+#: refugeeinfo/settings.py:204
 msgid "Tabanovce/Preševo"
 msgstr "تابانوچ/پرشوو"
 
-#: refugeeinfo/settings.py:203
+#: refugeeinfo/settings.py:205
 msgid "Šid"
 msgstr "سید"
 
-#: refugeeinfo/settings.py:204
+#: refugeeinfo/settings.py:206
 msgid "Slavonski Brod"
 msgstr "اسلوونسكي برود"
+
+msgid "Greece"
+msgstr "یونان"
+
+msgid "Macedonia"
+msgstr "جمهوری مقدونیه"
+
+msgid "Serbia"
+msgstr "صربستان"
+
+msgid "Croatia"
+msgstr "کرواسی"
+
+msgid "Chios"
+msgstr "خیوس"
+
+msgid "Dimitrovgrad"
+msgstr "دیمیتروگراد"
+
+msgid "Belgrade"
+msgstr "بلگراد"
+
+msgid "Leros"
+msgstr "لروس"
+
+msgid "Idomeni"
+msgstr "ایدومنی"
+
+msgid "Samos"
+msgstr "ساموس"
+
+msgid "Slovenia"
+msgstr "اسلونیا"
+
+msgid "Dobova"
+msgstr "دوبوا"
+
+msgid "Sentilj"
+msgstr "سنتیلج"
+
+msgid "Germany"
+msgstr "آلمان"

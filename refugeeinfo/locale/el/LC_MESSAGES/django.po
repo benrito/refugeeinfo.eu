@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-29 15:44+0000\n"
+"POT-Creation-Date: 2016-01-29 16:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main/templates/index.html:49
+#: main/templates/index.html:50
 msgid "Feedback"
 msgstr ""
 
-#: main/templates/index.html:72
+#: main/templates/index.html:85
 msgid "This is a free wifi hotspot provider by "
 msgstr ""
 
-#: main/templates/index.html:74
+#: main/templates/index.html:87
 msgid ""
 "\n"
 "                Tap the button below to continue to the internet, or\n"
@@ -35,23 +35,23 @@ msgid ""
 "            "
 msgstr ""
 
-#: main/templates/index.html:79
+#: main/templates/index.html:92
 msgid "CONTINUE TO THE INTERNET"
 msgstr ""
 
-#: main/templates/index.html:88
+#: main/templates/index.html:101
 msgid "OTHER LOCATIONS"
 msgstr ""
 
-#: main/templates/index.html:92
+#: main/templates/index.html:105
 msgid "VIEW INFO ON OTHER LOCATIONS"
 msgstr ""
 
-#: main/templates/index.html:95
+#: main/templates/index.html:108
 msgid "FEEDBACK"
 msgstr ""
 
-#: main/templates/index.html:99
+#: main/templates/index.html:112
 msgid "GIVE FEEDBACK ON THIS PAGE"
 msgstr ""
 
@@ -75,34 +75,46 @@ msgstr ""
 msgid "Detect my location"
 msgstr ""
 
-#: main/templates/landing.html:241
+#: main/templates/landing.html:240
 msgid "Acknowledgements"
 msgstr ""
 
-#: refugeeinfo/settings.py:198
-msgid "Lesvos"
-msgstr ""
-
-#: refugeeinfo/settings.py:199
-msgid "Kos"
+#: main/templates/splash_message.html:3
+#, python-format
+msgid ""
+"\n"
+"        Welcome to RefugeeInfo.eu!\n"
+"        <a href=\"/%(location_slug)s/en/\" target=\"_blank\">Click here</a> "
+"for\n"
+"        important information about your\n"
+"        location and services available.\n"
+"    "
 msgstr ""
 
 #: refugeeinfo/settings.py:200
-msgid "Athens"
+msgid "Lesvos"
 msgstr ""
 
 #: refugeeinfo/settings.py:201
-msgid "Gevgelija"
+msgid "Kos"
 msgstr ""
 
 #: refugeeinfo/settings.py:202
-msgid "Tabanovce/Preševo"
+msgid "Athens"
 msgstr ""
 
 #: refugeeinfo/settings.py:203
-msgid "Šid"
+msgid "Gevgelija"
 msgstr ""
 
 #: refugeeinfo/settings.py:204
+msgid "Tabanovce/Preševo"
+msgstr ""
+
+#: refugeeinfo/settings.py:205
+msgid "Šid"
+msgstr ""
+
+#: refugeeinfo/settings.py:206
 msgid "Slavonski Brod"
 msgstr ""
