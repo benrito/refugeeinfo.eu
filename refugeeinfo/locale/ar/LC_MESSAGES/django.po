@@ -114,6 +114,9 @@ msgstr "اليونان"
 msgid "Macedonia"
 msgstr "جمهورية مقدونيا اليوغوسلافية السابقة"
 
+msgid "Macedonia (FYROM)"
+msgstr "جمهورية مقدونيا اليوغوسلافية السابقة"
+
 msgid "Serbia"
 msgstr "صربيا"
 
