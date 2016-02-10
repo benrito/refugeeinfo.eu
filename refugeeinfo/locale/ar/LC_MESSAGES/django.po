@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Mumen Ghazi Shafiq El-Tibi <bromumen@gmail.com>, 2015-2016
 # Rey Rodrigues <Reynaldo.Rodrigues@rescue.org>, 2015-2016
@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: RefugeeInfo\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-29 16:55+0000\n"
-"PO-Revision-Date: 2016-01-29 17:06+0000\n"
-"Last-Translator: Rey Rodrigues <Reynaldo.Rodrigues@rescue.org>\n"
+"PO-Revision-Date: 2016-02-10 12:11+0000\n"
+"Last-Translator: Hossam Khattab <htkhattab@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/refugeeinfo/refugeeinfo/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,17 +79,6 @@ msgstr "حدّد مكان تواجدي الآن"
 #: main/templates/landing.html:240
 msgid "Acknowledgements"
 msgstr "إقـرار وشكـر للجهـات المسـاهمة"
-
-#: main/templates/splash_message.html:3
-#, python-format
-msgid ""
-"\n"
-"        Welcome to RefugeeInfo.eu!\n"
-"        <a class=\"click-here\" href=\"/%(location_slug)s/%(language_code)s/\" target=\"_blank\">Click here</a> for\n"
-"        important information about your\n"
-"        location and services available.\n"
-"    "
-msgstr "\nمرحبا بكم في RefugeeInfo.eu!\n<a class=\"click-here\" href=\"/%(location_slug)s/%(language_code)s/\" target=\"_blank\">انقر هنا</a>\nإلى\nمعلومات هامة حول بك\nالموقع والخدمات المتوفرة."
 
 #: refugeeinfo/settings.py:200
 msgid "Lesvos"
@@ -160,3 +149,6 @@ msgstr "سيـنتيـلج"
 
 msgid "Germany"
 msgstr "ألمانيا"
+
+msgid "Important Information for Refugees! Please read carefully!"
+msgstr "معلومـات هـامة للاجئيـن! الرجـاء قراءتـها بعنـاية!"

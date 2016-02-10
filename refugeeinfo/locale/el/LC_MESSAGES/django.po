@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-29 16:55+0000\n"
+"POT-Creation-Date: 2016-02-10 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main/templates/index.html:50
+#: main/templates/index.html:56
 msgid "Feedback"
 msgstr ""
 
-#: main/templates/index.html:85
+#: main/templates/index.html:99
 msgid "This is a free wifi hotspot provider by "
 msgstr ""
 
-#: main/templates/index.html:87
+#: main/templates/index.html:101
 msgid ""
 "\n"
 "                Tap the button below to continue to the internet, or\n"
@@ -35,23 +35,23 @@ msgid ""
 "            "
 msgstr ""
 
-#: main/templates/index.html:92
+#: main/templates/index.html:106
 msgid "CONTINUE TO THE INTERNET"
 msgstr ""
 
-#: main/templates/index.html:101
+#: main/templates/index.html:115
 msgid "OTHER LOCATIONS"
 msgstr ""
 
-#: main/templates/index.html:105
+#: main/templates/index.html:119
 msgid "VIEW INFO ON OTHER LOCATIONS"
 msgstr ""
 
-#: main/templates/index.html:108
+#: main/templates/index.html:122
 msgid "FEEDBACK"
 msgstr ""
 
-#: main/templates/index.html:112
+#: main/templates/index.html:126
 msgid "GIVE FEEDBACK ON THIS PAGE"
 msgstr ""
 
@@ -80,14 +80,9 @@ msgid "Acknowledgements"
 msgstr ""
 
 #: main/templates/splash_message.html:3
-#, python-format
 msgid ""
 "\n"
-"        Welcome to RefugeeInfo.eu!\n"
-"        <a href=\"/%(location_slug)s/%(language_code)s/\" target=\"_blank\">Click here</a> "
-"for\n"
-"        important information about your\n"
-"        location and services available.\n"
+"        Important Information for Refugees! Please read carefully!\n"
 "    "
 msgstr ""
 
