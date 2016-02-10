@@ -78,17 +78,6 @@ msgstr ""
 msgid "Acknowledgements"
 msgstr ""
 
-#: main/templates/splash_message.html:3
-#, python-format
-msgid ""
-"\n"
-"        Welcome to RefugeeInfo.eu!\n"
-"        <a class=\"click-here\" href=\"/%(location_slug)s/%(language_code)s/\" target=\"_blank\">Click here</a> "
-"for\n"
-"        important information about your\n"
-"        location and services available.\n"
-"    "
-msgstr ""
 
 #: refugeeinfo/settings.py:200
 msgid "Lesvos"
@@ -158,4 +147,7 @@ msgid "Sentilj"
 msgstr ""
 
 msgid "Germany"
+msgstr ""
+
+msgid "Important Information for Refugees! Please read carefully!"
 msgstr ""

@@ -241,12 +241,12 @@ Below are links to be hardcoded into the landing page
 format of the dictionary:
 "<destination parent": [<list of foreign children>]
 
-"""
 OVERRIDE_SLUG_LINKS = {
     "serbia": [
         "tabanovce"
     ]
 }
+"""
 
 
 try:
