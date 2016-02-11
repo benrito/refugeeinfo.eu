@@ -158,3 +158,6 @@ msgstr "آلمان"
 
 msgid "Important Information for Refugees! Please read carefully!"
 msgstr "اطلاعات مهم برای پناهجویان! لطفا با دقت بخوانید!"
+
+msgid "Back to top"
+msgstr "رفتن به بالای صفحه"

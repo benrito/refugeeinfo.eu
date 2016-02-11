@@ -151,3 +151,9 @@ msgstr ""
 
 msgid "Important Information for Refugees! Please read carefully!"
 msgstr ""
+
+msgid "Back to top"
+msgstr ""
+
+msgid "Last updated on:"
+msgstr ""
