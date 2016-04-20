@@ -82,6 +82,8 @@ def landing(request):
 
 
 def site_map(request):
+    raise Http404
+    
     query = models.Location.objects.filter(enabled=True,
                                            country__isnull=False)
     query = query.values('country').annotate(count=django.db.models.Count('*'))
