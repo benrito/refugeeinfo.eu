@@ -70,23 +70,7 @@
     <hr/>
 </div>
 {% if is_captive %}
-    <div style="margin: 5px 0px 5px 0px; padding: 5px 5px 5px 5px; border: 1px white solid;">
-        {% language 'en' %}
-            <div style="direction: ltr">
-                {% include "splash_message.html" with location_slug=location.slug language_code='en' %}
-            </div>
-        {% endlanguage %}
-        {% language 'ar' %}
-            <div style="direction: rtl">
-                {% include "splash_message.html" with location_slug=location.slug language_code='ar' %}
-            </div>
-        {% endlanguage %}
-        {% language 'fa' %}
-            <div style="direction: rtl">
-                {% include "splash_message.html" with location_slug=location.slug language_code='fa' %}
-            </div>
-        {% endlanguage %}
-    </div>
+<img src="https://d3w2ev2d100chk.cloudfront.net/media/filer_public/2a/8d/2a8d9390-618e-4d0e-9eda-5e5a6992461d/header.png" alt="Important notice">
 {% endif %}
 
 {% if is_captive and is_meraki %}
