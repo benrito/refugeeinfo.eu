@@ -1,23 +1,27 @@
 # -*- coding: utf-8 -*-
 
 import json
+import os
+import random
 import urllib
+from StringIO import StringIO
 
-from django.shortcuts import render, redirect
-from django.template import RequestContext
-from django.contrib.gis.geos import fromstr
-from ipware.ip import get_ip
-from django.http import HttpResponse, Http404
-from django.core.cache import cache
-from django.views.decorators.cache import cache_page
 import django.db.models
 import geojson
-from django.conf import settings
 import requests
+from PIL import Image
+from django.conf import settings
+from django.conf import settings
+from django.contrib.gis.geos import fromstr
+from django.core.cache import cache
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, redirect
+from django.template import RequestContext
 from django.utils import translation
+from django.views.decorators.cache import cache_page
+from ipware.ip import get_ip
 
 from content import models, utils
-
 
 CACHE_LENGTH = getattr(settings, 'CACHE_LENGTH', 60 * 15)
 
@@ -83,7 +87,7 @@ def landing(request):
 
 def site_map(request):
     raise Http404
-    
+
     query = models.Location.objects.filter(enabled=True,
                                            country__isnull=False)
     query = query.values('country').annotate(count=django.db.models.Count('*'))
@@ -333,3 +337,21 @@ def services(request, slug, service_category=None):
 
 def acknowledgements(request):
     return render(request, "acknowledgments.html", {}, RequestContext(request))
+
+@cache_page(CACHE_LENGTH)
+def logo_bar(request):
+    root = os.path.dirname(settings.BASE_DIR)
+    logos = os.path.join(root, 'main', 'static', 'logos')
+
+    images = [x for x in os.listdir(logos) if x != 'bar.png' and x[-3:].lower() == 'png']
+    img = Image.open(os.path.join(logos, 'bar.png'))
+    logo_imgs = [Image.open(os.path.join(logos, i)) for i in images]
+
+    random.shuffle(logo_imgs)
+    for i, image in enumerate(logo_imgs):
+        x = 38 * i
+        img.paste(image.convert('RGBA'), (x, 0))
+
+    response = HttpResponse(content_type="image/png")
+    img.save(response, "PNG")
+    return response

@@ -36,3 +36,4 @@ tornado
 websocket
 apscheduler
 xmltodict
+pillow
